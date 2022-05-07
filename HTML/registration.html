@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/registration.css">
+    <title>Form Registrazione</title>
+</head>
+
+<body>
+    <div class="register">
+        <form action="../PHP/manager-registration.php" method="post" autocomplete="on" class="form">
+            <h1>Registrazione</h1>
+            <label for="username">
+                <i class="">Username</i>
+            </label><br>
+            <input type="text" name="username" placeholder="Username" id="username">
+            <br><br>
+            <label for="email">
+                <i class="">Email</i>
+            </label><br>
+            <input type="email" name="email" placeholder="Email" id="email">
+            <br><br>
+            <label for="password">
+                <i class="fas fa-lock">Password</i>
+            </label><br>
+            <input type="password" name="password" placeholder="Password" id="password">
+            <br><br>
+            <label for="verify-password">
+                <i class="">Verifica Password</i>
+            </label><br>
+            <input type="password" name="verify-password" placeholder="Reinserisci la Password" id="verify-password">
+            <br><br>
+            <input type="submit" value="Registrati" class="submit">
+            <p>Hai gia un account? <a href="login.html">Accedi</a></p>
+        </form>
+    </div>
+</body>
+
+</html>
