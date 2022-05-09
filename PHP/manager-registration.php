@@ -7,31 +7,30 @@ if (isset($_POST['username']))
     $user = $_POST['username'];
 else
     $user = "";
-if (isset($_POST['email']))
-    $email = $_POST['email'];
+if (isset($_POST['email-register']))
+    $email = $_POST['email-register'];
 else
     $email = "";
-if (isset($_POST['password']))
-    $pass = $_POST['password'];
+if (isset($_POST['password-register']))
+    $pass = $_POST['password-register'];
 else
     $pass = "";
 if (isset($_POST['verify-password']))
     $verify_password = $_POST['verify-password'];
 else
     $verify_password = "";
-echo "$user";
 if (!empty($pass))
     if ($pass != $verify_password) {
         echo "Le password non corrispondono!";
         $pass = "";
     } else {
-        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            echo "Email non valida!";
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $email = "";
+            exit("Email non valida");
         }
-        echo "$user";
         if ((strlen($pass) < 6) && !(preg_match($regex, $pass))) {
             $pass = "";
+            exit("Password incorrect!");
         }
         if ((check_username($user,$db))||(check_email($email,$db))){
             echo "<p> Username $user già esistente. Riprova</p>";

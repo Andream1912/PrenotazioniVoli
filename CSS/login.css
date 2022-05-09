@@ -1,0 +1,38 @@
+.form-login {
+    display: none;
+    background-color: white;
+    color: #3498db;
+    border: 1px solid #333;
+    border-radius: .5rem;
+    padding: .5rem;
+    width: 300px;
+    position: fixed;
+    top: 20%;
+    left: 37%;
+    z-index: 1;
+}
+
+.form-login>label {
+    font-weight: bold;
+    font-size: .8em;
+    color: #3498db;
+}
+
+.form-login>input:not([type="submit"]) {
+    border-radius: .25em;
+    border: 1px solid #333;
+    font-size: 1rem;
+    padding: .25em;
+    width: 95%;
+}
+
+.form-login h3 {
+    margin: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #023e8a;
+}
+
+.form-login .login {
+    margin-left: 80%;
+}
