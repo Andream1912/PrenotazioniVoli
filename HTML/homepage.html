@@ -3,45 +3,120 @@
 
 <head>
     <link rel="stylesheet" href="../CSS/homepage.css">
+    <link rel="stylesheet" href="../CSS/register.css">
     <script src="https://kit.fontawesome.com/63a4bcd19a.js" crossorigin="anonymous"></script>
+    <script src="../JS/register.js" defer></script>
     <title>Homepage</title>
 </head>
 
 <body>
-    <header>
-        <img src="../immagini/logo.jpg">
-        <h2>FlyHigh</h2>
-        <button type="button" dir="rtl">Registrati</button>
-        <button type="button" dir="rtl">Accedi</button>
+    <header class="header">
+        <div dir="ltl" class="left">
+            <img src="../immagini/logo.jpg" id="img">
+            <h2>FlyHigh</h2>
+        </div>
+        <div>
+        </div>
+        <div class="right">
+            <button type="button" dir="rtl" class="btn-register" onclick="openRegister()">Registrati</button>
+            <button type="button" dir="rtl" class="btn-login">Accedi</button>
+        </div>
     </header>
     <div class="mid">
         <video loop muted autoplay class="fullscreen">
             <source src="../video/sea.mp4" type="video/mp4">  
         </video>
-        <!-- <form action="" method="get" class="searchbar">
-            <input type="radio" name="" value="double">Andata e Ritorno
-            <input type="radio" name="" value="only">Solo andata
-            <br>
-            <br> Da
-            <br>
-            <input type="text" placeholder="Paese,citt&agrave o Aereoporto">
-            <input type="text" placeholder="Paese,citt&agrave o Aereoporto">
-            <input type="date" value="06/05/2022">
-            <input type="date" value="10/05/2022">
-            <br>
-            <input type="radio" name="" value="solo voli diretti">Solo voli diretti
-            <br>
-            <input type="radio" name="" value="solo voli diretti">Includi aereoporti vicini
-            <input type="submit" dir="rtl">
-        </form> -->
-        <form action="" class="searchbar">
-            <input type="text">
-            <a href="" class="search-btn">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
+        <form action="" class="search">
+            <div class="container">
+                <label for="">Da</label>
+                <input type="text" placeholder="Paese,citt&agrave o aereoporto" />
+            </div>
+            <div class="container">
+                <label for="">A</label>
+                <input type="text" placeholder="Paese,citt&agrave o aereoporto" />
+            </div>
+            <div class="container">
+                <label for="">Partenza</label>
+                <input type="date" id="startDate" />
+            </div>
+            <div class="container end">
+                <label for="">Ritorno</label>
+                <input type="date" id="endDate" />
+            </div>
+            <button>Cerca voli -></button>
         </form>
     </div>
 
+
+    <script>
+        var data = new Date();
+        if (data.getMonth() < 10) {
+            var month = "0" + data.getMonth();
+        }
+        if (data.getDate() < 10) {
+            var day = "0" + data.getDate()
+        }
+        var string = data.getFullYear() + "-" + month + "-" + day;
+        document.getElementById("startDate").value = string;
+        console.log(string)
+    </script>
+
+    <form data-multi-step class="multi-step-form" id="form">
+        <div class="card active" data-step>
+            <a href="#" class="close" id="close"><i class="fas fa-hand-middle-finger fa-spin" dir="rtl"></i></a>
+            <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
+
+            <h3 class=" step-title ">Primo step</h3>
+            <div class="form-group ">
+                <label for="username ">Username</label>
+                <br>
+                <input type="text " name="username " id="username " placeholder="Username " required>
+            </div>
+            <button type="button " data-next>Avanti</button>
+        </div>
+        <div class="card " data-step>
+            <a href="#" class="close "><i class="fas fa-hand-middle-finger fa-spin " dir="rtl "></i></a>
+            <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
+            <h3 class="step-title ">Secondo step</h3>
+            <div class="form-group ">
+                <label for="email ">Email</label>
+                <br>
+                <input type="email " name="email " id="email ">
+            </div>
+            <button type="button " data-previous>Indietro</button>
+            <button type="button " data-next>Avanti</button>
+        </div>
+        <div class="card " data-step>
+            <a href="#" class="close "><i class="fas fa-hand-middle-finger fa-spin " dir="rtl "></i></a>
+            <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
+            <h3 class="step-title ">Terzo step</h3>
+            <div class="form-group ">
+                <label for="password ">Password</label>
+                <br>
+                <input type="password " name="password " id="password ">
+            </div>
+            <div class="form-group ">
+                <label for="verify-password ">Conferma Password</label>
+                <br>
+                <input type="password " name="verify-password " id="verify-password " required>
+            </div>
+            <button type="button " data-previous>Indietro</button>
+            <button type="submit ">Registrati</button>
+        </div>
+    </form>
+
+    <script>
+        function openRegister() {
+            document.querySelector(".multi-step-form ").style.display = "block ";
+            document.querySelector(".mid ").style.opacity = "0.5 "
+        }
+
+        document.getElementById("close").addEventListener("click", function() {
+            document.querySelector(".multi-step-form").style.display = "none";
+            document.querySelector(".header").style.opacity = "1";
+            document.querySelector(".mid ").style.opacity = "1";
+        })
+    </script>
 </body>
 
 </html>
