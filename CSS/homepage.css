@@ -17,16 +17,12 @@ header {
     box-shadow: -2px 2px 8px #888888;
 }
 
-header img {
-    width: 45px;
-    height: 45px;
-}
 
 .header .left {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 2%
+    margin-left: 1%
 }
 
 .header .right {
@@ -146,3 +142,4 @@ header img {
 .search button:hover {
     background-color: #023e8a;
 }
+
