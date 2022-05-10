@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: white;
+    overflow: auto;
 }
 
 header {
@@ -16,7 +17,6 @@ header {
     box-shadow: -2px 2px 8px #888888;
     z-index: 1;
 }
-
 
 .header .left {
     display: flex;
@@ -91,9 +91,9 @@ header {
 
 .search {
     position: absolute;
-    top:40%;
-    left:20%;
-    z-index:1;
+    top: 40%;
+    left: 20%;
+    z-index: 1;
     display: flex;
     background-color: #ffffffce;
     padding: 0.5rem;
@@ -130,8 +130,8 @@ header {
 }
 
 .search button {
-    padding:1.1rem;
-    width:180px;
+    padding: 1.1rem;
+    width: 180px;
     cursor: pointer;
     border-radius: 0.3rem;
     border: none;
@@ -146,151 +146,28 @@ header {
     background-color: #023e8a;
 }
 
-.carta-container{
-    position: relative;
+.carta-container {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    height: 350px;
-    margin-top: 250px;
-    margin-bottom: 30px;
     flex-wrap: wrap;
-    justify-content:space-evenly;
-    overflow:hidden;
-}
-.prima{
-    display:block;
+    gap: 50px;
+    margin-left: 93px;
+    margin-right: 93px;
+    margin-top: 450px;
 }
 
-
-.seconda{
-    display:block;
+.carta-container>div {
+    width: 600px;
     overflow: hidden;
 }
 
-.carta-container img{
+.carta-container>div>img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.carta-container>div>h1 {
     position: relative;
-    width: 500px;
-    height: 650px;
-    border-radius: 10px;
+    top: 10%;
+    left: 100px;
 }
-
-.prima h1{
-    top:0;
-    left:0; 
-    border-radius: 10px;
-    background: rgba(47, 46, 46, 0.486);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(8px);
-    position: absolute;
-    font-size: 2.5rem;
-    color: white;
-}
-
-
-
-
-.seconda p{
-    top:0;
-    left:0;   
-    border-radius: 10px;
-    background: rgba(47, 46, 46, 0.486);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(8px);
-    position: absolute;
-    font-size: 2.5rem;
-    color: white;
-}
-
-
-/*.lasciati-ispirare {
-    width: 200px;
-    height: 300px;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 25px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: absolute;
-    display: inline-block;
-     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-     7px 7px 20px 0px rgba(0,0,0,.1),
-     4px 4px 5px 0px rgba(0,0,0,.1);
-    outline: none;
-    margin: 0 auto;
-    top:80%;
-    left:45%;
-  }
-
-.bottone {
-    background: rgb(0,172,238);
-  background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
-    width: 130px;
-    height: 40px;
-    line-height: 42px;
-    padding: 0;
-    border: none;
-  }
-  .bottone span {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .bottone:before,
-  .bottone:after {
-    position: absolute;
-    content: "";
-    right: 0;
-    top: 0;
-     background: rgba(2,126,251,1);
-    transition: all 0.3s ease;
-  }
-  .bottone:before {
-    height: 0%;
-    width: 2px;
-  }
-  .bottone:after {
-    width: 0%;
-    height: 2px;
-  }
-  .bottone:hover{
-    background: rgba(255, 255, 255, .05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(8px);
-  }
-  .bottone:hover:before {
-    height: 100%;
-  }
-  .bottone:hover:after {
-    width: 100%;
-  }
-  .bottone span:hover{
-     color: rgba(2,126,251,1);
-  }
-  .bottone span:before,
-  .bottone span:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: 0;
-     background: rgba(2,126,251,1);
-    transition: all 0.3s ease;
-  }
-  .bottone span:before {
-    width: 2px;
-    height: 0%;
-  }
-  .bottone span:after {
-    width: 0%;
-    height: 2px;
-  }
-  .bottone span:hover:before {
-    height: 100%;
-  }
-  .bottone span:hover:after {
-    width: 100%;
-  }*/

@@ -13,8 +13,8 @@
 <body>
     <header class="header">
         <div dir="ltl" class="left">
-            <img src="../immagini/logo.png" id="img"  style="width:15%; height:15%;">
-            <h2 style="font-family:'Lucida Handwriting'; color:#3498db; font-size: 200%;">FlyHigh</h2 >
+            <img src="../immagini/logo.png" id="img" style="width:15%; height:15%;">
+            <h1 style="font-family:'Lucida Handwriting'; color:#3498db; font-size: 200%;">FlyHigh</h1>
         </div>
         <div>
         </div>
@@ -23,7 +23,7 @@
             <button type="button" dir="rtl" class="btn-login" onclick="openLogin()">Accedi</button>
         </div>
     </header>
-    <div class="mid">           
+    <div class="mid">
         <video loop muted autoplay class="fullscreen">
             <source src="../video/sea.mp4" type="video/mp4">  
         </video>
@@ -48,15 +48,14 @@
         </form>
     </div>
     <div class="carta-container">
-        <div class="prima">
+        <div class="first-card">
+            <h1>prova</h1>
             <img src="../immagini/uomocappello.jpg">
-            <h1>Esperienze<br> per il tuo viaggio</h1>
         </div>
-        <div class="seconda">
-            <!----<img src="../immagini/cascate.jpg">--->
-            <p>prova</p>
+        <div class="second-card">
+            <h1>prova</h1>
+            <img src="../immagini/cascate.jpg">
         </div>
-       <!--<button class="lasciati-ispirare bottone"><span>Lasciati ispirare</span></button>-->
     </div>
 
     <form data-multi-step class="multi-step-form" method="post" id="form" action="../PHP/manager-registration.php">
@@ -120,11 +119,13 @@
     </form>
     <script>
         var data = new Date();
+        var month = data.getMonth();
+        var day = data.getDate();
         if (data.getMonth() < 10) {
-            var month = "0" + data.getMonth();
+            month = "0" + data.getMonth();
         }
         if (data.getDate() < 10) {
-            var day = "0" + data.getDate()
+            day = "0" + data.getDate()
         }
         var string = data.getFullYear() + "-" + month + "-" + day;
         document.getElementById("startDate").value = string;
