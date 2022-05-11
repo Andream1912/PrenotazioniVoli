@@ -13,8 +13,8 @@
         <div>
         </div>
         <div class="right">
-            <button type="button" dir="rtl" class="btn-register" onclick="openRegister()">Registrati</button>
-            <button type="button" dir="rtl" class="btn-login" onclick="openLogin()">Accedi</button>
+            <button type="button" class="btn-register" onclick="openRegister()">Registrati</button>
+            <button type="button" class="btn-login" onclick="openLogin()">Accedi</button>
         </div>
     </header>
 </body>
