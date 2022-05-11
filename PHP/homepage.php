@@ -32,6 +32,27 @@
             <button>Cerca voli</button>
         </form>
     </div>
+    <div class="carta-container">
+        <div class="first-card">
+            <h1>Esplora il mondo,</h1>
+            <h2 dir="rtl">sentiti libero</h2>
+            <button class="bottone-foto">sono io</button>
+            <img src="../immagini/uomocappello.jpg">
+        </div>
+        <div class="second-card">
+            <h1>Cultura, bellezza,</h1>
+            <h2 dir="rtl">felicità</h2>
+            <button class="bottone-foto">pietro</button>
+            <img src="../immagini/nature.jpg">
+        </div>
+    </div>
+    <br><br><br>
+    <div class="third-card">
+        <h1>Immergiti in un avventura unica</h1>
+        <button>Esperienze</button>
+        <img src="../immagini/quad.jpg" alt="">
+    </div>
+    <?php include 'footer.php' ?>
     <script>
         var data = new Date();
         var month = data.getMonth();

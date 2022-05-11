@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    max-width: 100%;
 }
 
 video {
@@ -68,6 +69,122 @@ video {
     background-color: #023e8a;
 }
 
+#header-carte {
+    font-size: 60px;
+    text-align: center;
+}
+
+.carta-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow: hidden;
+    gap: 30px;
+    left: 113px;
+    right: 93px;
+}
+
+.carta-container>div {
+    width: 600px;
+}
+
+.carta-container>div>img {
+    width: 100%;
+    height: 800px;
+    border-radius: 10px;
+}
+
+.carta-container>div>h1 {
+    position: relative;
+    top: 240px;
+    left: 200px;
+    color: #03045e;
+    font-family: system-ui;
+    font-size: 40px;
+}
+
+.carta-container>div>h2 {
+    position: relative;
+    top: 220px;
+    right: 60px;
+    margin-right: 0px;
+    color: #03045e;
+    text-decoration-line: #03045e;
+    font-family: system-ui;
+    font-size: 40px;
+}
+
+.bottone-foto {
+    position: relative;
+    top: 220px;
+    left: 330px;
+    width: 160px;
+    height: 45px;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background: #03045e;
+    color: white;
+    outline: none;
+}
+
+.bottone-foto:hover {
+    outline: 1px solid #03045e;
+    background: rgba(237, 242, 243, 0.295);
+    color: #03045e;
+    box-shadow: 0 0 10px rgba(57, 56, 56, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+.third-card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 800px;
+    left: 70px;
+    right: 100px;
+}
+
+.third-card>h1 {
+    position: absolute;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    left: 300px;
+    top: 70%;
+    font-family: system-ui;
+    font-size: 40px;
+}
+
+.third-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.third-card button {
+    position: absolute;
+    top: 80%;
+    left: 530px;
+    width: 160px;
+    height: 45px;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background: #3498db;
+    color: white;
+    outline: none;
+}
+
+.third-card button:hover {
+    outline: 1px solid #3498db;
+    background: white;
+    color: #3498db;
+    box-shadow: 0 0 10px rgba(57, 56, 56, 0.4);
+    backdrop-filter: blur(10px);
+}
+
 @media screen and (max-width: 1100px) {
     .search-bar {
         width: 550px;
@@ -86,5 +203,33 @@ video {
     .search-bar button {
         font-size: 12px;
         width: 130px;
+    }
+    .carta-container>div>h1 {
+        font-size: 30px;
+    }
+    .carta-container>div>h2 {
+        font-size: 25px;
+    }
+    .bottone-foto {
+        width: 150px;
+        height: 3rem;
+        left: 200px;
+    }
+    .third-card {
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: 800px;
+        left: 10px;
+        right: 10px;
+    }
+    .third-card h1 {
+        left: 125px;
+    }
+    .third-card button {
+        top: 80%;
+        left: 395px;
     }
 }
