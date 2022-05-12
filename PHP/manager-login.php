@@ -9,18 +9,15 @@ if ($_POST['email'] || $_POST['password']) {
         echo "<p>Utente non registrato";
     } else {
         if (password_verify($pass, $hash)) {
-            $level = get_role($email, $db);
-            if ($level == False) {
-                echo "Problemi con l'utente";
-            } else {
-                echo "<p>Login eseguito con successo!";
-                session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['livello'] = $level;
+            $username = get_role($email, $db);
+            session_start();
+            $_SESSION['email'] = $email;
+            $_SESSION['username'] = $username;
+            header("Location:homepage.php");
             }
         }
     }
-}
+
 
 function get_pwd($email, $db)
 {
@@ -41,7 +38,7 @@ function get_pwd($email, $db)
 }
 function get_role($email, $db)
 {
-    $sql = "SELECT livello from utenti where email=$1";
+    $sql = "SELECT username from utenti where email=$1";
     $prep = pg_prepare($db, "sqllivello", $sql);
     $ret = pg_execute($db, "sqllivello", array($email));
     if (!$ret) {
@@ -49,11 +46,10 @@ function get_role($email, $db)
         return false;
     } else {
         if ($row = pg_fetch_assoc($ret)) {
-            $role = $row['livello'];
-            return $role;
+            $username = $row['username'];
+            return $username;
         } else {
             return false;
         }
     }
 }
-?>
