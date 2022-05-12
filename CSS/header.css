@@ -12,6 +12,7 @@ header {
     box-shadow: -2px 2px 8px #888888;
 }
 
+
 .header .left h2 {
     font-family: 'Oleo Script Swash Caps', cursive;
     color: #3498db;
@@ -48,23 +49,7 @@ header {
     color: #3498db;
 }
 
-.header .right .btn-register:hover {
-    color: #fff
-}
-
-.header .right .btn-register::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 0%;
-    background: #3498db;
-    z-index: -1;
-    transition: 0.8s;
-    bottom: 0;
-    border-radius: 50% 50% 0% 0%;
-}
-
-.header .right .btn-register:hover::before {
-    height: 180%;
+.header .right .btn-login {
+    color: #fff;
+    background-color: #3498db;
 }

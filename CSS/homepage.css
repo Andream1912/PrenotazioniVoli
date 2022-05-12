@@ -9,6 +9,7 @@ video {
     width: 100% !important;
     height: auto !important;
     opacity: 0.8;
+    z-index: -1;
 }
 
 .search-bar {
