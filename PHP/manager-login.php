@@ -13,7 +13,7 @@ if ($_POST['email'] || $_POST['password']) {
             session_start();
             $_SESSION['email'] = $email;
             $_SESSION['username'] = $username;
-            header("Location:homepage.php");
+            header("Location:".$_SERVER['HTTP_REFERER']);
             }
         }
     }

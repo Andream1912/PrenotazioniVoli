@@ -1,5 +1,5 @@
 <?php
 Session_start();
 Session_destroy();
-header("Location:homepage.php");
+header("Location:" . $_SERVER['HTTP_REFERER']);
 ?>

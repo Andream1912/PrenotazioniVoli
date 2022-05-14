@@ -2,7 +2,7 @@ footer {
     margin-top: 10%;
     display: flex;
     flex-direction: column;
-    background-color: #EAEAEA;
+    background-color: #f1f2f8;
     text-align: center;
     border-top: 0.4px solid black;
 }
@@ -26,13 +26,6 @@ footer {
 }
 
 .footer div img {
-    width: 165px;
-    height: 165px;
-    transition: 2.4s ease-in-out;
-}
-
-.footer div img:hover {
-    content: url(../developer/Andrea.png);
     width: 165px;
     height: 165px;
 }

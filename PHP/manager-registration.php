@@ -37,7 +37,7 @@ if (!empty($pass))
             echo "<p>Ritorna alla <a href=../HTML/registration.html>registrazione</p>";
         } else {
             if (add_new_user($user,$email,$pass,$db)) {
-                echo "<p> Username $user inserito!";
+                header("Location:" . $_SERVER['HTTP_REFERER']);
             } else {
                 echo "<p> Errore nell'inserimento del nuovo utente</p>";
             }

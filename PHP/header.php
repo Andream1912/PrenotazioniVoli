@@ -13,7 +13,7 @@
 <body>
     <header class="header" id="head">
         <div dir="ltl" class="left">
-            <img src="../immagini/logo.png" width="160px" height="101,6px">
+            <img src="../immagini/logo.png" class="logo" style="width:160px;height:101,6px;cursor:pointer" onclick="comeback()">
             <h2>FlyHigh</h2>
         </div>
         <?php
@@ -104,6 +104,9 @@
     </form>
 
     <script>
+        function comeback(){
+            location.href = "../PHP/homepage.php";
+        }
         window.onclick = function(event) {
                 if (document.querySelector(".dropdown-menu").style.display == "flex") {
                 if (!event.target.matches(".user-drop")) {

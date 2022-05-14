@@ -12,18 +12,18 @@
         <video loop muted autoplay class="fullscreen">
                 <source src="../video/sea.mp4" type="video/mp4">  
         </video>
-        <form action="" class="search-bar">
+        <form action="flight.php" method="get" class="search-bar">
             <div class="container-search-bar">
                 <label for="">Da</label>
-                <input type="text" placeholder="Paese,citt&agrave o aereoporto" />
+                <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="departure" id="departure"/>
             </div>
             <div class="container-search-bar">
                 <label for="">A</label>
-                <input type="text" placeholder="Paese,citt&agrave o aereoporto" />
+                <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="landing" id="landing"/>
             </div>
             <div class="container-search-bar">
                 <label for="">Partenza</label>
-                <input type="date" id="startDate" />
+                <input type="date" id="startDate" name="startDate"/>
             </div>
             <div class="container-search-bar">
                 <label for="">Ritorno</label>
