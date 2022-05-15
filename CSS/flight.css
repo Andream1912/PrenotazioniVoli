@@ -157,7 +157,7 @@ body {
     flex-direction: column;
 }
 
-.info-flight p:nth-child(1) {
+.info-flight p {
     color: #444560;
     margin-top: 0;
     margin-bottom: 0;
@@ -170,6 +170,7 @@ body {
 
 .flight-price {
     width: 200px;
+    justify-content: flex-end;
     background-color: #fff;
     margin-left: 0;
     border: 0.5px solid black;
@@ -180,11 +181,11 @@ body {
 
 .flight-price p {
     color: #444560;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 .flight-price button {
-    margin-top: 30px;
+    margin-bottom: 30px;
     background-color: #3498db;
     box-shadow: 0 0 5px rgba(57, 56, 56, 1);
     color: #fff;
@@ -198,7 +199,7 @@ body {
 
 .flight-price button:hover {
     width: 160px;
-    height: 60px;
+    height: 52px;
 }
 
 .flight-price:hover {
