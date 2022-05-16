@@ -17,11 +17,12 @@ video {
     bottom: 300px;
     margin-left: 15%;
     margin-right: 10%;
-    width: 950px;
     display: flex;
-    flex-direction: row;
+    width: 950px;
+    flex-direction: column;
+    align-items: center;
     background-color: #ffffffce;
-    padding: 1rem;
+    padding: 1.2rem;
     border-radius: 0.5rem;
 }
 
@@ -51,6 +52,14 @@ video {
     width: 160px;
     height: 1.2rem;
     margin-top: 5px;
+}
+
+.top-bar {
+    margin-bottom: 20px;
+}
+
+.roundtrip {
+    margin-right: 50px;
 }
 
 .search-bar button {
@@ -103,6 +112,14 @@ video {
     color: #03045e;
     font-family: system-ui;
     font-size: 40px;
+}
+
+.switch {
+    position: absolute;
+    left: 190px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
 
 .carta-container>div>h2 {
@@ -187,14 +204,21 @@ video {
 
 @media screen and (max-width: 1100px) {
     .search-bar {
-        width: 550px;
-        bottom: 150px;
+        width: 600px;
+        bottom: 200px;
         margin-left: 20%;
         margin-right: 10%;
         padding: 0.5rem;
     }
     .container-search-bar label {
         font-size: 12px;
+    }
+    .switch {
+        position: absolute;
+        left: 117px;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
     }
     .container-search-bar input {
         width: 80px;

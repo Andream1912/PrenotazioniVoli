@@ -10,26 +10,33 @@
     <?php include './header.php' ?>
     <div class="mid-page">
         <video loop muted autoplay class="fullscreen">
-                <source src="../video/sea.mp4" type="video/mp4">  
+            <source src="../video/sea.mp4" type="video/mp4">
         </video>
         <form action="flight.php" method="get" class="search-bar">
-            <div class="container-search-bar">
-                <label for="">Da</label>
-                <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="departure" id="departure"/>
+            <div class="top-bar" style="display:flex;flex-direction:row">
+                <div class="roundtrip"><input type="radio" name="roundtrip" value="ritorno" checked onclick="enableDate()"><label for="ritorno">Andata e Ritorno</label></div>
+                <div class="gone"><input type="radio" name="roundtrip" value="andata" onclick="disableDate()"><label for="andata">Solo Andata</label></div>
             </div>
-            <div class="container-search-bar">
-                <label for="">A</label>
-                <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="landing" id="landing"/>
+            <div class="bot-bar" style="display:flex;flex-direction:row">
+                <div class="container-search-bar">
+                    <label for="">Da</label>
+                    <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="departure" id="departure" />
+                </div>
+                <img src="../immagini/switch.png" class="switch" onclick="switchCity()">
+                <div class="container-search-bar">
+                    <label for="">A</label>
+                    <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="landing" id="landing" />
+                </div>
+                <div class="container-search-bar">
+                    <label for="">Partenza</label>
+                    <input type="date" id="startDate" name="startDate" />
+                </div>
+                <div class="container-search-bar">
+                    <label for="">Ritorno</label>
+                    <input type="date" id="endDate" />
+                </div>
+                <button>Cerca voli</button>
             </div>
-            <div class="container-search-bar">
-                <label for="">Partenza</label>
-                <input type="date" id="startDate" name="startDate"/>
-            </div>
-            <div class="container-search-bar">
-                <label for="">Ritorno</label>
-                <input type="date" id="endDate" />
-            </div>
-            <button>Cerca voli</button>
         </form>
     </div>
     <div class="cards">
@@ -56,17 +63,41 @@
     </div>
     <?php include 'footer.php' ?>
     <script>
-        var data = new Date();
-        var month = data.getMonth();
-        var day = data.getDate();
-        if (data.getMonth() < 10) {
-            month = "0" + data.getMonth();
+        function switchCity(){
+            x = document.getElementById("landing").value;
+            document.getElementById("landing").value = document.getElementById("departure").value;
+            document.getElementById("departure").value = x;
         }
-        if (data.getDate() < 10) {
-            day = "0" + data.getDate()
+        Date.prototype.addDays = function(days) {
+            this.setDate(this.getDate() + parseInt(days));
+            return this;
+        };
+
+        function disableDate() {
+            document.getElementById("endDate").disabled = true;
+            document.getElementById("endDate").value = "";
         }
-        var string = data.getFullYear() + "-" + month + "-" + day;
-        document.getElementById("startDate").value = string;
+
+        function enableDate() {
+            document.getElementById("endDate").disabled = false;
+            document.getElementById("endDate").value = calculateDate(14);
+        }
+
+        function calculateDate(x) {
+            var date = new Date();
+            date.addDays(x)
+            var month = date.getMonth();
+            var day = date.getDate();
+            if (month < 10) {
+                month = "0" + date.getMonth();
+            }
+            if (day < 10) {
+                day = "0" + date.getDate();
+            }
+            return date.getFullYear() + "-" + month + "-" + day;
+        }
+        document.getElementById("startDate").value = calculateDate(7);
+        document.getElementById("endDate").value = calculateDate(14);
     </script>
 </body>
 

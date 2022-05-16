@@ -31,20 +31,8 @@ $ret = pg_execute($db,"searchFlight",array($from,$to,$data));
 if(!$ret){
     echo "Errore Query";
     return false;
-}else{
-    if($row = pg_fetch_array($ret)){
-        $ora_partenza = substr($row['ora_partenza'],0,5);
-        $ora_arrivo = substr($row['ora_arrivo'],0,5);
-        $diff_h = substr($ora_arrivo,0,2) - substr($ora_partenza,0,2);
-        $diff_m = substr($ora_arrivo,3,5) - substr($ora_partenza,3,5);
-        $id = $row['id_volo'];
-        $città_partenza = $row['città_partenza'];
-        $città_arrivo = $row['città_arrivo'];
-        $prezzo = $row['prezzo'];
-    }
 }
 ?>
-<script>console.log(<?php $object_date1?>)</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,7 +65,18 @@ if(!$ret){
             <h1>Dio cane</h1>
         </div>
         <div class="mid-page">
-            <hr class="hr">
+           <?php 
+           $noData = pg_result_seek($ret,0);
+           if($noData == 1){
+           while($row = pg_fetch_array($ret)){
+                       $ora_partenza = substr($row['ora_partenza'],0,5);
+                       $ora_arrivo = substr($row['ora_arrivo'],0,5);
+                       $diff_h = substr($ora_arrivo,0,2) - substr($ora_partenza,0,2);
+                       $diff_m = substr($ora_arrivo,3,5) - substr($ora_partenza,3,5);
+                       $id = $row['id_volo'];
+                       $città_partenza = $row['città_partenza'];
+                       $città_arrivo = $row['città_arrivo'];
+                       $prezzo = $row['prezzo'];?>
             <div class="wild-card">
                 <div class="single-flight">
                     <div class="departure">
@@ -87,7 +86,7 @@ if(!$ret){
                     <div class="info-flight">
                         <p><?php echo $diff_h;?>h <?php echo $diff_m?>min</p>
                         <p>ID:<?php echo $id?></p>
-                        <img src="../immagini/aereo.png" alt="">
+                        <img src="../immagini/aereo.png">
                         <p style="color:lightgreen;margin-top:0;">Diretto</p>
                     </div>
                     <div class="landing">
@@ -111,6 +110,11 @@ if(!$ret){
                 }
                 ?>
             </div>
+            <?php }}else{?>
+                <div class="nodata">
+                    <p>Voli non trovati</p>
+                </div>
+                <?php }?>
         </div>
     </div>
     <?php include 'footer.php' ?>
