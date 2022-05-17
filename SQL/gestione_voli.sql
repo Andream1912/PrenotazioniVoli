@@ -1,3 +1,5 @@
+DROP TABLE IF  EXISTS volo cascade;
+
 create table if not exists volo(
     id_volo SERIAL primary key,
     data_volo DATE not null,
@@ -8,6 +10,8 @@ create table if not exists volo(
     prezzo decimal(10,2) not null,
     categoria varchar(255)
 );
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO www;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO www;
 
 insert into volo(data_volo,città_partenza,ora_partenza,città_arrivo,ora_arrivo,prezzo,categoria) values
  ('2022-06-01','Napoli','07:00:00','Milano','08:30:00',32,'città'),
