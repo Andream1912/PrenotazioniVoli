@@ -31,7 +31,7 @@
                     <label for="">Partenza</label>
                     <input type="date" id="startDate" name="startDate" />
                 </div>
-                <div class="container-search-bar">
+                <div class="container-search-bar date">
                     <label for="">Ritorno</label>
                     <input type="date" id="endDate" />
                 </div>
@@ -56,9 +56,9 @@
         </div>
         <br><br><br>
         <div class="third-card">
-            <h1>Immergiti in un avventura unica</h1>
+            <h1>Immergiti in un avventura <br> unica</h1>
             <button>Esperienze</button>
-            <img src="../immagini/quad.jpg" alt="">
+            <img src="../immagini/quad.jpg">
         </div>
     </div>
     <?php include 'footer.php' ?>

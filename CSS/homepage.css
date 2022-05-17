@@ -35,7 +35,7 @@ video {
     border-right: 1px solid black;
 }
 
-.search-bar .container-search-bar:nth-child(4) {
+.search-bar .container-search-bar:nth-child(5) {
     border: none;
 }
 
@@ -176,13 +176,12 @@ video {
 }
 
 .third-card img {
-    width: 100%;
     border-radius: 10px;
 }
 
 .third-card button {
     position: absolute;
-    top: 80%;
+    top: 700px;
     left: 530px;
     width: 160px;
     height: 45px;
@@ -244,16 +243,17 @@ video {
         position: relative;
         display: flex;
         flex-direction: row;
-        width: auto;
-        height: 800px;
-        left: 10px;
-        right: 10px;
+        width: 800px;
+        height: 600px;
+        left: 10%;
+        right: 10%;
     }
     .third-card h1 {
-        left: 125px;
+        top: 350px;
+        left: 120px;
     }
     .third-card button {
-        top: 80%;
-        left: 395px;
+        top: 500px;
+        left: 320px;
     }
 }

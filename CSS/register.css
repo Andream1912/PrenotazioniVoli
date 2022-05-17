@@ -24,14 +24,32 @@
     color: #3498db;
 }
 
-.form-group>input {
-    border-radius: .25em;
-    border: 1px solid #333;
-    font-size: 1rem;
-    padding: .25em;
+.form-group input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
+    width: 90%;
 }
 
-.card>h3 {
+.form-group i {
+    visibility: hidden;
+    position: absolute;
+    top: 370px;
+    right: 20px;
+}
+
+#wrong-r {
+    color: #e74c3c;
+}
+
+#right-r {
+    color: #2ecc71;
+}
+
+i .card>h3 {
     color: #023e8a;
 }
 

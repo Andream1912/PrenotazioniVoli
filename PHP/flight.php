@@ -17,21 +17,32 @@ if ((isset($_GET['landing'])) && (!empty($_GET['landing']))) {
 if ((isset($_GET['startDate'])) && (!empty($_GET['startDate']))) {
     $data = $_GET['startDate'];
     $date = strtotime($_GET['startDate']);
-    $day=date('d',$date);
-    $month=date('m',$date);
-    $year=date('Y',$date);
-}else{
+    $day = date('d', $date);
+    $month = date('m', $date);
+    $year = date('Y', $date);
+} else {
     $date = "";
     header("Location:../PHP/homepage.php");
 }
-
-$sql = "SELECT * FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3";
-$prep = pg_prepare($db,"searchFlight",$sql);
-$ret = pg_execute($db,"searchFlight",array($from,$to,$data));
-if(!$ret){
-    echo "Errore Query";
-    return false;
+if (($_GET['roundtrip']) == 'andata') {
+    $sql = "SELECT * FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3";
+    $prep = pg_prepare($db, "searchFlight", $sql);
+    $ret = pg_execute($db, "searchFlight", array($from, $to, $data));
+    if (!$ret) {
+        echo "Errore Query";
+        return false;
+    }
+} else {
+    $sql = "SELECT * FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3";
+    $prep = pg_prepare($db, "searchFlight", $sql);
+    $ret = pg_execute($db, "searchFlight", array($from, $to, $data));
+    $ret_r = pg_execute($db, "searchFlight", array($to, $from, $_GET['roundtrip']));
+    if (!$ret) {
+        echo "Errore Query";
+        return false;
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +64,7 @@ if(!$ret){
         </div>
         <div class="bottom-bar">
             <div class="date"><span onclick="nextDay()">&lt</span>
-                <p class="inizio"><?php echo $day?> <?php echo number_to_month($month)?></p> <span onclick="">&gt</span>
+                <p class="inizio"><?php echo $day ?> <?php echo number_to_month($month) ?></p> <span onclick="">&gt</span>
             </div>
             <div class="date"><span>&lt</span>
                 <p>12 Luglio</p> <span>&gt</span>
@@ -62,59 +73,67 @@ if(!$ret){
     </form>
     <div class="body">
         <div class="left-page">
-            <h1>Dio cane</h1>
+            <h1>Prova</h1>
         </div>
         <div class="mid-page">
-           <?php 
-           $noData = pg_result_seek($ret,0);
-           if($noData == 1){
-           while($row = pg_fetch_array($ret)){
-                       $ora_partenza = substr($row['ora_partenza'],0,5);
-                       $ora_arrivo = substr($row['ora_arrivo'],0,5);
-                       $diff_h = substr($ora_arrivo,0,2) - substr($ora_partenza,0,2);
-                       $diff_m = substr($ora_arrivo,3,5) - substr($ora_partenza,3,5);
-                       $id = $row['id_volo'];
-                       $città_partenza = $row['città_partenza'];
-                       $città_arrivo = $row['città_arrivo'];
-                       $prezzo = $row['prezzo'];?>
-            <div class="wild-card">
-                <div class="single-flight">
-                    <div class="departure">
-                        <p class="time"><?php echo $ora_partenza?></p>
-                        <p class="city"> <?php echo $città_partenza ?></p>
+            <?php
+            $noData = pg_result_seek($ret, 0);
+            if ($noData) {
+                if($_GET['roundtrip'] == 'andata'){
+                while ($row = pg_fetch_array($ret)) {
+                    $ora_partenza = substr($row['ora_partenza'], 0, 5);
+                    $ora_arrivo = substr($row['ora_arrivo'], 0, 5);
+                    $diff_h = substr($ora_arrivo, 0, 2) - substr($ora_partenza, 0, 2);
+                    $diff_m = substr($ora_arrivo, 3, 5) - substr($ora_partenza, 3, 5);
+                    $id = $row['id_volo'];
+                    $città_partenza = $row['città_partenza'];
+                    $città_arrivo = $row['città_arrivo'];
+                    $prezzo = $row['prezzo']; ?>
+                    <div class="wild-card">
+                        <div class="single-flight">
+                            <div class="departure">
+                                <p class="time"><?php echo $ora_partenza ?></p>
+                                <p class="city"> <?php echo $città_partenza ?></p>
+                            </div>
+                            <div class="info-flight">
+                                <p><?php echo $diff_h; ?>h <?php echo $diff_m ?>min</p>
+                                <p>ID:<?php echo $id ?></p>
+                                <img src="../immagini/aereo.png">
+                                <p style="color:lightgreen;margin-top:0;">Diretto</p>
+                            </div>
+                            <div class="landing">
+                                <p class="time"><?php echo $ora_arrivo ?> </p>
+                                <p class="city"> <?php echo $città_arrivo ?></p>
+                            </div>
+                        </div>
+                        <?php
+                        if (!empty($user)) { ?>
+                            <div class="flight-price">
+                                <p>€ <?php echo $prezzo; ?></p>
+                                <button class="buy">Seleziona</button>
+                            </div>
+                        <?php
+                        } else { ?>
+                            <div class="flight-price">
+                                <p>Vuoi conoscere il prezzo?</p>
+                                <button class="price-registration">Accedi </button>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
-                    <div class="info-flight">
-                        <p><?php echo $diff_h;?>h <?php echo $diff_m?>min</p>
-                        <p>ID:<?php echo $id?></p>
-                        <img src="../immagini/aereo.png">
-                        <p style="color:lightgreen;margin-top:0;">Diretto</p>
-                    </div>
-                    <div class="landing">
-                        <p class="time"><?php echo $ora_arrivo?> </p>
-                        <p class="city"> <?php echo $città_arrivo ?></p>
-                    </div>
-                </div>
-                <?php
-                if (!empty($user)) { ?>
-                    <div class="flight-price">
-                        <p>€ <?php echo $prezzo; ?></p>
-                        <button class="buy">Seleziona</button>
-                    </div>
-                <?php
-                } else { ?>
-                    <div class="flight-price">
-                        <p>Vuoi conoscere il prezzo?</p>
-                        <button class="price-registration">registrati </button>
-                    </div>
+                <?php }}else{ ?>
+                    <!-- <div>
+                        Gestione in CASO DI ANDATA E RITORNO
+                    </div> -->
+                
                 <?php
                 }
-                ?>
-            </div>
-            <?php }}else{?>
+            } else { ?>
                 <div class="nodata">
                     <p>Voli non trovati</p>
                 </div>
-                <?php }?>
+            <?php } ?>
         </div>
     </div>
     <?php include 'footer.php' ?>

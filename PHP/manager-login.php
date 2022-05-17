@@ -6,17 +6,28 @@ if ($_POST['email'] || $_POST['password']) {
     $pass = $_POST['password'];
     $hash = get_pwd($email, $db);
     if (!$hash) { /* Se ritorna false l'utente non è stato trovato nel db, in caso in cui non è false l'utente è stato trovato*/
-        echo "<p>Utente non registrato";
+?>
+        <script>
+            alert("Parametri errati!!");
+            window.location = "../PHP/homepage.php";
+        </script>
+<?php
     } else {
         if (password_verify($pass, $hash)) {
             $username = get_role($email, $db);
             session_start();
             $_SESSION['email'] = $email;
             $_SESSION['username'] = $username;
-            header("Location:".$_SERVER['HTTP_REFERER']);
-            }
+            header("Location:" . $_SERVER['HTTP_REFERER']);
+        } else {?>
+        <script>
+            alert("Parametri errati!!");
+            window.location = "../PHP/homepage.php";
+        </script>
+        <?php
         }
     }
+}
 
 
 function get_pwd($email, $db)

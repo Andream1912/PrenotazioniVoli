@@ -12,18 +12,40 @@
     z-index: 1;
 }
 
-.form-login>label {
+.form-control label {
     font-weight: bold;
     font-size: .8em;
     color: #3498db;
 }
 
-.form-login>input:not([type="submit"]) {
-    border-radius: .25em;
-    border: 1px solid #333;
-    font-size: 1rem;
-    padding: .25em;
-    width: 95%;
+.form-control input:focus {
+    outline: 0;
+    border-color: #777;
+}
+
+.form-control input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px;
+    width: 90%;
+}
+
+.form-control i {
+    visibility: hidden;
+    position: absolute;
+    top: 340px;
+    right: 20px;
+}
+
+#wrong {
+    color: #e74c3c;
+}
+
+#right {
+    color: #2ecc71;
 }
 
 .form-login h3 {
