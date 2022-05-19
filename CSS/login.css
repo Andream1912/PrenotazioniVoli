@@ -33,6 +33,12 @@
     width: 90%;
 }
 
+.sex {
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+}
+
 .form-control i {
     visibility: hidden;
     position: absolute;

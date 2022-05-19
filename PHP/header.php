@@ -44,7 +44,7 @@
         ?>
     </header>
 
-    <form data-multi-step class="multi-step-form" method="POST" id="form" action="manager-registration.php" onsubmit="return    validateRegister()">
+    <form data-multi-step class="multi-step-form" method="POST" id="form" action="manager-registration.php" onsubmit="return validateRegister()">
         <div class="card active" data-step>
             <a href="#" class="close" onclick=closeWindow()><i class="fas fa-hand-middle-finger fa-spin" dir="rtl"></i></a>
             <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">

@@ -187,25 +187,21 @@ body {
 .flight-price p {
     color: #444560;
     font-size: 1rem;
+    margin-bottom: 30px;
 }
 
-.flight-price button {
-    margin-bottom: 30px;
-    background: rgb(2, 62, 138);
+.flight-price a {
     background: linear-gradient(90deg, rgba(2, 62, 138, 1) 25%, rgba(67, 97, 238, 1) 55%, rgba(52, 152, 219, 1) 100%);
     box-shadow: 0 0 5px rgba(57, 56, 56, 1);
     color: #fff;
     cursor: pointer;
-    width: 140px;
-    border-radius: 0.5rem;
-    text-align: center;
     text-transform: uppercase;
     padding: 1rem;
+    text-decoration: none;
 }
 
-.flight-price button:hover {
-    width: 160px;
-    height: 52px;
+.flight-price a:hover {
+    padding: 1.5rem;
 }
 
 .search-bar .bottom-bar .date input {

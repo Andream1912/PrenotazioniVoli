@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    background-color: #f2f2f2;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+}
+
+.confirm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.ticket {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 250px;
+    margin-right: 250px;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #fff;
+    border: 0.5px solid black;
+    font-size: 2rem;
+    border-radius: 4px;
+}
+
+.ticketOne {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 250px;
+    margin-right: 250px;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: #fff;
+    border: 0.5px solid black;
+    border-top: none;
+    font-size: 2rem;
+    border-radius: 4px;
+}
+
+.ticketTwo {
+    display: flex;
+    flex-direction: column;
+}
+
+.ticketTwo:nth-child(2) {
+    font-size: 1rem;
+}
+
+.ticketOne:nth-child(2) {
+    font-size: 1rem;
+}
+
+.ticketOne p {
+    margin: 0;
+}
+
+.ticketTwo p {
+    margin: 0;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    background-color: #fff;
+    margin-left: 250px;
+    border-width: 1px;
+    border-radius: 4px;
+}
+
+fieldset legend {
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+fieldset label {
+    margin: 20px;
+}
+
+fieldset input {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 15px;
+    width: 90%;
+}
+
+fieldset input .sex {
+    display: flex;
+    flex-direction: row;
+}
+
+fieldset p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 12px;
+}
+
+.info-pay {
+    margin-right: 250px;
+    border: 0.5px solid black;
+    width: 400px;
+    text-align: center;
+    background-color: white;
+    margin-top: 11px;
+    height: 450px;
+    border-radius: 4px;
+}
+
+.info-pay h1 {
+    border-bottom: 4px dotted #d2d7da;
+    padding-bottom: 30px;
+    border-spacing: 6px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.total {
+    color: #3264ff!important
+}
+
+.end {
+    border-bottom: 4px dotted #d2d7da;
+    border-spacing: 6px;
+}
+
+.submit-flight {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    width: 260px;
+    height: 40px;
+    color: white;
+    background: rgb(2, 62, 138);
+    background: linear-gradient(90deg, rgba(2, 62, 138, 1) 25%, rgba(67, 97, 238, 1) 55%, rgba(52, 152, 219, 1) 100%);
+}
