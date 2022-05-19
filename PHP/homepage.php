@@ -33,7 +33,7 @@
                 </div>
                 <div class="container-search-bar date">
                     <label for="">Ritorno</label>
-                    <input type="date" id="endDate" />
+                    <input type="date" id="endDate" name="endDate"/>
                 </div>
                 <button>Cerca voli</button>
             </div>

@@ -55,6 +55,30 @@
     color: #023e8a;
 }
 
-.form-login .login {
-    margin-left: 80%;
+#pright {
+    visibility: hidden;
+    position: absolute;
+    right: 20px;
+    top: 400px;
+    color: #2ecc71;
+}
+
+#pwrong {
+    visibility: hidden;
+    position: absolute;
+    right: 20px;
+    top: 400px;
+    color: #e74c3c;
+}
+
+.loginsubmit {
+    margin-left: 60%;
+    margin-top: 15px;
+    border: none;
+    height: 40px;
+    width: 100px;
+    border-radius: 0.2rem;
+    background: rgb(2, 62, 138);
+    background: linear-gradient(90deg, rgba(2, 62, 138, 1) 15%, rgba(67, 97, 238, 1) 30%, rgba(52, 152, 219, 1) 100%);
+    cursor: pointer;
 }

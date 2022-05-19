@@ -69,7 +69,8 @@ video {
     border-radius: 0.3rem;
     border: none;
     color: white;
-    background-color: #4361ee;
+    background: rgb(2, 62, 138);
+    background: linear-gradient(90deg, rgba(2, 62, 138, 1) 25%, rgba(67, 97, 238, 1) 55%, rgba(52, 152, 219, 1) 100%);
     font-size: 1rem;
     text-transform: uppercase;
     transition: 0.3s ease-in-out;
@@ -177,6 +178,7 @@ video {
 
 .third-card img {
     border-radius: 10px;
+    width: 100%;
 }
 
 .third-card button {
@@ -255,5 +257,8 @@ video {
     .third-card button {
         top: 500px;
         left: 320px;
+    }
+    .third-card img {
+        width: auto;
     }
 }

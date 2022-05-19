@@ -10,6 +10,7 @@ footer {
 .footer {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     left: 30px;
     right: 30px;
