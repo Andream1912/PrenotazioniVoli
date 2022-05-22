@@ -18,7 +18,7 @@ video {
     margin-left: 15%;
     margin-right: 10%;
     display: flex;
-    width: 950px;
+    width: auto;
     flex-direction: column;
     align-items: center;
     background-color: #ffffffce;
@@ -45,21 +45,14 @@ video {
 }
 
 .container-search-bar input {
-    background-color: transparent;
-    border: none;
-    text-align: center;
-    color: black;
+    border: 2px solid #f0f0f0;
+    padding: 0.6rem;
+    border-radius: 2px;
+    display: block;
+    font-family: inherit;
+    font-size: 14px;
     width: 160px;
-    height: 1.2rem;
     margin-top: 5px;
-}
-
-.top-bar {
-    margin-bottom: 20px;
-}
-
-.roundtrip {
-    margin-right: 50px;
 }
 
 .search-bar button {
@@ -78,6 +71,14 @@ video {
 
 .search-bar button:hover {
     background-color: #023e8a;
+}
+
+.top-bar {
+    margin-bottom: 20px;
+}
+
+.roundtrip {
+    margin-right: 50px;
 }
 
 #header-carte {
@@ -117,8 +118,8 @@ video {
 
 .switch {
     position: absolute;
-    left: 190px;
-    width: 40px;
+    left: 214px;
+    bottom: 2rem;
     height: 40px;
     cursor: pointer;
 }
@@ -145,6 +146,7 @@ video {
     background: #03045e;
     color: white;
     outline: none;
+    cursor: pointer;
 }
 
 .bottone-foto:hover {
@@ -205,7 +207,7 @@ video {
 
 @media screen and (max-width: 1100px) {
     .search-bar {
-        width: 600px;
+        width: auto;
         bottom: 200px;
         margin-left: 20%;
         margin-right: 10%;
@@ -216,9 +218,10 @@ video {
     }
     .switch {
         position: absolute;
-        left: 117px;
+        left: 125px;
         width: 25px;
         height: 25px;
+        bottom: 20px;
         cursor: pointer;
     }
     .container-search-bar input {
@@ -228,6 +231,7 @@ video {
     .search-bar button {
         font-size: 12px;
         width: 130px;
+        margin-right: 10px;
     }
     .carta-container>div>h1 {
         font-size: 30px;
@@ -257,6 +261,7 @@ video {
     .third-card button {
         top: 500px;
         left: 320px;
+        cursor: pointer;
     }
     .third-card img {
         width: auto;

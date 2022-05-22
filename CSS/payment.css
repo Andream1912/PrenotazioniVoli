@@ -1,0 +1,76 @@
+.card-payment h1 {
+    text-align: center
+}
+
+.card-payment {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    border: 0.5px solid black;
+    border-radius: 4px;
+    width: 480px;
+    margin-left: 250px;
+    background-color: white;
+}
+
+.card-payment .ccn {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 15px;
+    width: 300px;
+}
+
+.card-payment .month {
+    border: none;
+    width: 70px;
+    padding: 8px;
+}
+
+.card-payment .year {
+    border: none;
+    width: 100px;
+    padding: 8px;
+}
+
+.cvv {
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 8px;
+    width: 150px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+.mastercard {
+    position: absolute;
+    visibility: hidden;
+    width: 120px;
+    height: 120px;
+    margin-left: 320px;
+    margin-top: -10px;
+}
+
+.visa {
+    position: absolute;
+    visibility: hidden;
+    width: 75px;
+    height: 75px;
+    margin-left: 350px;
+}
+
+.typecard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 1100px) {
+    .card-payment {
+        margin-left: 0;
+    }
+}

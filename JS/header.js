@@ -11,6 +11,7 @@ function RegistertoLogin() {
 function comeback() {
     location.href = "../PHP/homepage.php";
 }
+
 window.onclick = function(event) {
     if (document.querySelector(".dropdown-menu").style.display == "flex") {
         if (!event.target.matches(".user-drop")) {
@@ -121,7 +122,6 @@ function validateRegister() {
 
 function validateForm() {
     let email = document.getElementById("email");
-    let pass = document.getElementById("password");
     let wrong = document.getElementById("wrong");
     let right = document.getElementById("right");
     if (email.value === "") {

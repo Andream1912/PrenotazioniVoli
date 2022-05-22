@@ -12,10 +12,10 @@
         <video loop muted autoplay class="fullscreen">
             <source src="../video/sea.mp4" type="video/mp4">
         </video>
-        <form action="flight.php" method="get" class="search-bar">
+        <form action="flight.php" method="get" class="search-bar" onsubmit="return checkInput()">
             <div class="top-bar" style="display:flex;flex-direction:row">
-                <div class="roundtrip"><input type="radio" name="roundtrip" value="ritorno" checked onclick="enableDate()"><label for="ritorno">Andata e Ritorno</label></div>
-                <div class="gone"><input type="radio" name="roundtrip" value="andata" onclick="disableDate()"><label for="andata">Solo Andata</label></div>
+                <div class="roundtrip"><input type="radio" name="roundtrip" value="ritorno" onclick="enableDate()"><label for="ritorno">Andata e Ritorno</label></div>
+                <div class="gone"><input type="radio" name="roundtrip" value="andata" checked onclick="disableDate()"><label for="andata">Solo Andata</label></div>
             </div>
             <div class="bot-bar" style="display:flex;flex-direction:row">
                 <div class="container-search-bar">
@@ -29,12 +29,13 @@
                 </div>
                 <div class="container-search-bar">
                     <label for="">Partenza</label>
-                    <input type="date" id="startDate" name="startDate" />
+                    <input type="date" id="startDate" name="startDate"/>
                 </div>
                 <div class="container-search-bar date">
                     <label for="">Ritorno</label>
                     <input type="date" id="endDate" name="endDate"/>
                 </div>
+                <input type="hidden" name="filter" value="standard">
                 <button>Cerca voli</button>
             </div>
         </form>
@@ -63,15 +64,38 @@
     </div>
     <?php include 'footer.php' ?>
     <script>
+        document.getElementById("startDate").min = new Date();
+
+        function checkInput(){
+            from = document.getElementById("departure");
+            to = document.getElementById("landing");
+            startDate = document.getElementById("startDate");
+            if(from.value == "" || to.value == "" || startDate.value == ""){
+            if(from.value == ""){
+                from.style.borderColor = "red";
+            }else{
+                from.style.borderColor = "#f0f0f0";
+            }
+            if(to.value == ""){
+                to.style.borderColor = "red";
+            }else{
+                to.style.borderColor = "#f0f0f0";
+            }if((startDate.value == "")||(startDate.value < new Date())){
+                startDate.style.borderColor = "red";
+                startDate.innerHTML = "prova";
+            }else{
+                startDate.style.borderColor = "#f0f0f0";
+            }
+            return false;
+        }else{
+            return true;
+        }
+        }
         function switchCity(){
             x = document.getElementById("landing").value;
             document.getElementById("landing").value = document.getElementById("departure").value;
             document.getElementById("departure").value = x;
         }
-        Date.prototype.addDays = function(days) {
-            this.setDate(this.getDate() + parseInt(days));
-            return this;
-        };
 
         function disableDate() {
             document.getElementById("endDate").disabled = true;
@@ -80,24 +104,9 @@
 
         function enableDate() {
             document.getElementById("endDate").disabled = false;
-            document.getElementById("endDate").value = calculateDate(14);
         }
-
-        function calculateDate(x) {
-            var date = new Date();
-            date.addDays(x)
-            var month = date.getMonth();
-            var day = date.getDate();
-            if (month < 10) {
-                month = "0" + date.getMonth();
-            }
-            if (day < 10) {
-                day = "0" + date.getDate();
-            }
-            return date.getFullYear() + "-" + month + "-" + day;
-        }
-        document.getElementById("startDate").value = calculateDate(7);
-        document.getElementById("endDate").value = calculateDate(14);
+        document.getElementById("startDate").valueAsDate = new Date();
+        document.getElementById("endDate").disabled = true;
     </script>
 </body>
 

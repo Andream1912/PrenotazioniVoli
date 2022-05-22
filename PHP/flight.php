@@ -2,6 +2,12 @@
 require_once "parametri.php";
 require_once "transform_date.php";
 $user = $_SESSION['username'];
+$type = $_GET['filter'];
+if ($type == 'speed') {
+    $order = "order by tempo,prezzo";
+} else if ($type == 'economy') {
+    $order = "order by prezzo";
+}
 if ((isset($_GET['departure'])) && (!empty($_GET['departure']))) {
     $from = $_GET['departure'];
 } else {
@@ -26,24 +32,24 @@ if ((isset($_GET['startDate'])) && (!empty($_GET['startDate']))) {
 }
 if (($_GET['roundtrip']) == 'andata') {
     $roundtrip = $_GET['roundtrip'];
-    $sql = "SELECT * FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3";
+    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3" . $order;
     $prep = pg_prepare($db, "searchFlight", $sql);
     $ret = pg_execute($db, "searchFlight", array($from, $to, $data));
     if (!$ret) {
-        echo "Errore Query";
-        return false;
+        exit;
     }
 } else {
     $roundtrip = $_GET['roundtrip'];
-    $sql = "SELECT * FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3";
+    $endDate = $_GET['endDate'];
+    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3" . $order;
     $prep = pg_prepare($db, "searchFlight", $sql);
     $ret = pg_execute($db, "searchFlight", array($from, $to, $data));
 
     if (!$ret) {
-        echo "Errore Query";
-        return false;
+        exit;
     }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -56,7 +62,6 @@ if (($_GET['roundtrip']) == 'andata') {
 </head>
 
 <body>
-
     <?php include 'header.php' ?>
     <br><br><br><br><br><br>
     <form action="flight.php" method="get">
@@ -72,31 +77,119 @@ if (($_GET['roundtrip']) == 'andata') {
             </div>
             <div class="bottom-bar">
                 <div class="date">
-                    <span onclick="previousDay()">&lt</span><input type="date" value=<?php echo $_GET['startDate'] ?> id="startDate" name="startDate" class="start-date"><span onclick="nextDay()">&gt</span>
+                    <input type="date" value=<?php echo $_GET['startDate'] ?> id="startDate" name="startDate" class="start-date">
                 </div>
                 <div class="date">
-                    <span>&lt</span><input type="date" value=<?php echo $_GET['endDate'] ?> id="endDate" name="endDate"><span>&gt</span>
+                    <input type="date" <?php if ((!empty($endDate) || (!isset($endDate)))) { ?>value=<?php echo $endDate;
+                                                                                                    } ?> id="endDate" name="endDate">
                 </div>
             </div>
         </div>
-        <div class="body">
-            <div class="left-page" action="prova.php" method="get">
-                <h1>Filtri</h1>
-                Filtro1:<input type="text" name="prova">
-                <input type="submit" value="applica filtri">
+        <?php if ((isset($user)) && (!empty($user))) { ?>
+            <div class="filter">
+                <div class="singleFilter firstFilter">
+                    <label>
+                        <input type="radio" name="filter" id="filterOne" value="standard" style="display:none" onChange="this.form.submit()">
+                        <?php
+                        $sql_standard = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where città_partenza = $1 and città_arrivo = $2 and data_volo = $3";
+                        $prep_standard = pg_prepare($db, "searchFlightStandard", $sql_standard);
+                        $ret_standard = pg_execute($db, "searchFlightStandard", array($from, $to, $data));
+                        if (!$ret_standard) {
+                            exit;
+                        }
+                        $standard = pg_fetch_array($ret_standard);
+                        if ($roundtrip == 'ritorno') {
+                            $prep_standard_back = pg_prepare($db, "searchFlightStandard", $sql_standard);
+                            $ret_standard_back = pg_execute($db, "searchFlightStandard", array($to, $from, $endDate));
+                            if (!$ret_standard_back) {
+                                exit;
+                            }else{
+                               $standard_back = pg_fetch_array($ret_standard_back); 
+                            }
+                        }
+                        ?>
+                        <p>Standard</p>
+                        <p>€ <?php echo number_format($standard['prezzo'] + $standard_back['prezzo'],2) ?></p>
+                        <p><?php echo substr($standard['tempo'], 0, 2) . "h " . substr($standard['tempo'], 3, 2) . "m (media)" ?></p>
+                    </label>
+                </div>
+                <div class="singleFilter secondFilter">
+                    <label>
+                        <input type="radio" name="filter" id="filterTwo" value="speed" style="display:none" onChange="this.form.submit()">
+                        <?php
+                        $sql_speed = "SELECT prezzo,id_volo,(ora_arrivo-ora_partenza) AS best FROM volo WHERE città_partenza = $1 and città_arrivo=$2 and data_volo=$3 and (ora_arrivo-ora_partenza) = (SELECT min(ora_arrivo-ora_partenza) from volo where città_partenza=$1 and città_arrivo=$2 and data_volo=$3) order by prezzo";
+                        $prep_speed = pg_prepare($db, "searchFlightSpeed", $sql_speed);
+                        $ret_speed = pg_execute($db, "searchFlightSpeed", array($from, $to, $data));
+                        if (!$ret_speed) {
+                            exit;
+                        } else {
+                            $second_filter = pg_fetch_array($ret_speed);
+                            $best = $second_filter['best'];
+                            $price = $second_filter['prezzo'];
+                        }
+                        if (($roundtrip == 'ritorno') && (!empty($endDate))) {
+                            $prep_speed_b = pg_prepare($db, "searchRoundTripSpeed", $sql_speed);
+                            $ret_speed_b = pg_execute($db, "searchRoundTripSpeed", array($to, $from, $endDate));
+                            if (!$ret_speed_b) {
+                                echo "Errore Query";
+                                exit;
+                            } else {
+                                $second_filter_back = pg_fetch_array($ret_speed_b);
+                                $priceback = $second_filter_back['prezzo'];
+                            }
+                        } ?>
+                        <p>Il pi&ugrave; veloce</p>
+                        <p><?php echo "€ " . number_format($price + $priceback,2) ?> </p>
+                        <p><?php echo substr($best, 0, 2) . "h " . substr($best, 3, 2) . "m" ?> </p>
+                    </label>
+                </div>
+
+                <div class="singleFilter thirdFilter">
+                    <label>
+                        <input type="radio" name="filter" value="economy" id="filterThree" style="display:none" onChange="this.form.submit()">
+                        <?php
+                        $sql_economy = "SELECT min(prezzo) as price,(ora_arrivo-ora_partenza) AS interval from volo where città_partenza = $1 and città_arrivo = $2 and data_volo=$3 group by interval";
+                        $prep_economy = pg_prepare($db, "searchFlightEconomy", $sql_economy);
+                        $ret_economy = pg_execute($db, "searchFlightEconomy", array($from, $to, $data));
+                        if (!$ret_economy) {
+                            echo "Errore Query";
+                            return false;
+                        } else {
+                            $third_filter = pg_fetch_array($ret_economy);
+                            $interval = $third_filter['interval'];
+                            $price = $third_filter['price'];
+                        }
+                        if (($roundtrip == 'ritorno') && (!empty($endDate))) {
+                            $prep_speed_b = pg_prepare($db, "searchRoundTripSpeed", $sql_speed);
+                            $ret_speed_b = pg_execute($db, "searchRoundTripSpeed", array($to, $from, $endDate));
+                            if (!$ret_speed_b) {
+                                echo "Errore Query";
+                                exit;
+                            } else {
+                                $second_filter_back = pg_fetch_array($ret_speed_b);
+                                $priceback = $second_filter_back['prezzo'];
+                            }
+                        } ?>
+                        <p>Il pi&ugrave; economico</p>
+                        <p> € <?php echo number_format($price + $priceback,2) ?></p>
+                        <p><?php echo substr($interval, 0, 2) . "h " . substr($interval, 3, 2) . "m" ?></p>
+                    </label>
+                </div>
             </div>
+        <?php } ?>
     </form>
 
     <div class="mid-page">
         <?php
         $noData = pg_result_seek($ret, 0);
         if ($noData) {
-            if ($_GET['roundtrip'] == 'andata') {
+            if ($roundtrip == 'andata') {
                 while ($row = pg_fetch_array($ret)) {
                     $ora_partenza = substr($row['ora_partenza'], 0, 5);
                     $ora_arrivo = substr($row['ora_arrivo'], 0, 5);
-                    $diff_h = substr($ora_arrivo, 0, 2) - substr($ora_partenza, 0, 2);
-                    $diff_m = substr($ora_arrivo, 3, 5) - substr($ora_partenza, 3, 5);
+                    $tempo = substr($row['tempo'], 0, 5);
+                    $diff_h = substr($tempo, 0, 2);
+                    $diff_m = substr($tempo, 3, 5);
                     $id = $row['id_volo'];
                     $città_partenza = $row['città_partenza'];
                     $città_arrivo = $row['città_arrivo'];
@@ -136,8 +229,7 @@ if (($_GET['roundtrip']) == 'andata') {
                     </div>
                 <?php }
             } else {
-                $endDate = $_GET['endDate'];
-                $sql = "SELECT * FROM volo WHERE città_partenza = $1 AND città_arrivo = $2 AND data_volo = $3";
+                $sql = "SELECT * FROM volo WHERE città_partenza = $1 AND città_arrivo = $2 AND data_volo = $3" . $order;
                 $prep_r = pg_prepare($db, "searchFlight", $sql);
                 $ret_r = pg_execute($db, "searchFlight", array($to, $from, $endDate));
                 if (!$ret_r) {
@@ -206,7 +298,7 @@ if (($_GET['roundtrip']) == 'andata') {
                                     if (!empty($user)) { ?>
                                         <div class="price-back">
                                             <p>Prezzo</p>
-                                            <p>€<?php echo $prezzo + $prezzo_ritorno ?></p>
+                                            <p>€<?php echo number_format($prezzo + $prezzo_ritorno,2) ?></p>
                                             <?php echo '<a class="buy" href="check-flight.php?id=' . $id . '&id_ritorno=' . $id_ritorno . '">Seleziona</a>' ?>
                                         </div>
                                     <?php } else { ?>
@@ -234,16 +326,37 @@ if (($_GET['roundtrip']) == 'andata') {
     </div>
     </div>
     <?php include 'footer.php' ?>
+
     <script>
+        queryString = window.location.search;
+        urlparams = new URLSearchParams(queryString);
+        filter = urlparams.get("filter");
+        if (filter == 'speed') {
+            document.querySelector('.secondFilter').style.backgroundColor = "#042759";
+            document.querySelector('.secondFilter').style.color = "white";
+        }
+        else if (filter == 'economy') {
+            document.querySelector('.thirdFilter').style.backgroundColor = "#042759";
+            document.querySelector('.thirdFilter').style.color = "white";
+        }else{
+            document.querySelector('.firstFilter').style.backgroundColor = "#042759";
+            document.querySelector('.firstFilter').style.color = "white";
+        }
+        if (!(urlparams.has("endDate"))) {
+            console.log(document.getElementsByName("endDate")[0].disabled);
+            document.getElementsByName("endDate")[0].disabled = true;
+        }
+
+
         function disableDate() {
-            document.getElementById("endDate").disabled = true;
-            document.getElementById("endDate").value = "";
+            document.getElementsByName("endDate")[0].disabled = true;
+            document.getElementsByName("endDate")[0].value = "";
         }
 
         function enableDate() {
-            document.getElementById("endDate").disabled = false;
+            document.getElementsByName("endDate")[0].disabled = false;
         }
     </script>
 </body>
 
-</html>i
+</html>

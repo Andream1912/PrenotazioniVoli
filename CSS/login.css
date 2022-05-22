@@ -1,7 +1,6 @@
 .form-login {
     display: none;
     background-color: white;
-    color: #3498db;
     border: 1px solid #333;
     border-radius: .5rem;
     padding: .5rem;
@@ -42,7 +41,7 @@
 .form-control i {
     visibility: hidden;
     position: absolute;
-    top: 340px;
+    top: 360px;
     right: 20px;
 }
 
@@ -73,7 +72,7 @@
     visibility: hidden;
     position: absolute;
     right: 20px;
-    top: 400px;
+    top: 420px;
     color: #e74c3c;
 }
 

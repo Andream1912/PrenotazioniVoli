@@ -22,7 +22,7 @@ if ($_POST['email'] || $_POST['password']) {
         } else {?>
         <script>
             alert("Parametri errati!!");
-            window.location = "../PHP/homepage.php";
+            window.location = (document.referrer);
         </script>
         <?php
         }
