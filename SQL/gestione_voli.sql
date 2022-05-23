@@ -3,19 +3,19 @@ DROP TABLE IF  EXISTS volo cascade;
 create table if not exists volo(
     id_volo SERIAL primary key,
     data_volo DATE not null,
-    città_partenza varchar(255) not null,
+    citta_partenza varchar(255) not null,
     ora_partenza TIME not null,
-    città_arrivo varchar(255) not null,
+    citta_arrivo varchar(255) not null,
     ora_arrivo TIME not null,
     prezzo decimal(10,2) not null,
     posti_disponibili integer not null check(posti_disponibili >= 0),
-    foreign key(città_partenza) references paese(nome) on delete restrict on update cascade,
-    foreign key(città_arrivo) references paese(nome) on delete restrict on update cascade
+    foreign key(citta_partenza) references paese(nome) on delete restrict on update cascade,
+    foreign key(citta_arrivo) references paese(nome) on delete restrict on update cascade
 );
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO www;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO www;
 
-insert into volo(data_volo,città_partenza,ora_partenza,città_arrivo,ora_arrivo,prezzo,posti_disponibili) values
+insert into volo(data_volo,citta_partenza,ora_partenza,citta_arrivo,ora_arrivo,prezzo,posti_disponibili) values
  ('2022-06-01','napoli','07:00:00','milano','08:30:00',32,35),
  ('2022-06-01','napoli','09:00:00','milano','11:30:00',19,50),
  ('2022-06-01','napoli','11:00:00','milano','12:30:00',40,10),
@@ -39,6 +39,6 @@ insert into volo(data_volo,città_partenza,ora_partenza,città_arrivo,ora_arrivo
  ('2022-06-01','napoli','18:00:00','londra','20:25:00',89.99,15),
  ('2022-06-01','roma','07:00:00','pago','18:30:00',329.99,100),
  ('2022-06-01','napoli','09:30:00','pago','11:00:00',32,100),
- ('2022-10-01','milano','11:00:00','napoli','12:00:00',18,40),
- ('2022-10-01','milano','14:00:00','napoli','15:00:00',20.99,60),
+ ('2022-06-01','milano','11:00:00','napoli','12:00:00',18,40),
+ ('2022-06-10','milano','14:00:00','napoli','15:00:00',20.99,60),
  ('2022-06-02','barcellona','09:00:00','milano','11:30:00',32,100)

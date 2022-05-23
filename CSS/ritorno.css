@@ -1,7 +1,6 @@
     .completo {
         display: flex;
         flex-direction: column;
-        overflow: hidden;
     }
     
     .completo .single-flight:nth-child(2n+1) {
@@ -31,7 +30,7 @@
         font-size: 35px;
         color: #444560;
         border: 0.5px solid black;
-        height: 243px;
+        height: 280px;
         background-color: white;
         border-left: none;
         width: 220px;

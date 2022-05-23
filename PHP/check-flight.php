@@ -67,7 +67,7 @@ if (!empty($_GET['id'])) {
 <body>
     <?php include 'header.php' ?>
     <br><br><br><br><br><br>
-    <form action="payment.php" class="payment" method="get" onsubmit="return checkPersonalData()">
+    <form action="payment.php" class="payment" method="post" onsubmit="return checkPersonalData()">
         <div class="ticket">
             <div class="ticketOne">
                 <p name="citta"><?php echo $città_partenza ?></p>
@@ -136,7 +136,7 @@ if (!empty($_GET['id'])) {
                     <label for="luogonascita">Luogo di Nascita: <input type="text" id="luogonascita" name="luogonascita" value="<?php echo $luogo_nascita; ?>"></label>
                     <label for="indirizzo">Indirizzo: <input type="text" id="indirizzo" value="<?php echo $indirizzo; ?>"></label>
                     <label for="cap">CAP: <input type="text" id="cap" value="<?php echo $cap; ?>"></label>
-                    <label for="sesso">SESSO: <div class="sex"><input type="radio" id="male" value="M" checked>M<input type="radio" name="sex" id="fale" value="F">F</div></label>
+                    <label for="sesso">SESSO: <div class="sex"><input type="radio" name="sex" id="male" value="M" checked>M<input type="radio" name="sex" id="fale" value="F">F</div></label>
                     <label for="nazionalita">Nazionalità: <input type="text" id="nazionalita" name="nazionalita" value="<?php echo $nazionalita; ?>"></label>
                     <label for="datanascita">Data di Nascita: <input type="date" id="datanascita" name="birthday" value="<?php echo $data_nascita; ?>"></label>
                     <label for="numero"> Numero: <input type="tel" id="numero" name="numero" value="<?php echo $numero; ?>"></label>
@@ -149,36 +149,92 @@ if (!empty($_GET['id'])) {
                     <label for="CVV">CVV: <input type="numeric" id="cvv" class="cvv" placeholder="CVV" maxlength="3"></label>
                 </div>
             </div>
-            <div class="info-pay">
-                <h1>Dettagli del prezzo</h1>
-                <h3>Riepilogo</h3>
-                <div class="price">
-                    <p>Adulto</p>
-                    <p><?php echo $prezzo ?> € x 1</p>
-                </div>
-                <?php if ((!empty([$id_back]))&&($id_back != null)) { ?>
+            <div class="right">
+                <div class="info-pay">
+                    <h1>Dettagli del prezzo</h1>
+                    <h3>Riepilogo</h3>
                     <div class="price">
-                        <p>Adulto(Ritorno)</p>
-                        <p><?php echo $prezzo_back ?> € x 1</p>
+                        <p>Adulto</p>
+                        <p><?php echo $prezzo ?> € x 1</p>
                     </div>
-                <?php
-                }
-                ?>
-                <div class="price end" style="color:grey">
-                    <p>Tasse(IVA 22%)</p>
-                    <p><?php echo number_format((($prezzo + $prezzo_back) * 22) / 100, 2) ?> €</p>
+                    <?php if ((!empty([$id_back])) && ($id_back != null)) { ?>
+                        <div class="price">
+                            <p>Adulto(Ritorno)</p>
+                            <p><?php echo $prezzo_back ?> € x 1</p>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    <div class="price end" style="color:grey">
+                        <p>Tasse(IVA 22%)</p>
+                        <p><?php echo number_format((($prezzo + $prezzo_back) * 22) / 100, 2) ?> €</p>
+                    </div>
+                    <div class="price">
+                        <h2>Totale</h2>
+                        <h2 class="total" id="totalPrice"><?php echo number_format($prezzo + $prezzo_back + (($prezzo + $prezzo_back) * 22) / 100, 2) ?> €</h2>
+                        <input type="hidden" name="price" value=<?php echo number_format($prezzo  + (($prezzo) * 22) / 100, 2) ?> id="totalPriceHidden">
+                        <input type="hidden" name="priceBack" value=<?php echo number_format($prezzo_back  + (($prezzo_back) * 22) / 100, 2) ?> id="totalPriceHidden">
+                    </div>
+                    <input type="submit" class="submit-flight" value="Prenota">
                 </div>
-                <div class="price">
-                    <h2>Totale</h2>
-                    <h2 class="total"><?php echo number_format($prezzo + $prezzo_back + (($prezzo + $prezzo_back) * 22) / 100, 2) ?> €</h2>
+                <div class="luggage">
+                    <div class="noluggage">
+                        <label>
+                            <input checked type="radio" name="luggage" id="noluggage" value="0" onchange=handleChange(this)>
+                            <img src="../immagini/backpack.png">
+                            <p>Senza bagaglio</p>
+                            <p>Gratis</p>
+                        </label>
+                    </div>
+                    <div class="oneluggage">
+                        <label>
+                            <input type="radio" name="luggage" id="oneluggage" value="19,99" onchange=handleChange(this)>
+                            <img src="../immagini/luggage1.png">
+                            <p>1 bagaglio(10kg)</p>
+                            <p>€ 12,99</p>
+                        </label>
+                    </div>
+                    <div class="twoluggage">
+                        <label>
+                            <input type="radio" name="luggage" id="twoluggage" value="32,99" onchange=handleChange(this)>
+                            <img src="../immagini/luggage2.png">
+                            <p>2 bagagli(10kg x 2)</p>
+                            <p>€ 32,99</p>
+                        </label>
+                    </div>
                 </div>
-                <input type="submit" class="submit-flight" value="Prenota">
             </div>
         </div>
     </form>
     <?php include 'footer.php' ?>
-
     <script>
+        var price = document.getElementById("totalPrice");
+        const priceconst = parseFloat(price.textContent.slice(0, 6));
+
+        function handleChange(src) {
+            const two = document.getElementById("twoluggage");
+            const one = document.getElementById("oneluggage")
+            const zero = document.getElementById("noluggage")
+            if (two.checked == false) {
+                two.parentElement.parentElement.style.backgroundColor = "#f2f2f2";
+                two.parentElement.parentElement.style.color = "black";
+
+            }
+            if (one.checked == false) {
+                one.parentElement.parentElement.style.backgroundColor = "#f2f2f2";
+                one.parentElement.parentElement.style.color = "black";
+            }
+            if (zero.checked == false) {
+                zero.parentElement.parentElement.style.backgroundColor = "#f2f2f2";
+                zero.parentElement.parentElement.style.color = "black";
+            }
+            const x = src.parentElement.parentElement;
+            x.style.backgroundColor = "rgb(4, 39, 89)"
+            x.style.color = "white"
+            newPrice = priceconst + parseFloat(src.value);
+            price.innerHTML = newPrice.toFixed(2) + " € ";
+        }
+
         function checkPersonalData() {
             nome = document.getElementById("nome");
             cognome = document.getElementById("cognome");
@@ -203,6 +259,11 @@ if (!empty($_GET['id'])) {
                     cognome.style.borderColor = "red";
                 } else {
                     cognome.style.borderColor = "#f0f0f0";
+                }
+                if (indirizzo.value == "") {
+                    indirizzo.style.borderColor = "red";
+                } else {
+                    indirizzo.style.borderColor = "f0f0f0";
                 }
                 if (datanascita.value == "") {
                     datanascita.style.borderColor = "red";
