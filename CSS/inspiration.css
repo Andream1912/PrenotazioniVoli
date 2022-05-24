@@ -1,0 +1,208 @@
+body {
+    margin: 0;
+}
+
+.hr1 {
+    margin-right: 550px;
+    background: #03045e;
+}
+
+.hr2 {
+    margin-right: 155px;
+    background: #03045e;
+}
+
+.head_midpage img {
+    position: relative;
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.mid_midpage {
+    display: flex;
+    flex-direction: row;
+    background-color: #f2f2f2;
+    z-index: -1;
+    margin-top: -420px
+}
+
+.mid_midpage h1 {
+    font-family: system-ui;
+    cursor: default;
+}
+
+.selection_midpage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 40px;
+}
+
+.selection_midpage h1 {
+    color: #3498db;
+    font-family: system-ui;
+    font-size: 50px;
+    text-transform: uppercase;
+    cursor: default;
+}
+
+.label_midpage {
+    color: #03045e;
+    margin-top: -30px;
+    font-size: 30px;
+    font-family: system-ui;
+    cursor: default !important;
+}
+
+.selection_midpage h3 {
+    font-size: 20px;
+    font-family: system-ui;
+    cursor: default;
+}
+
+.label_location {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    width: 850px;
+    gap: 40px;
+}
+
+.label_location h2 {
+    position: relative;
+    font-family: system-ui;
+    font-size: 15px;
+    cursor: default;
+}
+
+.selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selection img {
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.mare:hover {
+    content: url(../immagini/mare.jpg);
+}
+
+.montagna:hover {
+    content: url(../immagini/montagna.jpg);
+}
+
+.citta:hover {
+    content: url(../immagini/citta.jpg);
+}
+
+.economico:hover {
+    content: url(../immagini/economico.jpg);
+}
+
+.tendenza:hover {
+    content: url(../immagini/tendenza.jpg);
+}
+
+.cultura:hover {
+    content: url(../immagini/cultura.jpg);
+}
+
+.famiglia:hover {
+    content: url(../immagini/famiglia.jpg);
+}
+
+.cibo:hover {
+    content: url(../immagini/cibo.jpg);
+}
+
+.avventura:hover {
+    content: url(../immagini/avventura.jpg);
+}
+
+.romanticismo:hover {
+    content: url(../immagini/romanticismo.jpg);
+}
+
+.neve:hover {
+    content: url(../immagini/neve.jpg);
+}
+
+.divertimento:hover {
+    content: url(../immagini/divertimento.jpg);
+}
+
+.relax:hover {
+    content: url(../immagini/relax.jpg);
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-color: #d3d3d3;
+    border-style: outset;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+    width: 500px;
+    text-align: center;
+    gap: 40px;
+}
+
+.aside h1 {
+    font-family: system-ui;
+    font-size: 30px;
+    font-style: italic;
+    cursor: default;
+    color: rgb(239, 102, 48);
+    margin-bottom: 0;
+}
+
+.asideContent h2 {
+    font-size: 20px;
+    font-family: system-ui;
+    text-transform: uppercase;
+    margin-bottom: 30px
+}
+
+.footer_midpage {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    height: auto;
+    z-index: -1;
+    gap: 40px;
+    margin-top: 80px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.footer_midpage h1 {
+    font-family: system-ui;
+    font-size: 25px;
+    text-transform: uppercase;
+    cursor: default;
+}
+
+.footer_midpage img {
+    border-radius: 0.5rem;
+}
+
+.footer_midpage img:hover {
+    filter: brightness(75%)
+}
+
+@media screen and (max-width: 1100px) {
+    aside {
+        display: none;
+    }
+}

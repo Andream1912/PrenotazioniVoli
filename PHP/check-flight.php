@@ -206,7 +206,7 @@ if (!empty($_GET['id'])) {
             </div>
         </div>
     </form>
-    <?php include 'footer.php' ?>
+    <?php include '../HTML/footer.html' ?>
     <script>
         var price = document.getElementById("totalPrice");
         const priceconst = parseFloat(price.textContent.slice(0, 6));

@@ -29,11 +29,11 @@
                 </div>
                 <div class="container-search-bar">
                     <label for="">Partenza</label>
-                    <input type="date" id="startDate" name="startDate"/>
+                    <input type="date" id="startDate" name="startDate" />
                 </div>
                 <div class="container-search-bar date">
                     <label for="">Ritorno</label>
-                    <input type="date" id="endDate" name="endDate"/>
+                    <input type="date" id="endDate" name="endDate" />
                 </div>
                 <input type="hidden" name="filter" value="standard">
                 <button>Cerca voli</button>
@@ -44,54 +44,62 @@
         <div class="carta-container">
             <div class="first-card">
                 <h1>Esplora il mondo,</h1>
-                <h2 dir="rtl">sentiti libero</h2>
-                <button class="bottone-foto">sono io</button>
+                <h2 dir="rtl">!sentiti libero</h2>
+                <a href="../PHP/lasciati_ispirare.php?montagna=montagna&avventura=avventura">
+                    <button class="bottone-foto">SONO IO</button>
+                </a>
                 <img src="../immagini/uomocappello.jpg">
             </div>
             <div class="second-card">
-                <h1>Cultura, bellezza,</h1>
-                <h2 dir="rtl">felicità</h2>
-                <button class="bottone-foto">pietro</button>
+                <h1 style="margin-left:-140px">Immergiti nella Natura,</h1>
+                <h2 style="margin-left:100px">godititi la tua vacanza!</h2>
+                <a href="../PHP/lasciati_ispirare.php?relax=relax">
+                    <button class="bottone-foto2">SONO IO</button>
+                </a>
                 <img src="../immagini/nature.jpg">
             </div>
         </div>
         <br><br><br>
         <div class="third-card">
-            <h1>Immergiti in un avventura <br> unica</h1>
-            <button>Esperienze</button>
+            <h1>Immergiti in un avventura <br> unica!</h1>
+            <a href="../PHP/lasciati_ispirare.php?avventura=avventura&divertimento=divertimento">
+                <button>SONO IO</button>
+            </a>
             <img src="../immagini/quad.jpg">
         </div>
     </div>
-    <?php include 'footer.php' ?>
+    <?php include '../HTML/footer.html' ?>
     <script>
         document.getElementById("startDate").min = new Date();
 
-        function checkInput(){
+        function checkInput() {
             from = document.getElementById("departure");
             to = document.getElementById("landing");
             startDate = document.getElementById("startDate");
-            if(from.value == "" || to.value == "" || startDate.value == ""){
-            if(from.value == ""){
-                from.style.borderColor = "red";
-            }else{
-                from.style.borderColor = "#f0f0f0";
+            if (from.value == "" || to.value == "" || startDate.value == "") {
+                if (from.value == "") {
+                    from.style.borderColor = "red";
+                } else {
+                    from.style.borderColor = "#f0f0f0";
+                }
+                if (to.value == "") {
+                    to.style.borderColor = "red";
+                } else {
+                    to.style.borderColor = "#f0f0f0";
+                }
+                if ((startDate.value == "") || (startDate.value < new Date())) {
+                    startDate.style.borderColor = "red";
+                    startDate.innerHTML = "prova";
+                } else {
+                    startDate.style.borderColor = "#f0f0f0";
+                }
+                return false;
+            } else {
+                return true;
             }
-            if(to.value == ""){
-                to.style.borderColor = "red";
-            }else{
-                to.style.borderColor = "#f0f0f0";
-            }if((startDate.value == "")||(startDate.value < new Date())){
-                startDate.style.borderColor = "red";
-                startDate.innerHTML = "prova";
-            }else{
-                startDate.style.borderColor = "#f0f0f0";
-            }
-            return false;
-        }else{
-            return true;
         }
-        }
-        function switchCity(){
+
+        function switchCity() {
             x = document.getElementById("landing").value;
             document.getElementById("landing").value = document.getElementById("departure").value;
             document.getElementById("departure").value = x;

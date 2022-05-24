@@ -2,7 +2,7 @@ footer {
     margin-top: 10%;
     display: flex;
     flex-direction: column;
-    background-color: #f1f2f8;
+    background-color: #f2f2f2;
     text-align: center;
     border-top: 0.4px solid black;
 }
@@ -18,6 +18,7 @@ footer {
 }
 
 .footer div {
+    background-color: white;
     width: 200px;
     height: 300px;
     border: 0.5px solid black;
@@ -29,4 +30,20 @@ footer {
 .footer div img {
     width: 165px;
     height: 165px;
+}
+
+.memojiiAndrea:hover {
+    content: url("../developer/Andrea1.png");
+}
+
+.memojiiManuel:hover {
+    content: url("../developer/Manuel1.png");
+}
+
+.memojiiSamuel:hover {
+    content: url("../developer/Samuel1.png");
+}
+
+.memojiiAndrea:hover {
+    content: url("../developer/Andrea1.png");
 }
