@@ -28,8 +28,8 @@
                 echo "<p>Benvenuto $user</p>";
                 ?>
                 <div class="dropdown-menu">
-                    <a href="private_page.php?card=informazioni_personali">Area Privata</a>
-                    <a href="private_page.php?card=prenotazioni">Le mie prenotazioni</a>
+                    <a href="">Area Privata</a>
+                    <a href="">Le mie prenotazioni</a>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>

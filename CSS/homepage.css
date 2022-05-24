@@ -124,6 +124,54 @@ video {
     cursor: pointer;
 }
 
+.inspiration-card {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 570px;
+    left: 80px;
+    right: 100px;
+}
+
+.inspiration-card>h1 {
+    position: absolute;
+    color: #03045e;
+    text-transform: uppercase;
+    left: 310px;
+    top: 0%;
+    font-family: system-ui;
+    font-size: 50px;
+}
+
+.inspiration-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.inspiration-card button {
+    position: absolute;
+    top: 20%;
+    left: 600px;
+    width: 160px;
+    height: 45px;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background: #03045e;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.inspiration-card button:hover {
+    outline: 1px solid #03045e;
+    background: white;
+    color: #03045e;
+    box-shadow: 0 0 10px rgba(57, 56, 56, 0.4);
+    backdrop-filter: blur(10px);
+}
+
 .carta-container>div>h2 {
     position: relative;
     top: 220px;
@@ -229,6 +277,13 @@ video {
 }
 
 @media screen and (max-width: 1100px) {
+    .inspiration-card>h1 {
+        font-size: 40px;
+        left: 90px;
+    }
+    .inspiration-card button {
+        left: 400px;
+    }
     .search-bar {
         width: auto;
         bottom: 200px;
