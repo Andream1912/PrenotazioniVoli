@@ -62,6 +62,20 @@ if (!empty($_GET['id'])) {
     <title>Prenotazione Biglietto</title>
     <link rel="stylesheet" href="../CSS/check-flight.css">
     <link rel="stylesheet" href="../CSS/payment.css">
+    <link rel="icon" type="image/x-icon" href="../immagini/world.ico">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body>
@@ -134,7 +148,7 @@ if (!empty($_GET['id'])) {
                     <label for="nome"> Nome: <input type="text" id="nome" value="<?php echo $nome; ?>"></label>
                     <label for="cognome"> Cognome: <input type="text" id="cognome" value="<?php echo $cognome; ?>"></label>
                     <label for="luogonascita">Luogo di Nascita: <input type="text" id="luogonascita" name="luogonascita" value="<?php echo $luogo_nascita; ?>"></label>
-                    <label for="indirizzo">Indirizzo: <input type="text" id="indirizzo" value="<?php echo $indirizzo; ?>"></label>
+                    <label for="indirizzo">Indirizzo: <input type="text" id="indirizzo" name="indirizzo" value="<?php echo $indirizzo; ?>"></label>
                     <label for="cap">CAP: <input type="text" id="cap" value="<?php echo $cap; ?>"></label>
                     <label for="sesso">SESSO: <div class="sex"><input type="radio" name="sex" id="male" value="M" checked>M<input type="radio" name="sex" id="fale" value="F">F</div></label>
                     <label for="nazionalita">Nazionalità: <input type="text" id="nazionalita" name="nazionalita" value="<?php echo $nazionalita; ?>"></label>
@@ -146,7 +160,7 @@ if (!empty($_GET['id'])) {
                     <label for="ccn">Numero Carta:</label>
                     <div class="typecard"><input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" class="ccn" placeholder="xxxx xxxx xxxx xxxx"><img src="../immagini//mastercard.png" id="mastercard" class="mastercard"><img src="../immagini/visa.png" id="visa" class="visa"></div>
                     <label for="scadenza">Data di Scadenza: <input class="month" type="numeric" placeholder="Mese" id="month"> / <input class="year" type="numeric" min="2022" id="year" placeholder="Anno"></label>
-                    <label for="CVV">CVV: <input type="numeric" id="cvv" class="cvv" placeholder="CVV" maxlength="3"></label>
+                    <label for="CVV">CVV: <input type="number" min="99" max="999" id="cvv" class="cvv" placeholder="CVV" maxlength="3"></label>
                 </div>
             </div>
             <div class="right">
@@ -173,7 +187,7 @@ if (!empty($_GET['id'])) {
                         <h2>Totale</h2>
                         <h2 class="total" id="totalPrice"><?php echo number_format($prezzo + $prezzo_back + (($prezzo + $prezzo_back) * 22) / 100, 2) ?> €</h2>
                         <input type="hidden" name="price" value=<?php echo number_format($prezzo  + (($prezzo) * 22) / 100, 2) ?> id="totalPriceHidden">
-                        <input type="hidden" name="priceBack" value=<?php echo number_format($prezzo_back  + (($prezzo_back) * 22) / 100, 2) ?> id="totalPriceHidden">
+                        <input type="hidden" name="priceBack" value=<?php echo number_format($prezzo_back  + (($prezzo_back) * 22) / 100, 2) ?> id="totalPriceHiddenBack">
                     </div>
                     <input type="submit" class="submit-flight" value="Prenota">
                 </div>
@@ -248,8 +262,14 @@ if (!empty($_GET['id'])) {
             month = document.getElementById("month");
             year = document.getElementById("year");
             cvv = document.getElementById("cvv");
-            if (nome.value == "" || cognome.value == "" || datanascita.value == "" || numero.value == "" || indirizzo.value == "" || cap.value == "" || luogonascita.value == "" || ccn.value == "" || month.value == "" || year.value == "" || cvv.value == "" || year.value < '2022') {
-
+            if (nome.value == "" || cognome.value == "" || datanascita.value == "" || numero.value == "" || indirizzo.value == "" || cap.value == "" || nazionalita.value == "" || luogonascita.value == "" || ccn.value == "" || month.value == "" || year.value == "" || cvv.value == "" || year.value < 2022 || year.value > 3000 || month.value > 12 || month.value == 0) {
+                if (nome.value == "" || cognome.value == "" || luogonascita.value == "" || indirizzo.value == "" || cap.value == "") {
+                    window.scrollTo(0, 200);
+                } else if (nazionalita.value == "" || datanascita.value == "" || numero.value == "") {
+                    window.scrollTo(0, 600);
+                } else {
+                    window.scrollTo(0, 1000);
+                }
                 if (nome.value == "") {
                     nome.style.borderColor = "red";
                 } else {
@@ -260,36 +280,37 @@ if (!empty($_GET['id'])) {
                 } else {
                     cognome.style.borderColor = "#f0f0f0";
                 }
+                if (luogonascita.value == "") {
+                    luogonascita.style.borderColor = "red";
+                } else {
+                    luogonascita.style.borderColor = "#f0f0f0";
+                }
                 if (indirizzo.value == "") {
                     indirizzo.style.borderColor = "red";
                 } else {
                     indirizzo.style.borderColor = "f0f0f0";
-                }
-                if (datanascita.value == "") {
-                    datanascita.style.borderColor = "red";
-                } else {
-                    datanascita.style.borderColor = "#f0f0f0";
                 }
                 if (cap.value == "") {
                     cap.style.borderColor = "red";
                 } else {
                     cap.style.borderColor = "#f0f0f0";
                 }
-                if (luogonascita.value == "") {
-                    luogonascita.style.borderColor = "red";
+                if (nazionalita.value == "") {
+                    nazionalita.style.borderColor = "red";
                 } else {
-                    luogonascita.style.borderColor = "#f0f0f0";
+                    nazionalita.style.borderColor = "#f0f0f0";
+                }
+                if (datanascita.value == "") {
+                    datanascita.style.borderColor = "red";
+                } else {
+                    datanascita.style.borderColor = "#f0f0f0";
                 }
                 if (numero.value == "") {
                     numero.style.borderColor = "red";
                 } else {
                     numero.style.borderColor = "#f0f0f0";
                 }
-                if (nazionalita.value == "") {
-                    nazionalita.style.borderColor = "red";
-                } else {
-                    nazionalita.style.borderColor = "#f0f0f0";
-                }
+                
                 if (ccn.value == "") {
                     ccn.style.borderColor = "red";
                 } else {
@@ -298,10 +319,14 @@ if (!empty($_GET['id'])) {
                 if (month.value == "") {
                     month.style.border = "2px solid";
                     month.style.borderColor = "red";
+                } else if (month.value > 12 || month.value == 0) {
+                    month.style.border = "2px solid";
+                    month.style.borderColor = "red";
                 } else {
                     month.style.border = "none";
+                    
                 }
-                if ((year.value == "") || (year.value < '2022')) {
+                if ((year.value == "") || (year.value < 2022) || (year.value > 3000)) {
                     year.style.border = "2px solid";
                     year.style.borderColor = "red";
                 } else {
@@ -312,6 +337,7 @@ if (!empty($_GET['id'])) {
                 } else {
                     cvv.style.borderColor = "#f0f0f0"
                 }
+                
                 return false;
             } else {
                 return true;

@@ -16,6 +16,7 @@ header {
     font-family: 'Oleo Script Swash Caps', cursive;
     color: #3498db;
     font-size: 200%;
+    cursor: default;
 }
 
 .header .left {

@@ -11,20 +11,22 @@ if ($_POST['email'] || $_POST['password']) {
             alert("Parametri errati!!");
             window.location = "../PHP/homepage.php";
         </script>
-<?php
+        <?php
     } else {
         if (password_verify($pass, $hash)) {
-            $username = get_role($email, $db);
+            $ruolo = get_level($email, $db);
+            $username = get_username($email, $db);
             session_start();
             $_SESSION['email'] = $email;
             $_SESSION['username'] = $username;
+            $_SESSION['ruolo'] = $ruolo;
             header("Location:" . $_SERVER['HTTP_REFERER']);
-        } else {?>
-        <script>
-            alert("Parametri errati!!");
-            window.location = (document.referrer);
-        </script>
-        <?php
+        } else { ?>
+            <script>
+                alert("Parametri errati!!");
+                window.location = (document.referrer);
+            </script>
+<?php
         }
     }
 }
@@ -47,11 +49,11 @@ function get_pwd($email, $db)
         }
     }
 }
-function get_role($email, $db)
+function get_username($email, $db)
 {
     $sql = "SELECT username from utenti where email=$1";
-    $prep = pg_prepare($db, "sqllivello", $sql);
-    $ret = pg_execute($db, "sqllivello", array($email));
+    $prep = pg_prepare($db, "sqlUsername", $sql);
+    $ret = pg_execute($db, "sqlUsername", array($email));
     if (!$ret) {
         echo "ERRORE QUERY: " . pg_last_error($db);
         return false;
@@ -61,6 +63,24 @@ function get_role($email, $db)
             return $username;
         } else {
             return false;
+        }
+    }
+}
+function get_level($email, $db)
+{
+    $sql = "SELECT livello from utenti where email=$1";
+    $prep = pg_prepare($db, "sqllivello", $sql);
+    if (!$prep) {
+        return false;
+    } else {
+        $ret = pg_execute($db, "sqllivello", array($email));
+        if (!$ret) {
+            echo "ERRORE QUERY: " . pg_last_error($db);
+            return false;
+        } else {
+            $row = pg_fetch_assoc($ret);
+            $ruolo = $row['livello'];
+            return $ruolo;
         }
     }
 }

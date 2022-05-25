@@ -40,7 +40,6 @@ function hideMenu() {
 function openRegister() {
     document.querySelector(".multi-step-form").style.display = "block ";
     document.querySelector(".mid-page").style.opacity = "0.5";
-    document.querySelector(".cards").style.opacity = "0.5";
     document.querySelector(".body").style.overflow = "hidden";
 }
 
@@ -49,7 +48,6 @@ function closeWindow() {
     document.querySelector(".form-login").style.display = "none";
     document.querySelector(".header").style.opacity = "1";
     document.querySelector(".mid-page ").style.opacity = "1";
-    document.querySelector(".cards").style.opacity = "1";
     currentStep = 0;
     showCurrentStep();
     document.querySelector(".body").style.overflow = "auto";
@@ -58,7 +56,6 @@ function closeWindow() {
 function openLogin() {
     document.querySelector(".form-login").style.display = "block";
     document.querySelector(".mid-page").style.opacity = "0.5 "
-    document.querySelector(".cards").style.opacity = "0.5";
     document.querySelector(".body").style.overflow = "hidden";
 }
 

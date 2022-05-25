@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS personaldata (
     luogo_nascita varchar(30),
     data_nascita date,
     numerotel varchar(11),
-    FOREIGN KEY (username) REFERENCES utenti (username)
+    FOREIGN KEY (username) REFERENCES utenti (username) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO www;

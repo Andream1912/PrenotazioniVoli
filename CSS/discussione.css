@@ -1,0 +1,387 @@
+/*body*/
+
+body {
+    background-image: linear-gradient(to right, lightblue, white);
+}
+
+
+/*header*/
+
+.header {
+    margin-bottom: 90px;
+    left: 0;
+}
+
+
+/*contenitore overlay creazione risposta*/
+
+.respFormContainer {
+    z-index: 999999;
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -250px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 3px solid #3498db;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    border-radius: 8px;
+}
+
+
+/*form overlay creazione risposta*/
+
+.create-response-form {
+    padding: 20px;
+}
+
+
+/*contenitore bottone uscita overlay creazione risposta*/
+
+.respExitButtonContainer {
+    margin-left: auto;
+    padding: 10px;
+}
+
+
+/*bottone uscite overlay creazione risposta*/
+
+.respExitButton {
+    color: white;
+    background: #3498db;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.respExitButton:hover {
+    color: #3498db;
+    background: white;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    border: 2px solid #3498db;
+}
+
+
+/*area di testo overlay creazione risposta*/
+
+.responseText {
+    width: 100%;
+    height: 280px;
+    resize: none;
+}
+
+
+/*contenitore bottone submit overlay creazione risposta*/
+
+.respSubmitButtonContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/*bottone submit overlay creazione risposta*/
+
+.respSubmitButton {
+    color: white;
+    background: #3498db;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+}
+
+.respSubmitButton:hover {
+    color: #3498db;
+    background: white;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    border: 2px solid #3498db;
+}
+
+
+/*contenitore overlay modifica discussione*/
+
+.modifyFormContainer {
+    z-index: 999999;
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    left: 50%;
+    margin-top: -250px;
+    margin-left: -250px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 3px solid #3498db;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    border-radius: 8px;
+}
+
+
+/*form overlay modifica discussione*/
+
+.modify-discussion-form {
+    padding: 20px;
+}
+
+
+/*container bottone uscita overlay modifica discussione*/
+
+.modifyExitButtonContainer {
+    margin-left: auto;
+    padding: 10px;
+}
+
+
+/*bottone uscita overlay modifica discussione*/
+
+.modifyExitButton {
+    color: white;
+    background: #3498db;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modifyExitButton:hover {
+    color: #3498db;
+    background: white;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    border: 2px solid #3498db;
+}
+
+
+/*area di testo overlay modifica discussione*/
+
+.descriptionText {
+    width: 100%;
+    height: 280px;
+    resize: none;
+}
+
+
+/*container bottone submit overlay modifica discussione*/
+
+.modifySubmitButtonContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/*bottone submit overlay modifica discussione*/
+
+.modifySubmitButton {
+    color: white;
+    background: #3498db;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 30px;
+}
+
+.modifySubmitButton:hover {
+    color: #3498db;
+    background: white;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    border: 2px solid #3498db;
+}
+
+
+/*contenitore totale*/
+
+.cardTot {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 20px;
+}
+
+
+/*contenitore parte superiore per titolo e bottoni*/
+
+.topCard {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-image: url(../immagini/sfondo-barraricerca.jpg);
+    background-size: 100%;
+    border-radius: 10px;
+}
+
+
+/*contenitore titolo discussione*/
+
+.cardTit {
+    color: #03045e;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+/*contenitore discussione*/
+
+.cardPrinc {
+    padding: 20px;
+    width: 60%;
+    border: 1px solid #3498db;
+    border-radius: 10px;
+    margin: 10px;
+    transition: 1s;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.cardPrinc:hover {
+    box-shadow: 0 0 10px 1px rgba(59, 59, 59, 0.3);
+    transform: translateX(-10px);
+    transition: 1s;
+}
+
+
+/*informazioni discussione*/
+
+.cardInfor {
+    text-align: right;
+}
+
+
+/*bottoni per creazione risposta, modifica discussione e accesso*/
+
+
+/*creazione risposta*/
+
+.respButton {
+    position: fixed;
+    left: 50px;
+    top: 200px;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    background: #3498db;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    cursor: pointer;
+}
+
+.respButton:hover {
+    background: white;
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+
+/*modifica discussione*/
+
+.modifyButton {
+    position: absolute;
+    right: 300px;
+    top: 110px;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    background: #3498db;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    cursor: pointer;
+}
+
+.modifyButton:hover {
+    background: white;
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+
+/*accesso*/
+
+.logButton {
+    position: fixed;
+    left: 50px;
+    top: 200px;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    background: #3498db;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    cursor: pointer;
+}
+
+.logButton:hover {
+    background: white;
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+
+/*contenitore risposte*/
+
+.cardRisp {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    border: 3px solid grey;
+    border-radius: 10px;
+    align-items: center;
+    box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
+    background: white;
+}
+
+
+/*contenitore risposta singola*/
+
+.subCardRisp {
+    border: 2px solid grey;
+    border-radius: 10px;
+    width: 80%;
+    padding: 10px;
+    transition: 1s;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.subCardRisp:hover {
+    box-shadow: 0 0 10px 1px rgba(59, 59, 59, 0.3);
+    transform: translateX(-10px);
+    transition: 1s;
+}
+
+
+/*informazioni risposta singola*/
+
+.rispInfor {
+    text-align: right;
+}
+
+
+/*scritta numero risposte*/
+
+.numRisp {
+    order: -1;
+}
+
+
+/* footer */
+
+.body footer {
+    background-color: transparent;
+}
+
+
+/*classi da attribuire all'elemento*/
+
+.hide {
+    display: none;
+}
+
+.blur {
+    filter: blur(6px);
+}
+
+.disabled {
+    pointer-events: none;
+}

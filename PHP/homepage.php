@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="../CSS/homepage.css">
+    <link rel="icon" type="image/x-icon" href="../immagini/world.ico">
     <title>HomePage</title>
 </head>
 
@@ -39,42 +40,41 @@
                 <button>Cerca voli</button>
             </div>
         </form>
-    </div>
-    <div class="cards">
-        <div class="inspiration-card">
-            <h1>Indeciso sul dove andare?</h1>
-            <a href="../PHP/lasciati_ispirare.php">
-                <button>LASCIATI ISPIRARE</button>
-            </a>
-            <img src="../immagini/wide-angle-landscape-photography-tips-thumbnail.jpg">
+        <div class="cards">
+            <div class="inspiration-card">
+                <h1>Indeciso sul dove andare?</h1>
+                <a href="../PHP/lasciati_ispirare.php">
+                    <button>LASCIATI ISPIRARE</button>
+                </a>
+                <img src="../immagini/wide-angle-landscape-photography-tips-thumbnail.jpg">
+            </div>
         </div>
-    </div>
-    <div class="carta-container">
-        <div class="first-card">
-            <h1>Esplora il mondo,</h1>
-            <h2 dir="rtl">!sentiti libero</h2>
-            <a href="../PHP/lasciati_ispirare.php?montagna=montagna&avventura=avventura">
-                <button class="bottone-foto">SONO IO</button>
-            </a>
-            <img src="../immagini/uomocappello.jpg">
+        <div class="carta-container">
+            <div class="first-card">
+                <h1>Esplora il mondo,</h1>
+                <h2 dir="rtl">!sentiti libero</h2>
+                <a href="../PHP/lasciati_ispirare.php?montagna=montagna&avventura=avventura">
+                    <button class="bottone-foto">SONO IO</button>
+                </a>
+                <img src="../immagini/uomocappello.jpg">
+            </div>
+            <div class="second-card">
+                <h1 style="margin-left:-140px">Immergiti nella Natura,</h1>
+                <h2 style="margin-left:100px">godititi la tua vacanza!</h2>
+                <a href="../PHP/lasciati_ispirare.php?relax=relax">
+                    <button class="bottone-foto2">SONO IO</button>
+                </a>
+                <img src="../immagini/nature.jpg">
+            </div>
         </div>
-        <div class="second-card">
-            <h1 style="margin-left:-140px">Immergiti nella Natura,</h1>
-            <h2 style="margin-left:100px">godititi la tua vacanza!</h2>
-            <a href="../PHP/lasciati_ispirare.php?relax=relax">
-                <button class="bottone-foto2">SONO IO</button>
+        <br><br><br>
+        <div class="third-card">
+            <h1>Immergiti in un avventura <br> unica!</h1>
+            <a href="../PHP/lasciati_ispirare.php?avventura=avventura&divertimento=divertimento">
+                <button>SONO IO</button>
             </a>
-            <img src="../immagini/nature.jpg">
+            <img src="../immagini/quad.jpg">
         </div>
-    </div>
-    <br><br><br>
-    <div class="third-card">
-        <h1>Immergiti in un avventura <br> unica!</h1>
-        <a href="../PHP/lasciati_ispirare.php?avventura=avventura&divertimento=divertimento">
-            <button>SONO IO</button>
-        </a>
-        <img src="../immagini/quad.jpg">
-    </div>
     </div>
     <?php include '../HTML/footer.html' ?>
     <script>

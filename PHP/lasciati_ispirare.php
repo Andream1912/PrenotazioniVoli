@@ -117,13 +117,14 @@ if (!$ret_consigliati) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/inspiration.css">
+    <link rel="icon" type="image/x-icon" href="../immagini/world.ico">
     <title>Lasciati ispirare</title>
 </head>
 
-<body>
+<body class="body">
 
     <?php include './header.php' ?>
-    <div class="midpage">
+    <div class="mid-page">
         <div class="head_midpage">
             <img src="../immagini/joshua-earle-ICE__bo2Vws-unsplash.jpg">
         </div>

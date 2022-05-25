@@ -6,6 +6,7 @@
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/register.css">
     <link rel="stylesheet" href="../CSS/login.css">
+    <link rel="icon" type="image/x-icon" href="../immagini/world.ico">
     <script src="https://kit.fontawesome.com/63a4bcd19a.js" crossorigin="anonymous"></script>
     <script src="../JS/register.js" defer></script>
     <script src="../JS/header.js"></script>
@@ -21,6 +22,7 @@
         session_start();
         if (!empty($_SESSION['username'])) {
             $user = $_SESSION['username'];
+            $ruolo = $_SESSION['ruolo'];
         ?>
             <div class="right-logged">
                 <img onclick="dropMenu()" src="../immagini/usericon.png" class="user-drop">
@@ -28,8 +30,13 @@
                 echo "<p>Benvenuto $user</p>";
                 ?>
                 <div class="dropdown-menu">
-                    <a href="">Area Privata</a>
-                    <a href="">Le mie prenotazioni</a>
+                    <?php if ($ruolo == 'visitatore') { ?>
+                        <a href="private_page.php?card=informazioni_personali">Area Privata</a>
+                        <a href="private_page.php?card=prenotazioni&prenotazioni=correnti">Le mie prenotazioni</a>
+                    <?php } else if($ruolo == 'admin') { ?>
+                        <a href="admin.php?card=eliminautenti">Elimina utenti</a>
+                        <a href="admin.php?card=aggiungivoli">Aggiungi voli</a>
+                    <?php } ?>
                     <a href="logout.php">Logout</a>
                 </div>
             </div>
@@ -46,7 +53,9 @@
 
     <form data-multi-step class="multi-step-form" method="POST" id="form" action="manager-registration.php" onsubmit="return validateRegister()">
         <div class="card active" data-step>
-            <a href="#" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg></a>
+            <a href="#" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+                </svg></a>
             <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
 
             <h3 class=" step-title ">Primo step</h3>
@@ -61,7 +70,9 @@
             <p>Hai gi&agrave un account?<span style="cursor:pointer;color:#3498db" onclick="RegistertoLogin()"> Accedi</span></p>
         </div>
         <div class="card" data-step>
-            <a href="" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg></a>
+            <a href="" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+                </svg></a>
             <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
             <h3 class="step-title ">Secondo step</h3>
             <div class="form-group ">
@@ -76,7 +87,9 @@
             <p>Hai gi&agrave un account?<span style="cursor:pointer;" onclick="RegistertoLogin()"> Accedi</span></p>
         </div>
         <div class="card " data-step>
-            <a href="" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg></a>
+            <a href="" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                    <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+                </svg></a>
             <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
             <h3 class="step-title">Terzo step</h3>
             <div class="form-group ">
@@ -97,7 +110,9 @@
     </form>
 
     <form action="manager-login.php" method="post" class="form-login" onsubmit="return validateForm()">
-        <a href="#" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg></i></a>
+        <a href="#" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
+            </svg></i></a>
         <img src="../immagini/world.png" style="width:250px;height:240px;margin-left:5%;">
         <h3>Login</h3>
         <div class="form-control">

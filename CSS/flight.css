@@ -93,20 +93,12 @@ body {
     margin-right: 10px;
 }
 
-.body {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-top: 100px;
-    text-align: center;
-}
-
 .bottom-bar input {
     background: none;
     border: none;
 }
 
-.mid-page {
+.midpage {
     margin-top: 80px;
     text-align: center;
     margin-left: 15%;
@@ -255,7 +247,7 @@ body {
     .filter {
         margin-left: 40px;
     }
-    .mid-page {
+    .midpage {
         margin-left: 17%;
         margin-right: 14%;
     }
