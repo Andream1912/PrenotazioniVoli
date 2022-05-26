@@ -13,7 +13,7 @@ function comeback() {
 }
 
 window.onclick = function(event) {
-    if (document.querySelector(".dropdown-menu").style.display == "flex") {
+    if (document.querySelector(".dropdown-menu").style.visibility == "visible") {
         if (!event.target.matches(".user-drop")) {
             hideMenu();
         }
@@ -21,20 +21,20 @@ window.onclick = function(event) {
 }
 
 function dropMenu() {
-    if (document.querySelector(".dropdown-menu").style.display == "flex") {
-        document.querySelector(".dropdown-menu").style.display = "none";
-        document.querySelector(".right-logged p").style.display = "block";
+    if (document.querySelector(".dropdown-menu").style.visiblity == "visible") {
+        document.querySelector(".dropdown-menu").style.visibility = "hidden";
+        document.querySelector(".right-logged p").style.visibility = "visible";
     } else {
-        document.querySelector(".right-logged p").style.display = "none";
-        document.querySelector(".dropdown-menu").style.display = "flex";
-        document.querySelector(".dropdown-menu").style.flexDirection = "column";
+        // wrongUser.style.visibility = "visible";
+        document.querySelector(".right-logged p").style.visibility = "hidden";
+        document.querySelector(".dropdown-menu").style.visibility = "visible";
 
     }
 }
 
 function hideMenu() {
-    document.querySelector(".dropdown-menu").style.display = "none";
-    document.querySelector(".right-logged p").style.display = "block";
+    document.querySelector(".dropdown-menu").style.visibility = "hidden";
+    document.querySelector(".right-logged p").style.visibility = "visible";
 }
 
 function openRegister() {

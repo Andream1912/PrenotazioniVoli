@@ -26,20 +26,12 @@ header {
     margin-left: 1%
 }
 
-.user-drop {
-    position: absolute;
-    right: 35px;
-    top: 4px;
-    width: 90px;
-    height: 60px;
-    cursor: pointer;
-}
-
 .dropdown-menu {
-    display: none;
-    position: relative;
-    top: 90px;
-    right: 10px;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    top: 60px;
+    position: absolute;
     opacity: 0.8;
 }
 
@@ -51,11 +43,26 @@ header {
     padding: 0.6rem;
 }
 
+.right-logged {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
 .right-logged p {
-    display: block;
-    position: relative;
-    top: 30px;
-    right: 30px;
+    color: #3498db;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.right-logged img {
+    height: 50px;
+    cursor: pointer;
+}
+
+.right-logged p {
+    margin: 0;
 }
 
 .header .right {

@@ -33,6 +33,7 @@
                     <?php if ($ruolo == 'visitatore') { ?>
                         <a href="private_page.php?card=informazioni_personali">Area Privata</a>
                         <a href="private_page.php?card=prenotazioni&prenotazioni=correnti">Le mie prenotazioni</a>
+                        <a href="forum.php">Topic</a>
                     <?php } else if($ruolo == 'admin') { ?>
                         <a href="admin.php?card=eliminautenti">Elimina utenti</a>
                         <a href="admin.php?card=aggiungivoli">Aggiungi voli</a>
@@ -43,6 +44,7 @@
         <?php
         } else { ?>
             <div class="right">
+                <a href="forum.php" class="discussioni">Discussioni</a>
                 <button type="button" class="btn-register" onclick="openRegister()">Registrati</button>
                 <button type="button" class="btn-login" onclick="openLogin()">Accedi</button>
             </div>
