@@ -12,6 +12,10 @@ video {
     z-index: -1;
 }
 
+.mid-page {
+    opacity: 1;
+}
+
 .search-bar {
     position: relative;
     bottom: 300px;

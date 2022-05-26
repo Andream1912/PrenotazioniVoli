@@ -38,6 +38,14 @@
     right: 20px;
 }
 
+#wrongVPass {
+    top: 300px;
+}
+
+#rightVPass {
+    top: 300px;
+}
+
 #wrong-r {
     color: #e74c3c;
 }

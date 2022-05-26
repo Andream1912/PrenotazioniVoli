@@ -13,12 +13,15 @@ function comeback() {
 }
 
 window.onclick = function(event) {
-    if (document.querySelector(".dropdown-menu").style.visibility == "visible") {
-        if (!event.target.matches(".user-drop")) {
-            hideMenu();
+    if (dropdown_menu = document.querySelector(".dropdown-menu")) {
+        if (dropdown_menu.style.visibility == "visible") {
+            if (!event.target.matches(".user-drop")) {
+                hideMenu();
+            }
         }
     }
 }
+
 
 function dropMenu() {
     if (document.querySelector(".dropdown-menu").style.visiblity == "visible") {
@@ -42,6 +45,11 @@ function openRegister() {
     document.querySelector(".body").style.overflow = "hidden";
 }
 
+function openRegisterError() {
+    document.querySelector(".multi-step-form").style.display = "block ";
+    document.querySelector(".body").style.overflow = "hidden";
+}
+
 function closeWindow() {
     document.querySelector(".multi-step-form").style.display = "none";
     document.querySelector(".form-login").style.display = "none";
@@ -59,7 +67,6 @@ function openLogin() {
 }
 
 function validateRegister() {
-    form.action = window.location.href;
     let username = document.getElementById("username");
     let email = document.getElementById("email-register");
     let pass = document.getElementById("password-register");
@@ -69,8 +76,24 @@ function validateRegister() {
     let wrongPass = document.getElementById("error-pass");
     let rightPass = document.getElementById("right-pass");
     let wrongMail = document.getElementById("wrong-r");
-    let rightMail = document.getElementById("right-r")
+    let rightMail = document.getElementById("right-r");
+    let rightVPass = document.getElementById("right-verifypass");
+    let wrongVPass = document.getElementById("wrong-verifypass");
+    const r = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])";
+    const regex = new RegExp(r)
+
+
+    if (username.value == "") {
+        currentStep = 0;
+    } else if (email.value == "") {
+        currentStep = 1;
+    } else if (password.value == "") {
+        currentStep = 2;
+    } else if (vpass.value == "") {
+        currentStep = 2;
+    }
     if ((username.value === "") || (email.value === "") || (vpass.value === "") || (pass.value === "")) {
+        showCurrentStep();
         if (username.value === "") {
             username.style.borderColor = "#e74c3c";
             wrongUser.style.visibility = "visible";
@@ -94,19 +117,40 @@ function validateRegister() {
             wrongPass.style.visibility = "visible";
             rightPass.style.visibility = "hidden";
         } else {
-            pass.style.borderColor = "#2ecc71";
-            wrongPass.style.visibility = "hidden";
-            rightPass.style.visibility = "visible";
+            if (pass.value > 6 && regex.test(pass.value)) {
+                pass.style.borderColor = "#2ecc71";
+                wrongPass.style.visibility = "hidden";
+                rightPass.style.visibility = "visible";
+            } else {
+                pass.style.borderColor = "#e74c3c";
+                wrongPass.style.visibility = "visible";
+                rightPass.style.visibility = "hidden";
+            }
         }
         if (vpass.value === "") {
             vpass.style.borderColor = "#e74c3c";
-        } else {
-            pass.style.borderColor = "#2ecc71";
+            wrongVPass.style.visibility = "visible";
+            rightVPass.style.visibility = "hidden";
+        } else if (pass.value == vpass.value) {
+            vpass.style.borderColor = "#2ecc71";
+            rightVPass.style.visibility = "visible";
+            wrongVPass.style.visibility = "hidden";
         }
-        currentStep = 0;
-        showCurrentStep();
         return false;
     } else {
+        if (pass.value.length > 6 && regex.test(pass.value)) {
+            pass.style.borderColor = "#2ecc71";
+            wrongPass.style.visibility = "hidden";
+            rightPass.style.visibility = "visible";
+        } else {
+            vpass.style.borderColor = "#e74c3c";
+            wrongVPass.style.visibility = "visible";
+            rightVPass.style.visibility = "hidden";
+            pass.style.borderColor = "#e74c3c";
+            wrongPass.style.visibility = "visible";
+            rightPass.style.visibility = "hidden";
+            return false;
+        }
         if (pass.value === vpass.value) {
             return true;
         } else {

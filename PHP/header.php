@@ -1,5 +1,25 @@
+<?php
+if (isset($_GET['error']) || !empty($_GET['error'])) {
+    $error = $_GET['error'];
+    if ($error == 'username') {
+        $errorUser = "Username gi&agrave esistente"; ?>
+        <script>
+            currentStep = 0;
+        </script>
+    <?php
+    } else if ($error == 'email') {
+        $errorEmail = "Email gi&agrave esistente";
+    ?> <script>
+            currentStep = 1
+        </script> <?php
+                }
+            }
+
+                    ?>
+
 <!DOCTYPE html>
 <html lang="it">
+
 
 <head>
     <link rel="stylesheet" href="../CSS/header.css">
@@ -34,7 +54,7 @@
                         <a href="private_page.php?card=informazioni_personali">Area Privata</a>
                         <a href="private_page.php?card=prenotazioni&prenotazioni=correnti">Le mie prenotazioni</a>
                         <a href="forum.php">Topic</a>
-                    <?php } else if($ruolo == 'admin') { ?>
+                    <?php } else if ($ruolo == 'admin') { ?>
                         <a href="admin.php?card=eliminautenti">Elimina utenti</a>
                         <a href="admin.php?card=aggiungivoli">Aggiungi voli</a>
                     <?php } ?>
@@ -64,6 +84,7 @@
             <div class="form-group ">
                 <label for="username ">Username</label>
                 <br>
+                <p style="margin:0;margin-right:40px;color:red" id="usernameError" dir="rtl"></p>
                 <input type="text" name="username" id="username" placeholder="Username">
                 <i class="fas fa-check-circle" id="right-user" style="color:#2ecc71"></i>
                 <i class="fas fa-exclamation-circle" id="error-user" style="color:#e74c3c"></i>
@@ -80,13 +101,14 @@
             <div class="form-group ">
                 <label for="email ">Email</label>
                 <br>
+                <p style="margin:0;margin-right:40px;color:red" id="emailError" dir="rtl"></p>
                 <input type="email" name="email-register" id="email-register" placeholder="Email">
                 <i class="fas fa-check-circle" id="right-r"></i>
                 <i class="fas fa-exclamation-circle" id="wrong-r"></i>
             </div>
             <button type="button" data-previous>Indietro</button>
             <button type="button" data-next>Avanti</button>
-            <p>Hai gi&agrave un account?<span style="cursor:pointer;" onclick="RegistertoLogin()"> Accedi</span></p>
+            <p>Hai gi&agrave un account?<span style="cursor:pointer;color:#3498db" onclick="RegistertoLogin()"> Accedi</span></p>
         </div>
         <div class="card " data-step>
             <a href="" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -105,6 +127,8 @@
                 <label for="verify-password">Conferma Password</label>
                 <br>
                 <input type="password" name="verify-password" id="verify-password">
+                <i class="fas fa-check-circle" id="right-verifypass" style="color:#2ecc71;top:435px"></i>
+                <i class="fas fa-exclamation-circle" id="wrong-verifypass" style="color:#e74c3c;top:435px"></i>
             </div>
             <button type="button" data-previous>Indietro</button>
             <input type="submit" name="invia" value="Registrati">
@@ -131,6 +155,28 @@
         <input type="submit" value="Accedi" name="invia" class="loginsubmit" id="submit">
         <p>Non hai ancora un account?<span style="cursor:pointer;color:#3498db;" onclick="LogintoRegister()"> Registrati</span></p>
     </form>
+    <script>
+        <?php
+        if (isset($_GET['error']) || !empty($_GET['error'])) {
+            if ($error == 'username') { ?>
+                let username = document.getElementById("username")
+                let errorUsername = document.getElementById("usernameError")
+                username.style.borderColor = "red";
+                errorUsername.innerHTML = "Username gi&agrave esistente";
+            <?php
+            } else if ($error = 'email') { ?>
+                let email = document.getElementById("email-register");
+                let errorEmail = document.getElementById("emailError");
+                email.style.borderColor = "red";
+                errorEmail.innerHTML = "Email gi&agrave esistente";
+        <?php
+            }
+            ?>
+            openRegisterError();
+            <?php
+        } ?>
+    </script>
 </body>
+
 
 </html>

@@ -50,7 +50,7 @@ require_once "parametri.php";
                 </div>
                 <?php
                 if (!empty($_SESSION['username'])) {
-                    echo '<button class="create-button" createButton>Crea discussione</button>';
+                    echo '<button class="create-button" onclick="showDiscussionCreator()">Crea discussione</button>';
                 } else {
                     echo '<button class="create-button" onclick="openLogin()">Per creare una discussione<br>accedi</button>';
                 }
