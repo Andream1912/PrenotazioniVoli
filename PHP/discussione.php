@@ -39,7 +39,7 @@ $row = pg_fetch_array($result);
                 <input type="hidden" name="code" value="<?php echo $var; ?>">
                 <div class="create-response-text">
                     <h1>Inserisci la risposta</h1>
-                    <textarea class="responseText" name="responseText" placeholder="Scrivi la risposta..." responseText></textarea>
+                    <textarea class="responseText" name="responseText" placeholder="Scrivi la risposta..." maxlenght="600" responseText></textarea>
                 </div>
                 <div class="respSubmitButtonContainer">
                     <button type="submit" class="respSubmitButton" respSubmitButton>Inoltra risposta</button>
@@ -56,7 +56,7 @@ $row = pg_fetch_array($result);
                 <input type="hidden" name="code" value="<?php echo $var; ?>">
                 <div class="modify-discussion-description">
                     <h1>Modifica la descrizione</h1>
-                    <textarea class="descriptionText" name="descriptionText" placeholder="Cambia la descrizione..." modifyText><?php echo $row['descrizione']; ?></textarea>
+                    <textarea class="descriptionText" name="descriptionText" placeholder="Cambia la descrizione..." maxlenght="600" modifyText><?php echo $row['descrizione']; ?></textarea>
                 </div>
                 <div class="modifySubmitButtonContainer">
                     <button class="modifySubmitButton" type="submit" modifySubmitButton>Cambia descrizione</button>

@@ -54,15 +54,12 @@ header {
     color: #3498db;
     text-transform: uppercase;
     letter-spacing: -1px;
+    margin: 0;
 }
 
 .right-logged img {
     height: 50px;
     cursor: pointer;
-}
-
-.right-logged p {
-    margin: 0;
 }
 
 .header .right {

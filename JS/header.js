@@ -25,7 +25,6 @@ function dropMenu() {
         document.querySelector(".dropdown-menu").style.visibility = "hidden";
         document.querySelector(".right-logged p").style.visibility = "visible";
     } else {
-        // wrongUser.style.visibility = "visible";
         document.querySelector(".right-logged p").style.visibility = "hidden";
         document.querySelector(".dropdown-menu").style.visibility = "visible";
 
@@ -60,6 +59,7 @@ function openLogin() {
 }
 
 function validateRegister() {
+    form.action = window.location.href;
     let username = document.getElementById("username");
     let email = document.getElementById("email-register");
     let pass = document.getElementById("password-register");
@@ -118,6 +118,7 @@ function validateRegister() {
 }
 
 function validateForm() {
+    form.action = window.location.href;
     let email = document.getElementById("email");
     let wrong = document.getElementById("wrong");
     let right = document.getElementById("right");

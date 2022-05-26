@@ -1,4 +1,4 @@
-function nasconi_tabella() {
+function nascondi_tabella() {
     document.getElementById("tabella_utenti").style.display = "none";
 }
 

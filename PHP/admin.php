@@ -108,7 +108,7 @@ if (!empty($user_da_eliminare)) {
                             }
                             echo "</table>";
                         } else {
-                            echo '<script type="text/javascript">nasconi_tabella();</script>';
+                            echo '<script type="text/javascript">nascondi_tabella();</script>';
                             echo "<p>Non esiste nessun utente</p>";
                         }
                     } else {

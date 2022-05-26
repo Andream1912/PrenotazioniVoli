@@ -30,11 +30,11 @@ require_once "parametri.php";
             <form action="create-discussion.php" method="GET" class="creator-form" onsubmit="return validateCreateDiscussion()">
                 <div class="creator-title">
                     <h1>Inserire il titolo della discussione</h1>
-                    <input type="text" name="discussionTitle" class="creator-discussionTitle" placeholder="Inserisci il titolo..." discussionTitle>
+                    <input type="text" name="discussionTitle" class="creator-discussionTitle" placeholder="Inserisci il titolo..." maxlenght="60" discussionTitle>
                 </div>
                 <div class="creator-text">
                     <h1>Descrivi il problema</h1>
-                    <textarea name="discussionText" class="creator-discussionText" placeholder="Descrivi il problema..." discussionText></textarea>
+                    <textarea name="discussionText" class="creator-discussionText" placeholder="Descrivi il problema..." maxlenght="600" discussionText></textarea>
                 </div>
                 <div class="creator-container-submit">
                     <input type="submit" name="creatorSubmit" class="creator-submit" value="Crea discussione">
