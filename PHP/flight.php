@@ -1,6 +1,8 @@
 <?php
 require_once "parametri.php";
 require_once "transform_date.php";
+$pre_economy_b = "";
+$priceBack = 0;
 if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
     $user = $_SESSION['username'];
 } else {
@@ -179,7 +181,7 @@ if ($roundtrip == 'ritorno') {
             }
 
             if ($noData && $noDataBack) {
-                if (((isset($user)) && (!empty($user)) && ($noDataBack))) { ?>
+                if (((isset($user)) && (!empty($user)) && ($noDataBack)) && ($data != 'qualsiasi') && ($from != 'ovunque')) { ?>
                     <div class="filter">
                         <div class="singleFilter firstFilter">
                             <label>
@@ -200,16 +202,19 @@ if ($roundtrip == 'ritorno') {
                                         exit;
                                     }
                                 }
-                                $standard_back;
+                                $standard_back = 0;
                                 $standard = pg_fetch_array($ret_standard);
+                                $price = $standard['prezzo'];
                                 if (($roundtrip == 'ritorno')) {
                                     if ($endDate == "") {
-                                        $prep_standard_back = pg_prepare($db, "searchFlightStandardBack", $sql_r);
-                                        $ret_standard_back = pg_execute($db, "searchFlightStandardBack", array($to, $from));
+                                        $sql_standard_back = "SELECT * FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo > $3";
+                                        $prep_standard_back = pg_prepare($db, "searchFlightStandardBack", $sql_standard_back);
+                                        $ret_standard_back = pg_execute($db, "searchFlightStandardBack", array($to, $from, $data));
                                         if (!$ret_standard_back) {
                                             exit;
                                         } else {
                                             $standard_back = pg_fetch_array($ret_standard_back);
+                                            $priceBack = $standard_back['prezzo'];
                                         }
                                     } else {
                                         $prep_standard_back = pg_prepare($db, "searchFlightStandardBack", $sql_r);
@@ -218,13 +223,13 @@ if ($roundtrip == 'ritorno') {
                                             exit;
                                         } else {
                                             $standard_back = pg_fetch_array($ret_standard_back);
+                                            $priceBack = $standard_back['prezzo'];
                                         }
                                     }
                                 }
                                 ?>
                                 <p>Standard</p>
-                                <p>€ <?php echo number_format($standard['prezzo'] + $standard_back['prezzo'], 2) ?></p>
-                                <p><?php echo substr($standard['tempo'], 0, 2) . "h " . substr($standard['tempo'], 3, 2) . "m (media)" ?></p>
+                                <p>€ <?php echo number_format($price + $priceBack, 2) ?></p>
                             </label>
                         </div>
                         <div class="singleFilter secondFilter">
@@ -254,7 +259,7 @@ if ($roundtrip == 'ritorno') {
                                         $price = $second_filter['prezzo'];
                                     }
                                 }
-                                $priceback;
+                                $priceback = 0;
                                 if (($roundtrip == 'ritorno')) {
                                     if ($endDate == "") {
                                         $sql_r_speed = "SELECT *,(ora_arrivo - ora_partenza) as interval FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo > '$data' order by prezzo,interval";
@@ -282,7 +287,6 @@ if ($roundtrip == 'ritorno') {
                                 ?>
                                 <p>Il pi&ugrave; veloce</p>
                                 <p><?php echo "€ " . number_format($price + $priceback, 2) ?> </p>
-                                <p><?php echo substr($best, 0, 2) . "h " . substr($best, 3, 2) . "m(media)" ?> </p>
                             </label>
                         </div>
 
@@ -303,7 +307,7 @@ if ($roundtrip == 'ritorno') {
                                         $price = $third_filter['price'];
                                     }
                                 } else {
-                                    $sql_economy = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo = $3 order by prezzo";
+                                    $sql_economy = "SELECT min(prezzo) as prezzo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo = $3";
                                     $prep_economy = pg_prepare($db, "searchFlightEconomy", $sql_economy);
                                     $ret_economy = pg_execute($db, "searchFlightEconomy", array($from, $to, $data));
                                     if (!$ret_economy) {
@@ -311,23 +315,23 @@ if ($roundtrip == 'ritorno') {
                                         return false;
                                     } else {
                                         $third_filter = pg_fetch_array($ret_economy);
-                                        $interval = $third_filter['tempo'];
                                         $price = $third_filter['prezzo'];
                                     }
                                 }
-                                $priceback;
+                                $priceback = 0;
                                 if (($roundtrip == 'ritorno')) {
                                     if ($endDate == "") {
-                                        $sql_r_economy = "SELECT min(prezzo),(ora_arrivo-ora_partenza) AS interval from volo where citta_partenza = $1 and citta_arrivo = $2 group by interval";
-                                        $prep_economy_b = pg_prepare($db, "searchRoundTripEconomy", $sql_r_economy);
-                                        if (!$pre_economy_b) {
+                                        $sql_economy_back = "SELECT min(prezzo) as prezzo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo > $3";
+                                        $prep_economy_back = pg_prepare($db, "roundTripEconomy", $sql_standard_back);
+                                        if (!$prep_economy_back) {
+                                            exit();
                                         } else {
-                                            $ret_economy_b = pg_execute($db, "searchRoundTripEconomy", array($to, $from));
-                                            if (!$ret_economy_b) {
-                                                exit;
+                                            $ret_economy_back = pg_execute($db, "roundTripEconomy", array($to, $from, $data));
+                                            if (!$ret_economy_back) {
+                                                exit();
                                             } else {
-                                                $third_filter_back = pg_fetch_array($ret_economy_b);
-                                                $priceback = $third_filter_back['min'];
+                                                $third_filter_back = pg_fetch_array($ret_economy_back);
+                                                $priceBack = $third_filter_back['prezzo'];
                                             }
                                         }
                                     } else {
@@ -342,8 +346,7 @@ if ($roundtrip == 'ritorno') {
                                     }
                                 } ?>
                                 <p>Il pi&ugrave; economico</p>
-                                <p> € <?php echo number_format($price + $priceback, 2) ?></p>
-                                <p><?php echo substr($interval, 0, 2) . "h " . substr($interval, 3, 2) . "m" ?></p>
+                                <p> € <?php echo number_format($price + $priceBack, 2) ?></p>
                             </label>
                         </div>
                     </div>
@@ -475,7 +478,7 @@ if ($roundtrip == 'ritorno') {
                                             <?php echo '<a class="buy" href="check-flight.php?id=' . $id . '&id_ritorno=' . $id_ritorno . '">Seleziona</a>' ?>
                                         </div>
                                     <?php } else { ?>
-                                        <div class="price-back" style="height:280px;">
+                                        <div class="price-back" style="height:285px;">
                                             <p>Vuoi conoscere</p>
                                             <p>il prezzo?</p>
                                             <a class="buy-login" onclick="openLogin()">Accedi</a>
@@ -487,15 +490,19 @@ if ($roundtrip == 'ritorno') {
 
                             }
                         }
+                    }else{
+                        ?>
+                        <h1 class="impossibleSearch">Impossibile trovare il volo con Ovunque per ANDATA/RITORNO</h1>
+                        <?php
                     } ?>
                     </div>
-
+                    
                 <?php
                 }
             } else {
                 ?>
                 <div class="nodata">
-                    <img src="../immagini/nodata.png" alt="">
+                    <img src="../immagini/nodata.png"">
                 </div>
             <?php } ?>
         </div>

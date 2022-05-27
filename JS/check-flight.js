@@ -181,9 +181,9 @@ input = document.querySelector('.ccn');
 input.addEventListener('input', updateValue);
 
 function updateValue(e) {
-    if ((e.target.value[0]) == 4) {
+    if (((e.target.value[0]) == 2) || (e.target.value[0] == 5)) {
         document.querySelector('.mastercard').style.visibility = 'visible';
-    } else if (((e.target.value[0] == 2) || (e.target.value[0] == 5))) {
+    } else if ((e.target.value[0] == 4)) {
         document.querySelector('.visa').style.visibility = 'visible';
     } else {
         document.querySelector('.mastercard').style.visibility = 'hidden';

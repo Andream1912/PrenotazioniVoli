@@ -1,7 +1,7 @@
+<?php ob_start(); ?>
+
 <!DOCTYPE html>
 <html lang="it">
-
-
 <head>
     <link rel="stylesheet" href="../CSS/header.css">
     <link type="text/css" href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap" rel="stylesheet">
@@ -195,3 +195,4 @@
 
 
 </html>
+<?php ob_start(); ?>

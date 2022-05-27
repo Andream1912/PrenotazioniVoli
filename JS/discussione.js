@@ -34,6 +34,7 @@ function modify() {
     modifyFormContainer.classList.remove("hide");
     visibleContainer.classList.toggle("blur");
     document.querySelector(".body").style.overflow = "hidden";
+    document.querySelector(".descriptionText").textContent = "proa";
 }
 
 function exitModify() {

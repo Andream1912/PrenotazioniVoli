@@ -1,33 +1,52 @@
 <?php
 require_once "parametri.php";
-session_start();
-if (empty($_SESSION['username'])) {
-    header("Location:../PHP/homepage.php");
-} else {
+include 'header.php';
+if (isset($_SESSION['username']) || !empty($_SESSION['username'])){
     $username = $_SESSION['username'];
     $sql_byUsername = "SELECT * FROM personaldata where username = $1";
     $prep_user = pg_prepare($db, 'selectByUsername', $sql_byUsername);
     if (!$prep_user) {
         echo "ERRORE QUERY Update: " . pg_last_error($db);
         exit;
-    } else {
+    } 
+    else {
         $ret_user = pg_execute($db, 'selectByUsername', array($username));
         if (!$ret_user) {
             echo "ERRORE QUERY";
         } else {
-            $user = pg_fetch_array($ret_user);
-            $nome = $user['nome'];
-            $cognome = $user['cognome'];
-            $indirizzo = $user['indirizzo'];
-            $cap = $user['cap'];
-            $sesso = $user['sesso'];
-            $nazionalita = $user['nazionalita'];
-            $luogo_nascita = $user['luogo_nascita'];
-            $data_nascita = $user['data_nascita'];
-            $numero = $user['numerotel'];
+            if (pg_result_seek($ret_user, 0)) {
+                $user = pg_fetch_array($ret_user);
+                $nome = $user['nome'];
+                $cognome = $user['cognome'];
+                $indirizzo = $user['indirizzo'];
+                $cap = $user['cap'];
+                $sesso = $user['sesso'];
+                $nazionalita = $user['nazionalita'];
+                $luogo_nascita = $user['luogo_nascita'];
+                $data_nascita = $user['data_nascita'];
+                $numero = $user['numerotel'];
+            }else{
+                $nome = "";
+                $cognome = "";
+                $indirizzo = "";
+                $cap = "";
+                $sesso = "";
+                $nazionalita = "";
+                $luogo_nascita = "";
+                $data_nascita = "";
+                $numero = "";
+            }
         }
-    }
+        }
+} 
+else {
+    header("Location:../PHP/homepage.php");
+    
 }
+$diff_h=0;
+$diff_m=0;
+$id_back=0;
+$prezzo_back=0;
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
     $sql_byId = "SELECT * FROM volo where id_volo = $1";
@@ -41,14 +60,14 @@ if (!empty($_GET['id'])) {
             echo "ERRORE QUERY";
         } else {
             $flight = pg_fetch_array($ret_select);
-            $città_partenza = $flight['città_partenza'];
-            $città_arrivo = $flight['città_arrivo'];
+            $città_partenza = ucfirst($flight['citta_partenza']);
+            $città_arrivo = ucfirst($flight['citta_arrivo']);
             $ora_partenza = $flight['ora_partenza'];
             $ora_arrivo = $flight['ora_arrivo'];
             $prezzo = $flight['prezzo'];
             $data_volo = $flight['data_volo'];
-            $diff_h = substr($ora_arrivo, 0, 2) - substr($ora_partenza, 0, 2);
-            $diff_m = substr($ora_arrivo, 3, 5) - substr($ora_partenza, 3, 5);
+            $diff_h = (int)(substr($ora_arrivo, 0, 2) - substr($ora_partenza, 0, 2));
+            $diff_m = (int)substr($ora_arrivo, 3, 5) - substr($ora_partenza, 3, 5);
         }
     }
 } else {
@@ -79,12 +98,11 @@ if (!empty($_GET['id'])) {
 </head>
 
 <body>
-    <?php include 'header.php' ?>
     <br><br><br><br><br><br>
     <form action="payment.php" class="payment" method="post" onsubmit="return checkPersonalData()">
         <div class="ticket">
             <div class="ticketOne">
-                <p name="citta"><?php echo $città_partenza ?></p>
+                <p name="citta"><?php echo $città_partenza; ?></p>
                 <p><?php echo substr($ora_partenza, 0, 5) ?></p>
             </div>
             <div class="ticketOne">
@@ -114,14 +132,14 @@ if (!empty($_GET['id'])) {
                     echo "ERRORE QUERY";
                 } else {
                     $flight_back = pg_fetch_array($ret_select_r);
-                    $città_partenza_back = $flight_back['città_partenza'];
-                    $città_arrivo_back = $flight_back['città_arrivo'];
+                    $città_partenza_back = ucfirst($flight_back['citta_partenza']);
+                    $città_arrivo_back = ucfirst($flight_back['citta_arrivo']);
                     $ora_partenza_back = $flight_back['ora_partenza'];
                     $ora_arrivo_back = $flight_back['ora_arrivo'];
                     $prezzo_back = $flight_back['prezzo'];
                     $data_volo_back = $flight_back['data_volo'];
-                    $diff_h_r = substr($ora_arrivo_back, 0, 2) - substr($ora_partenza_back, 0, 2);
-                    $diff_m_r = substr($ora_arrivo_back, 3, 5) - substr($ora_partenza_back, 3, 5);
+                    $diff_h_r = (int)substr($ora_arrivo_back, 0, 2) - (int)substr($ora_partenza_back, 0, 2);
+                    $diff_m_r = (int)substr($ora_arrivo_back, 3, 5) - (int)substr($ora_partenza_back, 3, 5);
                 }
             } ?>
             <div class="ticket2" id="ticket2">
@@ -147,14 +165,14 @@ if (!empty($_GET['id'])) {
             <div class="left-page">
                 <fieldset>
                     <legend>I Tuoi Dati</legend>
-                    <label for="nome"> Nome: <p dir="rtl"></p><input type="text" id="nome" value="<?php echo $nome; ?>"></label>
-                    <label for="cognome"> Cognome: <p dir="rtl"></p><input type="text" id="cognome" value="<?php echo $cognome; ?>"></label>
+                    <label for="nome"> Nome: <p dir="rtl"></p><input name="nome" type="text" id="nome" value="<?php echo $nome; ?>"></label>
+                    <label for="cognome"> Cognome: <p dir="rtl"></p><input type="text" name="cognome" id="cognome" value="<?php echo $cognome; ?>"></label>
                     <label for="luogonascita">Luogo di Nascita: <p dir="rtl"></p><input type="text" id="luogonascita" name="luogonascita" value="<?php echo $luogo_nascita; ?>"></label>
                     <label for="indirizzo">Indirizzo: <p dir="rtl"></p><input type="text" id="indirizzo" name="indirizzo" value="<?php echo $indirizzo; ?>"></label>
-                    <label for="cap">CAP: <p dir="rtl"></p><input type="number" min="10000" max="99999" value="<?php echo $cap; ?>"id="cap" value="<?php echo $cap; ?>"></label>
+                    <label for="cap">CAP: <p dir="rtl"></p><input name="cap" type="number" min="10000" max="99999" value="<?php echo $cap; ?>"id="cap" value="<?php echo $cap; ?>"></label>
                     <label for="sesso">SESSO: <div class="sex"><input type="radio" name="sex" id="male" value="M" checked>M<input type="radio" name="sex" id="fale" value="F">F</div></label>
                     <label for="nazionalita">Nazionalità: <p dir="rtl"></p><input type="text" id="nazionalita" name="nazionalita" value="<?php echo $nazionalita; ?>"></label>
-                    <label for="datanascita">Data di Nascita: <input type="date" id="datanascita" name="birthday" value="<?php echo $data_nascita; ?>"></label>
+                    <label for="datanascita">Data di Nascita: <input type="date" id="datanascita" name="datanascita" value="<?php echo $data_nascita; ?>"></label>
                     <label for="numero"> Numero: <p dir="rtl"></p><input type="number" id="numero" name="numero" minlenght="6" maxlength="15" value="<?php echo $numero; ?>"></label>
                 </fieldset>
                 <div class="card-payment">

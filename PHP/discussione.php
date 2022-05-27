@@ -55,7 +55,7 @@
             <input type="hidden" name="code" value="<?php echo $var; ?>">
             <div class="modify-discussion-description">
                 <h1>Modifica la descrizione</h1>
-                <textarea class="descriptionText" name="descriptionText" placeholder="Cambia la descrizione..." maxlength="600" modifyText></textarea>
+                <textarea class="descriptionText" name="descriptionText" placeholder="Cambia la descrizione..." maxlength="600" modifyText><?php echo $row['descrizione']; ?></textarea>
             </div>
             <div class="modifySubmitButtonContainer">
                 <button class="modifySubmitButton" type="submit" modifySubmitButton>Cambia descrizione</button>
