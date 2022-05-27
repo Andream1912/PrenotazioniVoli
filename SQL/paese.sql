@@ -30,7 +30,10 @@ insert into paese(nome,luogo,tipo,categoria) values
 ('bolzano','italia','montagna','cultura'),
 ('samedan','svizzera','montagna','neve'),
 ('innsbruck','austria','montagna','neve'),
-('aosta','italia','citta','neve')
+('aosta','italia','citta','neve'),
+('mombasa','kenya','mare','avventura'),
+('nairobi','kenya','citta','avventura'),
+('dodoma','tanzania','montagna','avventura')
 
 
 

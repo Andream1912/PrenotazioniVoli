@@ -3,12 +3,6 @@ body {
     max-width: 100%;
     margin-left: 0;
     background-color: #f2f2f2;
-    font-family: system-ui;
-}
-
-body h1 {
-    color: #3498db;
-    text-align: center;
 }
 
 #totale {
@@ -21,6 +15,7 @@ body h1 {
 }
 
 #menu {
+    margin-left: 40px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -70,6 +65,10 @@ body h1 {
     color: #dddde5;
 }
 
+#descrizione_carte h4 {
+    color: #3498db;
+}
+
 #logout {
     margin-top: 20px;
     width: 115px;
@@ -96,15 +95,6 @@ body h1 {
     width: 80%;
 }
 
-#print_personal_data {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-}
-
 .dettagli {
     display: flex;
     flex-direction: row;
@@ -116,15 +106,13 @@ body h1 {
     padding-right: 10px;
     border-radius: 0.5rem;
     font-weight: bold;
-}
-
-#modify_btn {
     color: #3498db;
 }
 
 #update_data {
     display: none;
     color: red;
+    cursor: pointer;
 }
 
 #prenotazione_personale {
@@ -189,4 +177,131 @@ body h1 {
 
 #voli_passati {
     display: none;
+}
+
+#personal_data_form {
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #3498db;
+    padding-right: 120px;
+    padding-left: 120px;
+    padding-top: -10px;
+    border-radius: 1rem;
+    background-color: #f2f2f2;
+}
+
+#personal_data_form p {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#personal_data_form input {
+    border-radius: 0.3rem;
+    text-align: center;
+    background-color: white;
+}
+
+#modifica_btn {
+    width: 115px;
+    height: 25px;
+    background: #dddde5;
+    color: #3498db;
+    text-align: center;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+#modifica_btn:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+#update_data {
+    width: 147px;
+    height: 25px;
+    background: #dddde5;
+    color: #3498db;
+    text-align: center;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+
+#update_data:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+#radio {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#sesso {
+    margin-bottom: -25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+}
+
+#radio_sex {
+    margin-top: -8px;
+    margin-bottom: 6px;
+}
+
+#btn_prenotazioni {
+    background: #dddde5;
+    color: #3498db;
+    border: 2px solid #3498db;
+    text-align: center;
+    width: 100px;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px;
+}
+
+#btn_prenotazioni:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+#btn_voliPassati {
+    background: #dddde5;
+    color: #3498db;
+    border: 2px solid #3498db;
+    text-align: center;
+    width: 100px;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px;
+}
+
+#btn_voliPassati:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+#btn_elimina_account {
+    background: #dddde5;
+    width: 135px;
+    height: 45px;
+    border-radius: 0.5rem;
+    border: none;
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+}
+
+#btn_elimina_account:hover {
+    background: #ababb1;
+    border: 2px solid red;
 }

@@ -2,12 +2,6 @@ body {
     margin-top: 90px;
     max-width: 100%;
     margin-left: 0;
-    font-family: system-ui;
-}
-
-body h1 {
-    color: #3498db;
-    text-align: center;
 }
 
 #totale {
@@ -20,6 +14,7 @@ body h1 {
 }
 
 #menu {
+    margin-left: 40px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -27,6 +22,17 @@ body h1 {
     width: 25%;
     align-items: center;
     border-radius: 0.5rem;
+}
+
+#menu a {
+    color: #3498db;
+}
+
+#ciao {
+    color: #3498db;
+    font-size: 20px;
+    margin-bottom: 2px;
+    margin-top: 2px;
 }
 
 .carte {
@@ -53,20 +59,144 @@ body h1 {
 
 #destra {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     width: 75%;
-}
-
-#ciao {
-    color: #3498db;
-    font-size: 20px;
-    margin-bottom: 2px;
-    margin-top: 2px;
 }
 
 #descrizione_carte p {
     margin-top: -20px;
     color: #dddde5;
+}
+
+#logout:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+#visualizza_utenti {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+#visualizza_utenti input {
+    border-radius: 0.3rem;
+    text-align: center;
+    border: 2px solid black;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+#visualizza_utenti table {
+    width: 440px;
+    border-radius: 0.5rem;
+    border: 2px solid black;
+    padding: 15px;
+    background-color: #f2f2f2;
+}
+
+#visualizza_utenti td {
+    text-align: center;
+    height: 50;
+    align-items: center;
+    border-radius: 0.5rem;
+    background-color: white;
+    border: 2px solid black;
+}
+
+#visualizza_utenti th {
+    text-align: center;
+    border-radius: 0.5rem;
+    color: #3498db;
+    background-color: white;
+    border: 2px solid black;
+}
+
+.btn_elimina_account:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+.btn_elimina_account {
+    border: 2px solid #3498db;
+    font-weight: bold;
+    background: #dddde5;
+    border-radius: 0.5rem;
+    padding: 5px;
+    color: red;
+    cursor: pointer;
+}
+
+#btn_aggiungi_voli {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+    padding-right: 120px;
+    padding-left: 120px;
+    padding-bottom: 50px;
+    padding-top: 35px;
+    border-radius: 1rem;
+    background-color: #f2f2f2;
+}
+
+#btn_aggiungi_voli h2 {
+    margin-bottom: -10px;
+    color: #3498db;
+}
+
+#btn_aggiungi_voli p {
+    margin-bottom: -8px;
+    gap: 2px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#btn_aggiungi_voli input {
+    padding: 4px;
+    border-radius: 0.3rem;
+    text-align: center;
+    border: 2px solid black;
+}
+
+#controllo_form {
+    display: flex;
+    flex-direction: column;
+}
+
+#submit_volo:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+#cerca_button:hover {
+    background: #ababb1;
+    border: 2px solid #3498db;
+}
+
+#cerca_button {
+    font-weight: bold;
+    border: 2px solid #3498db;
+    border-radius: 0.5rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 0.5rem;
+    background: #dddde5;
+    cursor: pointer;
+}
+
+#submit_volo {
+    width: 200px;
+    height: 30px;
+    background: #dddde5;
+    color: #3498db;
+    text-align: center;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    margin-top: 25px;
 }
 
 #logout {
@@ -81,156 +211,4 @@ body h1 {
     font-weight: bold;
     text-decoration: none;
     line-height: 25px;
-}
-
-#logout:hover {
-    background: #ababb1;
-    border: 2px solid #3498db;
-}
-
-#visualizza_utenti {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-}
-
-#print_personal_data {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-}
-
-.dettagli {
-    display: flex;
-    flex-direction: row;
-    background: #dddde5;
-    width: 450px;
-    align-items: center;
-    justify-content: space-between;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 0.5rem;
-    font-weight: bold;
-}
-
-#modify_btn {
-    color: #3498db;
-}
-
-#update_data {
-    color: red;
-}
-
-#prenotazione_personale {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-}
-
-.dettagli.voli {
-    height: 60px;
-}
-
-#voli_prenotati {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-}
-
-#voli_prenotati img {
-    height: 50px;
-    width: 80px;
-}
-
-#container_citta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#foto_citta img {
-    height: 70px;
-    width: 115px;
-    border-radius: 1rem;
-}
-
-#informazioni_prenotazione {
-    display: flex;
-    flex-direction: row;
-    background-color: #3498db;
-    border-radius: 0.5rem;
-}
-
-#informazioni_prenotazione p {
-    margin: 10px;
-}
-
-#voli_prenotati_tot {
-    border: 2px solid #3498db;
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    margin-top: 10px;
-}
-
-#prenotazioni {
-    display: none;
-}
-
-#voli_passati {
-    display: none;
-}
-
-.card_utenti {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    padding: 5px;
-    border: 2px solid #3498db;
-    border-radius: 0.5rem;
-    align-items: center;
-}
-
-.card_utenti input {
-    border: none;
-    background-color: white;
-    width: 250px;
-    text-align: center;
-}
-
-#header_utenti {
-    height: 35px;
-    width: 632px;
-    border: 2px solid #3498db;
-    border-radius: 0.5rem;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#header_utenti b:nth-child(1) {
-    margin-left: 100px;
-}
-
-#header_utenti b:nth-child(2) {
-    margin-right: 230px;
-}
-
-#visualizza_utenti {
-    display: none;
-}
-
-#btn_aggiungi_voli {
-    display: none;
-    flex-direction: column;
 }
