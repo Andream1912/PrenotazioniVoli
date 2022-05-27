@@ -26,7 +26,12 @@ insert into paese(nome,luogo,tipo,categoria) values
 ('pago','croazia','mare','divertimento'),
 ('barcellona','spagna','citta','divertimento'),
 ('madrid','spagna','citta','cultura'),
-('valencia','spagna','mare','cultura')
+('valencia','spagna','mare','cultura'),
+('bolzano','italia','montagna','cultura'),
+('samedan','svizzera','montagna','neve'),
+('innsbruck','austria','montagna','neve'),
+('aosta','italia','citta','neve')
+
 
 
 

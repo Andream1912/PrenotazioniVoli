@@ -1,6 +1,8 @@
 body {
     margin: 0;
     max-width: 100%;
+    font-family: system-ui;
+    ;
 }
 
 video {
@@ -61,7 +63,7 @@ video {
 
 .search-bar button {
     padding: 1.1rem;
-    width: 180px;
+    width: auto;
     cursor: pointer;
     border-radius: 0.3rem;
     border: none;
@@ -121,9 +123,6 @@ video {
 }
 
 .switch {
-    position: absolute;
-    left: 214px;
-    bottom: 2rem;
     height: 40px;
     cursor: pointer;
 }
@@ -284,7 +283,12 @@ video {
     border: none;
 }
 
-@media screen and (max-width: 1100px) {
+.search-bar .container-search-bar:nth-child(2) {
+    border: none;
+    padding: 0;
+}
+
+@media screen and (max-width: 1300px) {
     .inspiration-card>h1 {
         font-size: 40px;
         left: 90px;
@@ -303,8 +307,6 @@ video {
         font-size: 12px;
     }
     .switch {
-        position: absolute;
-        left: 125px;
         width: 25px;
         height: 25px;
         bottom: 20px;
@@ -316,7 +318,7 @@ video {
     }
     .search-bar button {
         font-size: 12px;
-        width: 130px;
+        width: auto;
         margin-right: 10px;
     }
     .carta-container>div>h1 {

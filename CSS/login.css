@@ -9,6 +9,7 @@
     top: 20%;
     left: 37%;
     z-index: 1;
+    animation: slide 250ms ease-in;
 }
 
 .form-control label {
@@ -86,4 +87,15 @@
     background: rgb(2, 62, 138);
     background: linear-gradient(90deg, rgba(2, 62, 138, 1) 15%, rgba(67, 97, 238, 1) 30%, rgba(52, 152, 219, 1) 100%);
     cursor: pointer;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(200%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

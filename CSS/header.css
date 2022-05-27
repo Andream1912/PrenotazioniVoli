@@ -113,3 +113,38 @@ header {
     color: #3498db;
     background-color: white;
 }
+
+.behind {
+    width: 80px;
+    height: 30px;
+    border-color: #3498db;
+    background-color: white;
+    color: #3498db;
+    cursor: pointer;
+}
+
+.behind:hover {
+    border-color: black;
+}
+
+.next:hover {
+    border-color: black;
+}
+
+.next {
+    width: 80px;
+    height: 30px;
+    margin-left: 40%;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+}
+
+.nextOne {
+    width: 80px;
+    height: 30px;
+    margin-left: 70%;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+}

@@ -8,6 +8,8 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #3498db;
+    background-image: linear-gradient(to right, #3498db, #ffff);
+    border-radius: 0.5rem;
     border: 1px solid black;
     width: 500px;
     margin-left: 435px;
@@ -245,7 +247,7 @@ body {
 
 @media screen and (max-width: 1100px) {
     .filter {
-        margin-left: 40px;
+        margin-left: 200px;
     }
     .midpage {
         margin-left: 17%;

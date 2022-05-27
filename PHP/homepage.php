@@ -23,7 +23,9 @@
                     <label for="">Da</label>
                     <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="departure" id="departure" />
                 </div>
-                <img src="../immagini/switch.png" class="switch" onclick="switchCity()">
+                <div class="container-search-bar">
+                    <img src="../immagini/switch.png" class="switch" onclick="switchCity()">
+                </div>
                 <div class="container-search-bar">
                     <label for="">A</label>
                     <input type="text" placeholder="Paese,citt&agrave o aereoporto" name="landing" id="landing" />
@@ -77,7 +79,7 @@
         </div>
     </div>
     <?php include '../HTML/footer.html' ?>
-    
+
     <script src="../JS/homepage.js"></script>
 </body>
 

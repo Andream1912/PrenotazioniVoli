@@ -1,9 +1,22 @@
 <?php
 require_once "parametri.php";
 require_once "transform_date.php";
-$user = $_SESSION['username'];
-$type = $_GET['filter']; //Gestisco il tipo in cui saranno ordinati i voli, all'inizio sarà di tipo "standard";
-$roundtrip = $_GET['roundtrip'];
+if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
+    $user = $_SESSION['username'];
+} else {
+    $user = "";
+}
+if (isset($_GET['filter']) || !empty($_GET['filter'])) {
+    $type = $_GET['filter']; //Gestisco il tipo in cui saranno ordinati i voli, all'inizio sarà di tipo "standard";
+} else {
+    $type = "";
+}
+if (isset($_GET['roundtrip']) || !empty($_GET['roundtrip'])) {
+    $roundtrip = $_GET['roundtrip'];
+} else {
+    $roundtrip = "";
+}
+$order = "";
 if ($type == 'speed') {
     $order = "order by tempo,prezzo";
 } else if ($type == 'economy') {
@@ -152,16 +165,21 @@ if ($roundtrip == 'ritorno') {
                         <input type="date" value=<?php echo $data ?> id="startDate" name="startDate" class="start-date">
                     </div>
                     <div class="date">
-                        <input type="date" <?php if ((!empty($endDate) || (!isset($endDate)))) { ?>value=<?php echo $endDate;
-                                                                                                        } ?> id="endDate" name="endDate">
+                        <input type="date" <?php if ((!empty($endDate) || (isset($endDate)))) { ?>value=<?php echo $endDate;
+                                                                                                    } ?> id="endDate" name="endDate">
                     </div>
                 </div>
             </div>
 
             <?php
             $noData = pg_result_seek($ret, 0);
-            if ($noData) {
-                if (((isset($user)) && (!empty($user)) && ($endDate != "qualsiasi"))) { ?>
+            $noDataBack = true;
+            if((!empty($endDate)) && (isset($endDate))){
+                $noDataBack = pg_result_seek($ret_r,0);
+            }
+
+            if ($noData && $noDataBack) {
+                if (((isset($user)) && (!empty($user)) && ($endDate != "qualsiasi") && ($noDataBack))) { ?>
                     <div class="filter">
                         <div class="singleFilter firstFilter">
                             <label>
@@ -279,6 +297,7 @@ if ($roundtrip == 'ritorno') {
                                         return false;
                                     } else {
                                         $third_filter = pg_fetch_array($ret_economy);
+                                        $interval = $third_filter['interval'];
                                         $price = $third_filter['price'];
                                     }
                                 } else {
@@ -296,7 +315,7 @@ if ($roundtrip == 'ritorno') {
                                 }
                                 if (($roundtrip == 'ritorno')) {
                                     if ($endDate == "") {
-                                        $sql_r_economy = "SELECT min(prezzo),(ora_arrivo-ora_partenza) AS interval from volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo = '2022-06-10' group by interval";
+                                        $sql_r_economy = "SELECT min(prezzo),(ora_arrivo-ora_partenza) AS interval from volo where citta_partenza = $1 and citta_arrivo = $2 group by interval";
                                         $prep_economy_b = pg_prepare($db, "searchRoundTripEconomy", $sql_r_economy);
                                         if (!$pre_economy_b) {
                                         } else {
@@ -313,10 +332,9 @@ if ($roundtrip == 'ritorno') {
                                         $ret_economy_b = pg_execute($db, "searchRoundTripEconomy", array($to, $from, $endDate));
                                         if (!$ret_speed_b) {
                                             echo "Errore Query";
-                                            exit;
                                         } else {
-                                            $second_filter_back = pg_fetch_array($ret_economy_b);
-                                            $priceback = $second_filter_back['min'];
+                                            $third_filter_back = pg_fetch_array($ret_economy_b);
+                                            $priceback = $third_filter_back['prezzo'];
                                         }
                                     }
                                 } ?>

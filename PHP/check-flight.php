@@ -151,17 +151,17 @@ if (!empty($_GET['id'])) {
                     <label for="cognome"> Cognome: <p dir="rtl"></p><input type="text" id="cognome" value="<?php echo $cognome; ?>"></label>
                     <label for="luogonascita">Luogo di Nascita: <p dir="rtl"></p><input type="text" id="luogonascita" name="luogonascita" value="<?php echo $luogo_nascita; ?>"></label>
                     <label for="indirizzo">Indirizzo: <p dir="rtl"></p><input type="text" id="indirizzo" name="indirizzo" value="<?php echo $indirizzo; ?>"></label>
-                    <label for="cap">CAP: <p dir="rtl"></p><input type="numeric" minlength="5" maxlength="5" value="<?php echo $cap; ?>"id="cap" value="<?php echo $cap; ?>"></label>
+                    <label for="cap">CAP: <p dir="rtl"></p><input type="number" minlength="5" maxlength="5" value="<?php echo $cap; ?>"id="cap" value="<?php echo $cap; ?>"></label>
                     <label for="sesso">SESSO: <div class="sex"><input type="radio" name="sex" id="male" value="M" checked>M<input type="radio" name="sex" id="fale" value="F">F</div></label>
                     <label for="nazionalita">Nazionalità: <p dir="rtl"></p><input type="text" id="nazionalita" name="nazionalita" value="<?php echo $nazionalita; ?>"></label>
                     <label for="datanascita">Data di Nascita: <input type="date" id="datanascita" name="birthday" value="<?php echo $data_nascita; ?>"></label>
-                    <label for="numero"> Numero: <p dir="rtl"></p><input type="numeric" id="numero" name="numero" minlenght="6" maxlength="15" value="<?php echo $numero; ?>"></label>
+                    <label for="numero"> Numero: <p dir="rtl"></p><input type="number" id="numero" name="numero" minlenght="6" maxlength="15" value="<?php echo $numero; ?>"></label>
                 </fieldset>
                 <div class="card-payment">
                     <h1>Pagamento</h1>
                     <label for="ccn">Numero Carta:</label>
-                    <div class="typecard"><p style="color:red"></p><input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" class="ccn" placeholder="xxxx xxxx xxxx xxxx"><img src="../immagini//mastercard.png" id="mastercard" class="mastercard"><img src="../immagini/visa.png" id="visa" class="visa"></div>
-                    <label for="scadenza">Data di Scadenza: <input class="month" type="numeric" placeholder="Mese" id="month"> / <input class="year" type="numeric" min="2022" id="year" placeholder="Anno"></label>
+                    <div class="typecard"><p style="color:red"></p><input id="ccn" type="tel" inputmode="number"  autocomplete="cc-number" maxlength="19" class="ccn" placeholder="xxxx xxxx xxxx xxxx"><img src="../immagini//mastercard.png" id="mastercard" class="mastercard"><img src="../immagini/visa.png" id="visa" class="visa"></div>
+                    <label for="scadenza">Data di Scadenza: <input class="month" type="number" placeholder="Mese" id="month"> / <input class="year" type="numeric" min="2022" id="year" placeholder="Anno"></label>
                     <label for="CVV">CVV: <input type="number" min="99" max="999" id="cvv" class="cvv" placeholder="CVV" maxlength="3"></label>
                 </div>
             </div>

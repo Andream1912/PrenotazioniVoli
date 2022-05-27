@@ -83,7 +83,7 @@ if (!$ret_empty) {
     return false;
 }
 
-$sql_tendenza = "SELECT citta_arrivo,count(*) as tendenza from volo group by citta_arrivo order by tendenza desc";
+$sql_tendenza = "SELECT citta_arrivo,count(*) as tendenza from volo where (data_volo+ora_partenza)>=(CURRENT_DATE+LOCALTIME(0)) group by citta_arrivo order by tendenza desc";
 $prep_tendenza = pg_prepare($db, 'tendenza', $sql_tendenza);
 $ret_tendenza = pg_execute($db, 'tendenza', array());
 if (!$ret_tendenza) {
@@ -91,7 +91,7 @@ if (!$ret_tendenza) {
     return false;
 }
 
-$sql_economico = "SELECT distinct(citta_arrivo),(select min(prezzo) from volo v where volo.citta_arrivo = v.citta_arrivo) as prezzo from volo order by prezzo";
+$sql_economico = "SELECT distinct(citta_arrivo),(select min(prezzo) from volo v where volo.citta_arrivo = v.citta_arrivo) as prezzo from volo where (data_volo+ora_partenza)>=(CURRENT_DATE+LOCALTIME(0)) order by prezzo";
 $prep_economico = pg_prepare($db, 'economico', $sql_economico);
 $ret_economico = pg_execute($db, 'economico', array());
 if (!$ret_economico) {
@@ -225,9 +225,11 @@ if (!$ret_consigliati) {
                 <h1>Consigliati di oggi</h1>
 
                 <?php
-                while ($row = pg_fetch_array($ret_consigliati)) {
+                $i = 0;
+                while (($row = pg_fetch_array($ret_consigliati)) && ($i<3)) {
                     $paese_consigliati = $row['citta_arrivo'];
                     $data_consigliata = $row['data_volo'];
+                    $i++;
                 ?>
                     <div class="asideContent">
                         <?php echo  '<a href="../PHP/flight.php?roundtrip=andata&departure=ovunque&landing=' . $paese_consigliati . '&startDate=' . $data_consigliata . '&filter=economy">' ?>

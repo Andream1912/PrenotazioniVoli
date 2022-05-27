@@ -72,7 +72,7 @@
                 <i class="fas fa-check-circle" id="right-user" style="color:#2ecc71"></i>
                 <i class="fas fa-exclamation-circle" id="error-user" style="color:#e74c3c"></i>
             </div>
-            <button type="button" dir="rtl" data-next>Avanti</button>
+            <button type="button" dir="rtl" class="nextOne" data-next>Avanti</button>
             <p>Hai gi&agrave un account?<span style="cursor:pointer;color:#3498db" onclick="RegistertoLogin()"> Accedi</span></p>
         </div>
         <div class="card" data-step>
@@ -89,8 +89,8 @@
                 <i class="fas fa-check-circle" id="right-r"></i>
                 <i class="fas fa-exclamation-circle" id="wrong-r"></i>
             </div>
-            <button type="button" data-previous>Indietro</button>
-            <button type="button" data-next>Avanti</button>
+            <button type="button" class="behind" data-previous>Indietro</button>
+            <button type="button" class="next" data-next>Avanti</button>
             <p>Hai gi&agrave un account?<span style="cursor:pointer;color:#3498db" onclick="RegistertoLogin()"> Accedi</span></p>
         </div>
         <div class="card " data-step>
@@ -113,8 +113,8 @@
                 <i class="fas fa-check-circle" id="right-verifypass" style="color:#2ecc71;top:435px"></i>
                 <i class="fas fa-exclamation-circle" id="wrong-verifypass" style="color:#e74c3c;top:435px"></i>
             </div>
-            <button type="button" data-previous>Indietro</button>
-            <input type="submit" name="invia" value="Registrati">
+            <button type="button" class="behind" data-previous>Indietro</button>
+            <input type="submit" name="invia" class="next" value="Registrati">
         </div>
     </form>
 
@@ -177,7 +177,7 @@
 
         function success() {
             var queryString = window.location.href;
-            var string = queryString.replace('?error=success', '');
+            var string = queryString.replace('error=success', '');
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',

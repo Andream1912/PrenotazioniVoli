@@ -1,21 +1,28 @@
 /*body*/
-body{
+
+body {
     background-image: linear-gradient(to right, lightblue, white);
-}
-/*header*/
-.header{
-    margin-bottom: 90px;
-    left:0;
+    font-family: system-ui;
 }
 
+
+/*header*/
+
+.header {
+    margin-bottom: 90px;
+    left: 0;
+}
+
+
 /*contenitore overlay creazione risposta*/
-.respFormContainer{
+
+.respFormContainer {
     z-index: 999999;
     position: fixed;
     width: 500px;
     height: 500px;
-    top:50%;
-    left:50%;
+    top: 50%;
+    left: 50%;
     margin-top: -250px;
     margin-left: -250px;
     display: flex;
@@ -26,56 +33,68 @@ body{
     border-radius: 8px;
 }
 
+
 /*form overlay creazione risposta*/
-.create-response-form{
-    padding:20px;
+
+.create-response-form {
+    padding: 20px;
 }
+
 
 /*contenitore bottone uscita overlay creazione risposta*/
-.respExitButtonContainer{
-    margin-left:auto;
-    padding:10px;
+
+.respExitButtonContainer {
+    margin-left: auto;
+    padding: 10px;
 }
 
+
 /*bottone uscite overlay creazione risposta*/
-.respExitButton{
-    color:white;
+
+.respExitButton {
+    color: white;
     background: #3498db;
-    border-radius:4px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-.respExitButton:hover{
-    color:#3498db;
+.respExitButton:hover {
+    color: #3498db;
     background: white;
     box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
     border: 2px solid #3498db;
 }
 
+
 /*area di testo overlay creazione risposta*/
-.responseText{
+
+.responseText {
     width: 100%;
     height: 280px;
     resize: none;
 }
 
+
 /*contenitore bottone submit overlay creazione risposta*/
-.respSubmitButtonContainer{
+
+.respSubmitButtonContainer {
     text-align: center;
     margin-top: 20px;
 }
 
+
 /*bottone submit overlay creazione risposta*/
-.respSubmitButton{
-    color:white;
+
+.respSubmitButton {
+    color: white;
     background: #3498db;
-    border-radius:4px;
+    border-radius: 4px;
     cursor: pointer;
     height: 30px;
 }
 
-.respSubmitButton:hover{
-    color:#3498db;
+.respSubmitButton:hover {
+    color: #3498db;
     background: white;
     box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
     border: 2px solid #3498db;
@@ -83,13 +102,14 @@ body{
 
 
 /*contenitore overlay modifica discussione*/
-.modifyFormContainer{
+
+.modifyFormContainer {
     z-index: 999999;
     position: fixed;
     width: 500px;
     height: 500px;
-    top:50%;
-    left:50%;
+    top: 50%;
+    left: 50%;
     margin-top: -250px;
     margin-left: -250px;
     display: flex;
@@ -100,65 +120,79 @@ body{
     border-radius: 8px;
 }
 
+
 /*form overlay modifica discussione*/
-.modify-discussion-form{
+
+.modify-discussion-form {
     padding: 20px;
 }
 
+
 /*container bottone uscita overlay modifica discussione*/
-.modifyExitButtonContainer{
-    margin-left:auto;
-    padding:10px;
+
+.modifyExitButtonContainer {
+    margin-left: auto;
+    padding: 10px;
 }
 
+
 /*bottone uscita overlay modifica discussione*/
-.modifyExitButton{
-    color:white;
+
+.modifyExitButton {
+    color: white;
     background: #3498db;
-    border-radius:4px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
-.modifyExitButton:hover{
-    color:#3498db;
+.modifyExitButton:hover {
+    color: #3498db;
     background: white;
     box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
     border: 2px solid #3498db;
 }
 
+
 /*area di testo overlay modifica discussione*/
-.descriptionText{
+
+.descriptionText {
     width: 100%;
     height: 280px;
     resize: none;
 }
 
+
 /*container bottone submit overlay modifica discussione*/
-.modifySubmitButtonContainer{
+
+.modifySubmitButtonContainer {
     text-align: center;
     margin-top: 20px;
 }
 
+
 /*bottone submit overlay modifica discussione*/
-.modifySubmitButton{
-    color:white;
+
+.modifySubmitButton {
+    color: white;
     background: #3498db;
-    border-radius:4px;
+    border-radius: 4px;
     cursor: pointer;
     height: 30px;
 }
 
-.modifySubmitButton:hover{
-    color:#3498db;
+.modifySubmitButton:hover {
+    color: #3498db;
     background: white;
     box-shadow: 0 0 0 1px rgba(59, 59, 59, 0.3);
     border: 2px solid #3498db;
 }
 
+
 /*contenitore totale*/
-.cardTot{
+
+.cardTot {
     width: 100%;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-left: auto;
@@ -166,8 +200,10 @@ body{
     gap: 20px;
 }
 
+
 /*contenitore parte superiore per titolo e bottoni*/
-.topCard{
+
+.topCard {
     width: 100%;
     height: 400px;
     display: flex;
@@ -180,41 +216,48 @@ body{
     border-radius: 10px;
 }
 
+
 /*contenitore titolo discussione*/
-.cardTit{
+
+.cardTit {
     color: #03045e;
     font-size: 30px;
     font-weight: bold;
 }
 
+
 /*contenitore discussione*/
-.cardPrinc{
+
+.cardPrinc {
     padding: 20px;
     width: 60%;
     border: 1px solid #3498db;
     border-radius: 10px;
-    margin:10px;
+    margin: 10px;
     transition: 1s;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(4px);
-
 }
 
-.cardPrinc:hover{
+.cardPrinc:hover {
     box-shadow: 0 0 10px 1px rgba(59, 59, 59, 0.3);
     transform: translateX(-10px);
     transition: 1s;
 }
 
+
 /*informazioni discussione*/
-.cardInfor{
+
+.cardInfor {
     text-align: right;
 }
 
+
 /*bottoni per creazione risposta, modifica discussione e accesso*/
-.borderButton{
+
+.borderButton {
     z-index: 999;
-    background: rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     position: fixed;
     top: 300px;
@@ -226,8 +269,10 @@ body{
     transition: 1s;
 }
 
+
 /*creazione risposta*/
-.respButton{
+
+.respButton {
     width: 200px;
     height: 50px;
     padding: 10px;
@@ -238,32 +283,36 @@ body{
     cursor: pointer;
 }
 
-.respButton:hover{
+.respButton:hover {
     background: transparent;
     backdrop-filter: blur(8px);
-    color:#3498db;
+    color: #3498db;
     border: 2px solid #3498db;
     transition: 1s;
 }
 
-.respButtonIcon{
+.respButtonIcon {
     background: none;
     align-self: center;
-    padding:10px;
+    padding: 10px;
     border-radius: 0 8px 8px 0;
 }
 
+
 /*bottone icona*/
-.buttonIcon{
-    cursor:pointer;
+
+.buttonIcon {
+    cursor: pointer;
     background: none;
     color: #3498db;
     font-size: 20px;
     border: none;
 }
 
+
 /*modifica discussione*/
-.modifyButton{
+
+.modifyButton {
     order: 5;
     padding: 10px;
     color: white;
@@ -273,14 +322,16 @@ body{
     cursor: pointer;
 }
 
-.modifyButton:hover{
+.modifyButton:hover {
     background: white;
-    color:#3498db;
+    color: #3498db;
     border: 2px solid #3498db;
 }
 
+
 /*contenitore risposte*/
-.cardRisp{
+
+.cardRisp {
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -292,8 +343,10 @@ body{
     background: white;
 }
 
+
 /*contenitore risposta singola*/
-.subCardRisp{
+
+.subCardRisp {
     border: 2px solid grey;
     border-radius: 10px;
     width: 80%;
@@ -303,54 +356,59 @@ body{
     margin-bottom: 20px;
 }
 
-.subCardRisp:hover{
+.subCardRisp:hover {
     box-shadow: 0 0 10px 1px rgba(59, 59, 59, 0.3);
     transform: translateX(-10px);
     transition: 1s;
 }
 
+
 /*informazioni risposta singola*/
-.rispInfor{
+
+.rispInfor {
     text-align: right;
 }
 
+
 /*scritta numero risposte*/
-.numRisp{
+
+.numRisp {
     order: -1;
 }
 
+
 /*classi da attribuire all'elemento*/
-.hide{
+
+.hide {
     display: none;
 }
 
-.blur{
+.blur {
     filter: blur(6px);
 }
 
-.disabled{
+.disabled {
     pointer-events: none;
 }
 
+
 /*gestisco la dimensione dello schermo*/
-@media screen and (max-width:900px){
-    .modifyFormContainer{
+
+@media screen and (max-width:900px) {
+    .modifyFormContainer {
         width: 250px;
         height: 400px;
         margin-left: -125px;
     }
-
-    .descriptionText{
+    .descriptionText {
         height: 150px;
     }
-
-    .respFormContainer{
+    .respFormContainer {
         width: 250px;
         height: 400px;
         margin-left: -125px;
     }
-
-    .responseText{
+    .responseText {
         height: 150px
     }
 }
