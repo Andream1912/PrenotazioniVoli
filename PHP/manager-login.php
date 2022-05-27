@@ -6,12 +6,12 @@ if ($_POST['email'] || $_POST['password']) {
     $pass = $_POST['password'];
     $hash = get_pwd($email, $db);
     if (!$hash) { /* Se ritorna false l'utente non è stato trovato nel db, in caso in cui non è false l'utente è stato trovato*/
-?>
-        <script>
-            alert("Parametri errati!!");
-            window.location = "../PHP/homepage.php";
-        </script>
-        <?php
+        if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
+            $location = explode("error", $_SERVER['HTTP_REFERER']);
+            header("Location:" . $location[0] . "&error=login");
+        } else {
+            header("Location:" . $_SERVER['HTTP_REFERER'] . "?error=login");
+        }
     } else {
         if (password_verify($pass, $hash)) {
             $ruolo = get_level($email, $db);
@@ -21,12 +21,13 @@ if ($_POST['email'] || $_POST['password']) {
             $_SESSION['username'] = $username;
             $_SESSION['ruolo'] = $ruolo;
             header("Location:" . $_SERVER['HTTP_REFERER']);
-        } else { ?>
-            <script>
-                alert("Parametri errati!!");
-                window.location = (document.referrer);
-            </script>
-<?php
+        } else {
+            if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
+                $location = explode("error", $_SERVER['HTTP_REFERER']);
+                header("Location:" . $location[0] . "&error=login");
+            } else {
+                header("Location:" . $_SERVER['HTTP_REFERER'] . "?error=login");
+            }
         }
     }
 }

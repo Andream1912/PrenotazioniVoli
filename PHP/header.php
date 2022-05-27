@@ -1,21 +1,18 @@
 <?php
-if (isset($_GET['error']) || !empty($_GET['error'])) {
-    $error = $_GET['error'];
-    if ($error == 'username') {
-        $errorUser = "Username gi&agrave esistente"; ?>
-        <script>
-            currentStep = 0;
-        </script>
-    <?php
-    } else if ($error == 'email') {
-        $errorEmail = "Email gi&agrave esistente";
-    ?> <script>
-            currentStep = 1
-        </script> <?php
-                }
-            }
+// if (isset($_GET['error']) || !empty($_GET['error'])) {
+//     $error = $_GET['error'];
+//     if ($error == 'username' || $error == 'email') {
+//         if ($error == 'username') {
+//             $errorUser = "Username gi&agrave esistente";
+//         } else if ($error == 'email') {
+//             $errorEmail = "Email gi&agrave esistente";
+//         } else if ($error == 'login') {
+//             $errorPassword = "Username e/o Password incoretti";
+//         }
+//     }
+// }
 
-                    ?>
+?>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -30,6 +27,8 @@ if (isset($_GET['error']) || !empty($_GET['error'])) {
     <script src="https://kit.fontawesome.com/63a4bcd19a.js" crossorigin="anonymous"></script>
     <script src="../JS/register.js" defer></script>
     <script src="../JS/header.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 
 <body>
@@ -141,6 +140,7 @@ if (isset($_GET['error']) || !empty($_GET['error'])) {
             </svg></i></a>
         <img src="../immagini/world.png" style="width:250px;height:240px;margin-left:5%;">
         <h3>Login</h3>
+        <p style="color:red;text-align:center;margin:0;" id="loginError"></p>
         <div class="form-control">
             <label for="email">Email</label>
             <input type="email" name="email" id="email" placeholder="E-mail" />
@@ -158,23 +158,54 @@ if (isset($_GET['error']) || !empty($_GET['error'])) {
     <script>
         <?php
         if (isset($_GET['error']) || !empty($_GET['error'])) {
-            if ($error == 'username') { ?>
-                let username = document.getElementById("username")
-                let errorUsername = document.getElementById("usernameError")
-                username.style.borderColor = "red";
-                errorUsername.innerHTML = "Username gi&agrave esistente";
+            $error = $_GET['error'];
+            if ($error == 'username' || $error == 'email') {
+                if ($error == 'username') { ?>
+                    let username = document.getElementById("username")
+                    let errorUsername = document.getElementById("usernameError")
+                    username.style.borderColor = "red";
+                    errorUsername.innerHTML = "Username gi&agrave esistente";
+                <?php
+                } else if ($error = 'email') { ?>
+                    let email = document.getElementById("email-register");
+                    let errorEmail = document.getElementById("emailError");
+                    email.style.borderColor = "red";
+                    errorEmail.innerHTML = "Email gi&agrave esistente";
+                <?php
+                }
+                ?>
+                openRegisterError();
             <?php
-            } else if ($error = 'email') { ?>
-                let email = document.getElementById("email-register");
-                let errorEmail = document.getElementById("emailError");
-                email.style.borderColor = "red";
-                errorEmail.innerHTML = "Email gi&agrave esistente";
+            } else if ($error == 'login') { ?>
+                let loginError = document.getElementById("loginError").innerHTML = "Username e/o Password incorretti";
+                let loginEmail = document.getElementById("email").style.borderColor = "red";
+                let loginPass = document.getElementById("password").style.borderColor = "red";
+                openLogin();
+
+            <?php
+            } else if ($error == 'success') { ?>
+                success();
+
         <?php
             }
-            ?>
-            openRegisterError();
-            <?php
         } ?>
+
+
+        function success() {
+            var queryString = window.location.href;
+            var string = queryString.replace('?error=success', '');
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Account registrato con successo',
+                showConfirmButton: false,
+                timer: 2000
+            })
+            setTimeout(function() {
+                location.href = string
+            }, 1500);
+
+        }
     </script>
 </body>
 

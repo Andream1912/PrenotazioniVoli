@@ -78,6 +78,7 @@
     </div>
     <?php include '../HTML/footer.html' ?>
     <script>
+        
         document.getElementById("startDate").min = new Date();
 
         function checkInput() {
@@ -125,4 +126,5 @@
         document.getElementById("endDate").disabled = true;
     </script>
 </body>
+
 </html>

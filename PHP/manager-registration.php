@@ -34,21 +34,39 @@ if (!empty($pass))
         }
         if ((check_username($user, $db))) {
             if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
-                header("Location:" . $_SERVER['HTTP_REFERER'] . "&error=username");
+                if (str_contains($_SERVER['HTTP_REFERER'], '&error')) {
+                    $location = explode("&error", $_SERVER['HTTP_REFERER']);
+                    header("Location:" . $location[0] . "&error=username");
+                } else {
+                    $location = explode("error", $_SERVER['HTTP_REFERER']);
+                    header("Location:" . $location[0] . "&error=username");
+                }
             } else {
                 header("Location:" . $_SERVER['HTTP_REFERER'] . "?error=username");
             }
         } else if (check_email($email, $db)) {
             if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
-                header("Location:" . $_SERVER['HTTP_REFERER'] . "&error=email");
+                if (str_contains($_SERVER['HTTP_REFERER'], '&error')) {
+                    $location = explode("&error", $_SERVER['HTTP_REFERER']);
+                    header("Location:" . $location[0] . "&error=email");
+                } else {
+                    $location = explode("error", $_SERVER['HTTP_REFERER']);
+                    header("Location:" . $location[0] . "&error=email");
+                }
             } else {
                 header("Location:" . $_SERVER['HTTP_REFERER'] . "?error=email");
             }
         } else {
             if (add_new_user($user, $email, $pass, $db)) {
-                header("Location:" . $_SERVER['HTTP_REFERER']);
-            } else {
-                echo "<p> Errore nell'inserimento del nuovo utente</p>";
+                if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
+                    if (str_contains($_SERVER['HTTP_REFERER'], '&error')) {
+                        $location = explode("&error", $_SERVER['HTTP_REFERER']);
+                        header("Location:" . $location[0] . "&error=email");
+                    } else {
+                        $location = explode("error", $_SERVER['HTTP_REFERER']);
+                        header("Location:" . $location[0] . "&error=email");
+                    }
+                }
             }
         }
     }
@@ -95,7 +113,7 @@ function add_new_user($user, $email, $pass, $db)
     $hash = password_hash($pass, PASSWORD_DEFAULT);
     $sql = "INSERT INTO utenti(username, email, password) VALUES($1, $2, $3)";
     $prep = pg_prepare($db, "insertUser", $sql);
-    if(!$prep){
+    if (!$prep) {
         return false;
     }
     $ret = pg_execute($db, "insertUser", array($user, $email, $hash));

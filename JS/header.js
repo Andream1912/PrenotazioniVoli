@@ -62,7 +62,7 @@ function closeWindow() {
 
 function openLogin() {
     document.querySelector(".form-login").style.display = "block";
-    document.querySelector(".mid-page").style.opacity = "0.5 "
+    document.querySelector(".mid-page").style.opacity = "0.5";
     document.querySelector(".body").style.overflow = "hidden";
 }
 
@@ -81,8 +81,6 @@ function validateRegister() {
     let wrongVPass = document.getElementById("wrong-verifypass");
     const r = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])";
     const regex = new RegExp(r)
-
-
     if (username.value == "") {
         currentStep = 0;
     } else if (email.value == "") {
@@ -162,7 +160,6 @@ function validateRegister() {
 }
 
 function validateForm() {
-    form.action = window.location.href;
     let email = document.getElementById("email");
     let wrong = document.getElementById("wrong");
     let right = document.getElementById("right");
