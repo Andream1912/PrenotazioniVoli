@@ -244,7 +244,7 @@ if (!$ret_consigliati) {
 
         <div class="footer_midpage">
             <?php
-            if (!$_GET) {
+            if (!$_GET || (!empty($_GET['error']))) {
                 while ($row = pg_fetch_array($ret_empty)) {
                     $paese_empty = $row['nome'];
             ?>

@@ -164,7 +164,7 @@
                 let loginError = document.getElementById("loginError").innerHTML = "Email e/o Password incorretti";
                 let loginEmail = document.getElementById("email").style.borderColor = "red";
                 let loginPass = document.getElementById("password").style.borderColor = "red";
-                openLogin();
+                openLoginError();
 
             <?php
             } else if ($error == 'success') { ?>

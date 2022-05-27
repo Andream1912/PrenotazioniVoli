@@ -64,6 +64,12 @@ function openLogin() {
     document.querySelector(".form-login").style.display = "block";
     document.querySelector(".mid-page").style.opacity = "0.5";
     document.querySelector(".body").style.overflow = "hidden";
+    document.querySelector(".container-search-bar").style.disabled = true;
+}
+
+function openLoginError() {
+    document.querySelector(".form-login").style.display = "block";
+    document.querySelector(".body").style.overflow = "hidden";
 }
 
 function validateRegister() {

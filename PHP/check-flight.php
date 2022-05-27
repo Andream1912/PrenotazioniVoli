@@ -151,7 +151,7 @@ if (!empty($_GET['id'])) {
                     <label for="cognome"> Cognome: <p dir="rtl"></p><input type="text" id="cognome" value="<?php echo $cognome; ?>"></label>
                     <label for="luogonascita">Luogo di Nascita: <p dir="rtl"></p><input type="text" id="luogonascita" name="luogonascita" value="<?php echo $luogo_nascita; ?>"></label>
                     <label for="indirizzo">Indirizzo: <p dir="rtl"></p><input type="text" id="indirizzo" name="indirizzo" value="<?php echo $indirizzo; ?>"></label>
-                    <label for="cap">CAP: <p dir="rtl"></p><input type="number" minlength="5" maxlength="5" value="<?php echo $cap; ?>"id="cap" value="<?php echo $cap; ?>"></label>
+                    <label for="cap">CAP: <p dir="rtl"></p><input type="number" min="10000" max="99999" value="<?php echo $cap; ?>"id="cap" value="<?php echo $cap; ?>"></label>
                     <label for="sesso">SESSO: <div class="sex"><input type="radio" name="sex" id="male" value="M" checked>M<input type="radio" name="sex" id="fale" value="F">F</div></label>
                     <label for="nazionalita">Nazionalità: <p dir="rtl"></p><input type="text" id="nazionalita" name="nazionalita" value="<?php echo $nazionalita; ?>"></label>
                     <label for="datanascita">Data di Nascita: <input type="date" id="datanascita" name="birthday" value="<?php echo $data_nascita; ?>"></label>

@@ -117,18 +117,18 @@ header {
 .behind {
     width: 80px;
     height: 30px;
-    border-color: #3498db;
+    border: 0.5px solid #3498db;
     background-color: white;
     color: #3498db;
     cursor: pointer;
 }
 
 .behind:hover {
-    border-color: black;
+    border: 0.5px solid black;
 }
 
 .next:hover {
-    border-color: black;
+    border: 0.5px solid black;
 }
 
 .next {
@@ -137,6 +137,7 @@ header {
     margin-left: 40%;
     background-color: #3498db;
     color: white;
+    border-color: #3498db;
     cursor: pointer;
 }
 
@@ -145,6 +146,11 @@ header {
     height: 30px;
     margin-left: 70%;
     background-color: #3498db;
+    border-color: #3498db;
     color: white;
     cursor: pointer;
+}
+
+.nextOne:hover {
+    border: 0.5px solid black;
 }

@@ -289,7 +289,7 @@ if ($roundtrip == 'ritorno') {
                                 <input type="radio" name="filter" value="economy" id="filterThree" style="display:none" onChange="this.form.submit()">
                                 <?php
                                 if ($from == 'ovunque') {
-                                    $sql_economy = "SELECT min(prezzo) as price,(ora_arrivo-ora_partenza) AS interval from volo where citta_arrivo = $1 and data_volo=$2 group by interval";
+                                    $sql_economy = "SELECT min(prezzo) as price,(ora_arrivo-ora_partenza) AS interval from volo where citta_arrivo = $1 and data_volo=$2 group by interval order by price";
                                     $prep_economy = pg_prepare($db, "searchFlightEconomy", $sql_economy);
                                     $ret_economy = pg_execute($db, "searchFlightEconomy", array($to, $data));
                                     if (!$ret_economy) {

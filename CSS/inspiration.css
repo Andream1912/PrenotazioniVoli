@@ -67,6 +67,7 @@ body {
     display: flex;
     flex-direction: row;
     align-content: center;
+    flex-wrap: wrap;
     width: 850px;
     gap: 40px;
 }
@@ -205,5 +206,39 @@ aside {
 @media screen and (max-width: 1100px) {
     aside {
         display: none;
+    }
+    .label_location {
+        flex-wrap: wrap;
+        width: auto;
+    }
+    .footer_midpage img {
+        height: 165px;
+    }
+    .footer_midpage {
+        text-align: center;
+    }
+    .head_midpage {
+        display: none;
+    }
+    .mid-page {
+        margin-top: 30rem;
+    }
+    .selection_midpage h1 {
+        width: 230px;
+        font-size: 30px;
+    }
+    .selection_midpage h4 {
+        width: 230px;
+        font-size: 20px;
+        margin-top: 40px
+    }
+    .selection_midpage h3 {
+        width: 230px;
+        font-size: 20px;
+        margin-top: 40px
+    }
+    .footer_midpage {
+        margin-left: 0;
+        align-items: center;
     }
 }

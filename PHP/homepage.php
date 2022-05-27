@@ -73,7 +73,7 @@
         <div class="third-card">
             <h1>Immergiti in un avventura <br> unica!</h1>
             <a href="../PHP/lasciati_ispirare.php?avventura=avventura&divertimento=divertimento">
-                <button>SONO IO</button>
+                <button >SONO IO</button>
             </a>
             <img src="../immagini/quad.jpg">
         </div>
