@@ -179,7 +179,7 @@ if ($roundtrip == 'ritorno') {
             }
 
             if ($noData && $noDataBack) {
-                if (((isset($user)) && (!empty($user)) && ($endDate != "qualsiasi") && ($noDataBack))) { ?>
+                if (((isset($user)) && (!empty($user))&& ($noDataBack))) { ?>
                     <div class="filter">
                         <div class="singleFilter firstFilter">
                             <label>
@@ -202,6 +202,7 @@ if ($roundtrip == 'ritorno') {
                                 }
                                 $standard = pg_fetch_array($ret_standard);
                                 if (($roundtrip == 'ritorno')) {
+                                    $standard_back = 0;
                                     if ($endDate == "") {
                                         $prep_standard_back = pg_prepare($db, "searchFlightStandardBack", $sql_r);
                                         $ret_standard_back = pg_execute($db, "searchFlightStandardBack", array($to, $from));
@@ -254,6 +255,7 @@ if ($roundtrip == 'ritorno') {
                                     }
                                 }
                                 if (($roundtrip == 'ritorno')) {
+                                    $priceback = 0;
                                     if ($endDate == "") {
                                         $sql_r_speed = "SELECT *,(ora_arrivo - ora_partenza) as interval FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo > '$data' order by prezzo,interval";
                                         $prep_speed_b = pg_prepare($db, "searchRoundTripSpeed", $sql_r_speed);
@@ -314,6 +316,7 @@ if ($roundtrip == 'ritorno') {
                                     }
                                 }
                                 if (($roundtrip == 'ritorno')) {
+                                    $priceback = 0;
                                     if ($endDate == "") {
                                         $sql_r_economy = "SELECT min(prezzo),(ora_arrivo-ora_partenza) AS interval from volo where citta_partenza = $1 and citta_arrivo = $2 group by interval";
                                         $prep_economy_b = pg_prepare($db, "searchRoundTripEconomy", $sql_r_economy);
