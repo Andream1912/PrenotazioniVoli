@@ -20,7 +20,12 @@ if ($_POST['email'] || $_POST['password']) {
             $_SESSION['email'] = $email;
             $_SESSION['username'] = $username;
             $_SESSION['ruolo'] = $ruolo;
-            header("Location:" . $_SERVER['HTTP_REFERER']);
+            if (str_contains($_SERVER['HTTP_REFERER'], 'error')) {
+                $location = explode("error", $_SERVER['HTTP_REFERER']);
+                header("Location:" . $location[0]);
+            } else {
+                header("Location:" . $_SERVER['HTTP_REFERER']);
+            }
         } else {
             if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
                 $location = explode("error", $_SERVER['HTTP_REFERER']);

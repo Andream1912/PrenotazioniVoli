@@ -51,10 +51,12 @@ header {
 }
 
 .right-logged p {
-    color: #3498db;
-    text-transform: uppercase;
     letter-spacing: -1px;
     margin: 0;
+    font-family: system-ui;
+    cursor: default;
+    color: #3498db;
+    text-transform: uppercase;
 }
 
 .right-logged img {
@@ -67,6 +69,18 @@ header {
     flex-direction: row;
     align-items: center;
     margin-right: 2%;
+}
+
+.right a {
+    color: #3498db;
+    margin-right: 5px;
+    font-family: system-ui;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.right a:hover {
+    text-decoration: underline;
 }
 
 .header .right button {
@@ -85,7 +99,17 @@ header {
     color: #3498db;
 }
 
+.header .right .btn-register:hover {
+    color: white;
+    background-color: #3498db;
+}
+
 .header .right .btn-login {
     color: #fff;
     background-color: #3498db;
+}
+
+.header .right .btn-login:hover {
+    color: #3498db;
+    background-color: white;
 }

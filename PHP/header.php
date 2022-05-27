@@ -1,19 +1,3 @@
-<?php
-// if (isset($_GET['error']) || !empty($_GET['error'])) {
-//     $error = $_GET['error'];
-//     if ($error == 'username' || $error == 'email') {
-//         if ($error == 'username') {
-//             $errorUser = "Username gi&agrave esistente";
-//         } else if ($error == 'email') {
-//             $errorEmail = "Email gi&agrave esistente";
-//         } else if ($error == 'login') {
-//             $errorPassword = "Username e/o Password incoretti";
-//         }
-//     }
-// }
-
-?>
-
 <!DOCTYPE html>
 <html lang="it">
 
@@ -177,7 +161,7 @@
                 openRegisterError();
             <?php
             } else if ($error == 'login') { ?>
-                let loginError = document.getElementById("loginError").innerHTML = "Username e/o Password incorretti";
+                let loginError = document.getElementById("loginError").innerHTML = "Email e/o Password incorretti";
                 let loginEmail = document.getElementById("email").style.borderColor = "red";
                 let loginPass = document.getElementById("password").style.borderColor = "red";
                 openLogin();

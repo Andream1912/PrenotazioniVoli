@@ -58,6 +58,17 @@ if (!empty($pass))
             }
         } else {
             if (add_new_user($user, $email, $pass, $db)) {
+                $location = $_SERVER['HTTP_REFERER'];
+                if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
+                    $location = explode("error", $_SERVER['HTTP_REFERER']);
+                    header("Location:" . $location[0] . "&error=success");
+                } else if (str_contains($_SERVER['HTTP_REFERER'], '&')) {
+                    $location = explode("error", $_SERVER['HTTP_REFERER']);
+                    header("Location:" . $location[0] . "&error=success");
+                }else{
+                    header("Location:" . $location . "?error=success");
+                }
+            } else {
                 if (str_contains($_SERVER['HTTP_REFERER'], '?')) {
                     if (str_contains($_SERVER['HTTP_REFERER'], '&error')) {
                         $location = explode("&error", $_SERVER['HTTP_REFERER']);

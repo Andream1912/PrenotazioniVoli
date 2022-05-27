@@ -280,6 +280,10 @@ video {
     backdrop-filter: blur(10px);
 }
 
+.search-bar .container-search-bar:nth-child(1) {
+    border: none;
+}
+
 @media screen and (max-width: 1100px) {
     .inspiration-card>h1 {
         font-size: 40px;
