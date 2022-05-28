@@ -42,5 +42,8 @@ I paesi inseriti sono i seguenti:
 All'inizializzazione del sito, ai fini di provare tutte le funzionalità del sito sono stati inseriti 4 utenti amministratori che avranno accesso 
 ad una pagina per la gestione degli utenti, e per l'aggiunta dei voli.
 
+Consigliamo per il test del sito di effetuare delle ricerche con luogo di partenza 'Napoli'
+
+
 
 
