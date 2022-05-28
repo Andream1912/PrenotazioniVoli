@@ -67,7 +67,15 @@ if (isset($_GET['relax'])) {
     $relax = 'pre_relax';
 }
 
-$sql = "SELECT nome FROM paese WHERE (paese.tipo=$1 or paese.tipo=$2 or paese.tipo=$3) or (paese.categoria=$4 or paese.categoria=$5 or paese.categoria=$6 or paese.categoria=$7 or paese.categoria=$8 or paese.categoria=$9 or paese.categoria=$10 or paese.categoria=$11)";
+$sql_single="SELECT nome FROM paese where paese.tipo=$1 or paese.tipo=$2 or paese.tipo=$3";
+$prep_single = pg_prepare($db, "paesi_single", $sql_single);
+$ret_single = pg_execute($db, "paesi_single", array($mare,$montagna,$citta));
+if (!$ret_single) {
+    echo "Errore Query";
+    return false;
+}
+
+$sql = "SELECT nome FROM paese WHERE (paese.tipo=$1 or paese.tipo=$2 or paese.tipo=$3) and (paese.categoria=$4 or paese.categoria=$5 or paese.categoria=$6 or paese.categoria=$7 or paese.categoria=$8 or paese.categoria=$9 or paese.categoria=$10 or paese.categoria=$11)";
 $prep = pg_prepare($db, "paesi", $sql);
 $ret = pg_execute($db, "paesi", array($mare, $montagna, $citta, $cultura, $famiglia, $cibo, $avventura, $romanticismo, $neve, $divertimento, $relax));
 if (!$ret) {
@@ -241,8 +249,36 @@ if (!$ret_consigliati) {
 
             </aside>
         </div>
+        <div>
+            <?php
 
+                if(pg_num_rows(($ret))==0 && (pg_num_rows($ret_single)==0) && $_GET){
+                    echo '<h5>OPS! A quanto pare non ci sono mete per i tuoi gusti!</h5>';
+                }else if(pg_num_rows(($ret))==0 && (pg_num_rows($ret_single)!=0) && count($_GET)>1){
+                    echo '<h5>OPS! A quanto pare non ci sono mete per i tuoi gusti!</h5>';
+                }else if(($tendenza == 'tendenza')){
+                    echo '<h5>Per te abbiamo selezionato le top 9 mete di tendenza!</h5>';
+                }else if($economico=='economico'){
+                    echo '<h5>Per te abbiamo selezionato le top 9 mete più economiche!</h5>';
+                }else {
+                    echo '<h5>Guarda cosa abbiamo trovato per te!</h5>';
+                }
+            ?>
         <div class="footer_midpage">
+            <?php
+            if((count($_GET)==1) &&($mare='mare' || $montagna='montagna' || $citta='citta') ){
+                
+                while ($row = pg_fetch_array($ret_single)) {
+                    $paese_single = $row['nome'];
+            ?>
+                    <div>
+                        <?php echo  '<a href="../PHP/flight.php?roundtrip=andata&departure=ovunque&landing=' . $paese_single . '&startDate=qualsiasi&filter=standard">' ?>
+                        <?php echo '<img src="../immagini/' . $paese_single . '.jpg">' ?>
+                        </a>
+                        <h1><?php echo $paese_single ?></h1>
+                    </div>
+            <?php }
+            } ?>
             <?php
             if (!$_GET || (!empty($_GET['error']))) {
                 while ($row = pg_fetch_array($ret_empty)) {
@@ -300,6 +336,7 @@ if (!$ret_consigliati) {
             <?php } ?>
         </div>
     </div>
+            </div>
     <?php include '../HTML/footer.html' ?>
     <script src="../JS/inspire.js"></script>
 </body>

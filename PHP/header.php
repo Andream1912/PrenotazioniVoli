@@ -12,7 +12,6 @@
     <script src="../JS/register.js" defer></script>
     <script src="../JS/header.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 
 <body>
@@ -61,7 +60,7 @@
             <a href="#" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                     <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
                 </svg></a>
-            <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
+            <img src="../immagini/world.png" style="height:200px;margin-left:40px;">
 
             <h3 class=" step-title ">Primo step</h3>
             <div class="form-group ">
@@ -79,7 +78,7 @@
             <a href="" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                     <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
                 </svg></a>
-            <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
+            <img src="../immagini/world.png" style="height:200px;margin-left:40px;">
             <h3 class="step-title ">Secondo step</h3>
             <div class="form-group ">
                 <label for="email ">Email</label>
@@ -97,21 +96,22 @@
             <a href="" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                     <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
                 </svg></a>
-            <img src="../immagini/world.png" style="width:250px;height:250px;margin-left:5%;">
+            <img src="../immagini/world.png" style="height:200px;margin-left:40px;">
             <h3 class="step-title">Terzo step</h3>
+            <p style="text-align:center;margin-top:0;font-size:12px;color:#023e8a">Requisiti: 1 Maiuscola, 1 Numero, Min 6 caratteri</p>
             <div class="form-group ">
                 <label for="password">Password</label>
                 <br>
                 <input type="password" name="password-register" id="password-register">
-                <i class="fas fa-check-circle" id="right-pass" style="color:#2ecc71"></i>
-                <i class="fas fa-exclamation-circle" id="error-pass" style="color:#e74c3c"></i>
+                <i class="fas fa-check-circle" id="right-pass" style="color:#2ecc71;top:345px"></i>
+                <i class="fas fa-exclamation-circle" id="error-pass" style="color:#e74c3c;top:345px"></i>
             </div>
             <div class="form-group">
                 <label for="verify-password">Conferma Password</label>
                 <br>
                 <input type="password" name="verify-password" id="verify-password">
-                <i class="fas fa-check-circle" id="right-verifypass" style="color:#2ecc71;top:435px"></i>
-                <i class="fas fa-exclamation-circle" id="wrong-verifypass" style="color:#e74c3c;top:435px"></i>
+                <i class="fas fa-check-circle" id="right-verifypass" style="color:#2ecc71;top:415px"></i>
+                <i class="fas fa-exclamation-circle" id="wrong-verifypass" style="color:#e74c3c;top:415px"></i>
             </div>
             <button type="button" class="behind" data-previous>Indietro</button>
             <input type="submit" name="invia" class="next" value="Registrati">
@@ -122,7 +122,7 @@
         <a href="#" class="close" onclick=closeWindow()><svg style="height:35px;" fill="#4361ee" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                 <path d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z" />
             </svg></i></a>
-        <img src="../immagini/world.png" style="width:250px;height:240px;margin-left:5%;">
+        <img src="../immagini/world.png" style="height:200px;margin-left:40px;">
         <h3>Login</h3>
         <p style="color:red;text-align:center;margin:0;" id="loginError"></p>
         <div class="form-control">

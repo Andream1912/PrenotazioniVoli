@@ -1,6 +1,5 @@
 <?php
 require_once "parametri.php";
-require_once "transform_date.php";
 $pre_economy_b = "";
 $priceBack = 0;
 if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
@@ -167,13 +166,15 @@ if ($roundtrip == 'ritorno') {
                         <input type="date" value=<?php echo $data ?> id="startDate" name="startDate" class="start-date">
                     </div>
                     <div class="date">
-                        <input type="date" <?php if ((!empty($endDate) || (isset($endDate)))) { ?>value=<?php echo $endDate;
+                        <input type="date" <?php if ((!empty($endDate))) { ?>value=<?php echo $endDate;
                                                                                                     } ?> id="endDate" name="endDate">
                     </div>
                 </div>
             </div>
 
             <?php
+            // CONTROLLO CHE, SE SELEZIONATA SIA ANDATA CHE RITORNO, CI SIANO VOLI SIA PER UNO CHE PER L'ALTRO IN CASO CONTRARIO 
+            //RISCONTREREMO UN "NODATA"
             $noData = pg_result_seek($ret, 0);
             $noDataBack = true;
             if ((!empty($endDate)) && (isset($endDate))) {
@@ -181,7 +182,12 @@ if ($roundtrip == 'ritorno') {
             }
 
             if ($noData && $noDataBack) {
+                // SE LE DUE VARIABILI MI HANNO DATO ENTRAMBI TRUE ALLORA VUOL DIRE CHE ESISTONO I VOLI
                 if (((isset($user)) && (!empty($user)) && ($noDataBack)) && ($data != 'qualsiasi') && ($from != 'ovunque')) { ?>
+                <!-- VADO A DEFINIRMI I FILITRI   -->
+               <!--S 1.STANDARD (FIRSTFILTER)
+                        2.IL PIU' VELOCE (SECONDFILTER)
+                            S3. IL PIU' ECONOMICO (THIRDFILTER) -->
                     <div class="filter">
                         <div class="singleFilter firstFilter">
                             <label>
@@ -356,6 +362,7 @@ if ($roundtrip == 'ritorno') {
         <div class="midpage">
             <?php
                 if ($roundtrip == 'andata') {
+                    // IN CASO DI SOLO ANDATA LA QUERY PER LA VISUALIZZAZIONE DEL VOLO SINGOLO
                     while ($row = pg_fetch_array($ret)) {
                         $ora_partenza = substr($row['ora_partenza'], 0, 5);
                         $ora_arrivo = substr($row['ora_arrivo'], 0, 5);
@@ -411,6 +418,7 @@ if ($roundtrip == 'ritorno') {
                     <div class="completo">
                         <?php
                         while ($row = pg_fetch_array($ret)) {
+                            // VISUALIZZAZIONE DEI VOLI PER ANDATA E RITORNO
                             $ora_partenza = substr($row['ora_partenza'], 0, 5);
                             $ora_arrivo = substr($row['ora_arrivo'], 0, 5);
                             $diff_h = substr($ora_arrivo, 0, 2) - substr($ora_partenza, 0, 2);
@@ -502,7 +510,7 @@ if ($roundtrip == 'ritorno') {
             } else {
                 ?>
                 <div class="nodata">
-                    <img src="../immagini/nodata.png"">
+                    <img src="../immagini/nodata.png">
                 </div>
             <?php } ?>
         </div>

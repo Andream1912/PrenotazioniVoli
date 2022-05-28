@@ -17,6 +17,10 @@ function onReload() {
     }
 
     if (urlParams.has('mare')) {
+        disableCheck('montagna');
+        disableCheck('citta');
+        disableCheck('economico');
+        disableCheck('tendenza');
         var mare = urlParams.get('mare');
         document.getElementById('mare').src = '../immagini/' + mare + '.jpg';
         document.getElementsByName('mare')[0].checked = true;
@@ -25,6 +29,10 @@ function onReload() {
     }
 
     if (urlParams.has('montagna')) {
+        disableCheck('mare');
+        disableCheck('citta');
+        disableCheck('economico');
+        disableCheck('tendenza');
         var montagna = urlParams.get('montagna');
         document.getElementById('montagna').src = '../immagini/' + montagna + '.jpg';
         document.getElementsByName('montagna')[0].checked = true;
@@ -34,6 +42,10 @@ function onReload() {
     }
 
     if (urlParams.has('citta')) {
+        disableCheck('mare');
+        disableCheck('montagna');
+        disableCheck('economico');
+        disableCheck('tendenza');
         var citta = urlParams.get('citta');
         document.getElementById('citta').src = '../immagini/' + citta + '.jpg';
         document.getElementsByName('citta')[0].checked = true;
@@ -42,6 +54,18 @@ function onReload() {
     }
 
     if (urlParams.has('economico')) {
+        disableCheck('mare');
+        disableCheck('montagna');
+        disableCheck('citta');
+        disableCheck('cultura');
+        disableCheck('famiglia');
+        disableCheck('cibo');
+        disableCheck('avventura');
+        disableCheck('romanticismo');
+        disableCheck('neve');
+        disableCheck('divertimento');
+        disableCheck('relax');
+        disableCheck('tendenza');
         var economico = urlParams.get('economico');
         document.getElementById('economico').src = '../immagini/' + economico + '.jpg';
         document.getElementsByName('economico')[0].checked = true;
@@ -50,6 +74,18 @@ function onReload() {
     }
 
     if (urlParams.has('tendenza')) {
+        disableCheck('mare');
+        disableCheck('montagna');
+        disableCheck('citta');
+        disableCheck('cultura');
+        disableCheck('famiglia');
+        disableCheck('cibo');
+        disableCheck('avventura');
+        disableCheck('romanticismo');
+        disableCheck('neve');
+        disableCheck('divertimento');
+        disableCheck('relax');
+        disableCheck('economico');
         var tendenza = urlParams.get('tendenza');
         document.getElementById('tendenza').src = '../immagini/' + tendenza + '.jpg';
         document.getElementsByName('tendenza')[0].checked = true;
@@ -58,6 +94,8 @@ function onReload() {
     }
 
     if (urlParams.has('cultura')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var cultura = urlParams.get('cultura');
         document.getElementById('cultura').src = '../immagini/' + cultura + '.jpg';
         document.getElementsByName('cultura')[0].checked = true;
@@ -66,6 +104,8 @@ function onReload() {
     }
 
     if (urlParams.has('famiglia')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var famiglia = urlParams.get('famiglia');
         document.getElementById('famiglia').src = '../immagini/' + famiglia + '.jpg';
         document.getElementsByName('famiglia')[0].checked = true;
@@ -74,6 +114,8 @@ function onReload() {
     }
 
     if (urlParams.has('cibo')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var cibo = urlParams.get('cibo');
         document.getElementById('cibo').src = '../immagini/' + cibo + '.jpg';
         document.getElementsByName('cibo')[0].checked = true;
@@ -82,6 +124,8 @@ function onReload() {
     }
 
     if (urlParams.has('avventura')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var avventura = urlParams.get('avventura');
         document.getElementById('avventura').src = '../immagini/' + avventura + '.jpg';
         document.getElementsByName('avventura')[0].checked = true;
@@ -90,6 +134,8 @@ function onReload() {
     }
 
     if (urlParams.has('romanticismo')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var romanticismo = urlParams.get('romanticismo');
         document.getElementById('romanticismo').src = '../immagini/' + romanticismo + '.jpg';
         document.getElementsByName('romanticismo')[0].checked = true;
@@ -98,6 +144,8 @@ function onReload() {
     }
 
     if (urlParams.has('neve')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var neve = urlParams.get('neve');
         document.getElementById('neve').src = '../immagini/' + neve + '.jpg';
         document.getElementsByName('neve')[0].checked = true;
@@ -106,6 +154,8 @@ function onReload() {
     }
 
     if (urlParams.has('divertimento')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var divertimento = urlParams.get('divertimento');
         document.getElementById('divertimento').src = '../immagini/' + divertimento + '.jpg';
         document.getElementsByName('divertimento')[0].checked = true;
@@ -114,6 +164,8 @@ function onReload() {
     }
 
     if (urlParams.has('relax')) {
+        disableCheck('economico');
+        disableCheck('tendenza');
         var relax = urlParams.get('relax');
         document.getElementById('relax').src = '../immagini/' + relax + '.jpg';
         document.getElementsByName('relax')[0].checked = true;
@@ -122,6 +174,8 @@ function onReload() {
     }
 }
 
-function onScroll() {
-    window.scrollTo(0, 800);
+function disableCheck(x){
+    document.getElementById('checkbox_'+x).disabled=true;
+    document.getElementById(x).style.opacity= 0.5;
+    document.getElementById(x).style.pointerEvents = "none";
 }

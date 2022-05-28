@@ -6,7 +6,7 @@
     padding: .5rem;
     width: 300px;
     position: fixed;
-    top: 20%;
+    top: 10%;
     left: 37%;
     z-index: 1;
     animation: slide 250ms ease-in;

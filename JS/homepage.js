@@ -52,9 +52,10 @@ function disableDate() {
     document.getElementById("endDate").disabled = true;
     document.getElementById("endDate").value = "";
 }
-
+/*                 Riabilita l'input del data picker               */
 function enableDate() {
     document.getElementById("endDate").disabled = false;
 }
-document.getElementById("startDate").valueAsDate = new Date();
+
+document.getElementById("startDate").valueAsDate = new Date(); //inserisco nel dataPicker la data di oggi
 document.getElementById("endDate").disabled = true;

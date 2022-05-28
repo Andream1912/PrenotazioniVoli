@@ -1,6 +1,6 @@
 var price = document.getElementById("totalPrice");
 const priceconst = parseFloat(price.textContent.slice(0, 6));
-
+// Gestione dei bagagli selezionati con incremento e decremento del pezzo
 function handleChange(src) {
     const two = document.getElementById("twoluggage");
     const one = document.getElementById("oneluggage")
@@ -23,15 +23,16 @@ function handleChange(src) {
     x.style.color = "white"
     newPrice = priceconst + parseFloat(src.value);
     if (document.getElementById("ticket2") != null) {
+        // moltiplico per 2 solo se esiste il ticket 2, ipotizzando che compro bagagli per andata e per ritorno
         newPrice = newPrice * 2;
     }
     price.innerHTML = newPrice.toFixed(2) + " € ";
 }
-
+//Regex per controllare se ho solo lettere,spazi e punti
 function onlyLettersSpacesDots(str) {
     return /^[a-zA-Z\s.,]+$/.test(str);
 }
-
+// tutti i controlli per il personal data 
 function checkPersonalData() {
     nome = document.getElementById("nome");
     cognome = document.getElementById("cognome");
@@ -179,7 +180,7 @@ function checkPersonalData() {
 }
 input = document.querySelector('.ccn');
 input.addEventListener('input', updateValue);
-
+// Visualizzazione della carta a seconda di come inizia
 function updateValue(e) {
     if (((e.target.value[0]) == 2) || (e.target.value[0] == 5)) {
         document.querySelector('.mastercard').style.visibility = 'visible';
