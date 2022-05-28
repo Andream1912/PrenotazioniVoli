@@ -64,16 +64,16 @@
                 <h1 style="margin-left:-140px">Immergiti nella Natura,</h1>
                 <h2 style="margin-left:100px">godititi la tua vacanza!</h2>
                 <a href="../PHP/lasciati_ispirare.php?relax=relax">
-                    <button class="bottone-foto2">SONO IO</button>
+                    <button class="bottone-foto2">FALLO ORA</button>
                 </a>
                 <img src="../immagini/nature.jpg">
             </div>
         </div>
         <br><br><br>
         <div class="third-card">
-            <h1>Immergiti in un avventura <br> unica!</h1>
+            <h1>Vivi un' avventura <br> unica!</h1>
             <a href="../PHP/lasciati_ispirare.php?avventura=avventura&divertimento=divertimento">
-                <button >SONO IO</button>
+                <button >ESPLORA</button>
             </a>
             <img src="../immagini/quad.jpg">
         </div>

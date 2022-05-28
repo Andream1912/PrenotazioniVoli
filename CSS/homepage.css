@@ -76,7 +76,7 @@ video {
 }
 
 .search-bar button:hover {
-    background-color: #023e8a;
+    background: rgb(2, 62, 138);
 }
 
 .top-bar {
@@ -99,12 +99,13 @@ video {
     justify-content: space-evenly;
     overflow: hidden;
     gap: 30px;
-    left: 113px;
-    right: 93px;
+    left: 10%;
+    right: 10%;
 }
 
 .carta-container>div {
     width: 600px;
+    margin-top: -150px;
 }
 
 .carta-container>div>img {
@@ -133,8 +134,8 @@ video {
     flex-direction: row;
     width: 90%;
     height: 570px;
-    left: 80px;
-    right: 100px;
+    left: 5%;
+    right: 5%;
 }
 
 .inspiration-card>h1 {
@@ -246,7 +247,7 @@ video {
     color: white;
     text-align: center;
     text-transform: uppercase;
-    left: 300px;
+    left: 400px;
     top: 70%;
     font-family: system-ui;
     font-size: 40px;
@@ -345,7 +346,7 @@ video {
     }
     .third-card h1 {
         top: 350px;
-        left: 120px;
+        left: 200px;
     }
     .third-card button {
         top: 500px;

@@ -242,7 +242,6 @@ body {
     margin-top: 50px;
     margin-left: 300px;
     opacity: 0.8;
-    width: 100%;
     align-items: center;
 }
 
@@ -271,5 +270,12 @@ body {
     }
     .search-bar {
         margin-left: 25%;
+    }
+    .nodata {
+        margin-left: 0;
+        height: auto;
+    }
+    .nodata img {
+        width: 100%;
     }
 }
