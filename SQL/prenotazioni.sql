@@ -6,7 +6,7 @@ create table if not exists prenotazioni(
     numero_bagagli numeric,
     prezzo numeric check(prezzo >= 0),
 	FOREIGN KEY(username) REFERENCES utenti(username) on delete cascade on update cascade,
-	FOREIGN KEY(id_volo)REFERENCES volo(id_volo),
+	FOREIGN KEY(id_volo)REFERENCES volo(id_volo) on delete restrict on update cascade,
     primary key (username,id_volo)
 );
 

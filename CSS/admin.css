@@ -212,3 +212,11 @@ body {
     text-decoration: none;
     line-height: 25px;
 }
+#insertFlightErr{
+    color: red;
+    font-weight: bold;
+}
+#insertFlight{
+    color:green;
+    font-weight:bold;
+}

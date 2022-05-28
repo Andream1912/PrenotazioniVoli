@@ -61,7 +61,7 @@ function validateAggiungiVoli(){
         else{
             citta_arrivo.style.border="2px solid black";
         }
-        if(ora_arrivo.value==""){
+        if(ora_arrivo.value==""||ora_arrivo.value<=ora_partenza.value){
             ora_arrivo.style.border="2px solid red";
         }
         else{
@@ -81,7 +81,7 @@ function validateAggiungiVoli(){
         }
         return false;
     }
-    if((data_volo.value<data_oggi)||prezzo.value<0||posti_disponibili.value<0){
+    if((data_volo.value<data_oggi)||prezzo.value<0||posti_disponibili.value<0||ora_arrivo.value<=ora_partenza.value){
         if(data_volo.value<data_oggi){
             data_volo.style.border="2px solid red";
         }
@@ -100,6 +100,12 @@ function validateAggiungiVoli(){
         else{
             posti_disponibili.style.border="2px solid black";
         }
+        if(ora_arrivo.value<=ora_partenza.value){
+            ora_arrivo.style.border="2px solid red";
+        }
+        else{
+            ora_arrivo.style.border="2px solid black";
+        }
         return false;
     }
     return true;
@@ -112,5 +118,4 @@ function confirm_elimina_account(){
       } else {
         return false;
       }
-   
 }

@@ -67,6 +67,7 @@ if (isset($_GET['relax'])) {
     $relax = 'pre_relax';
 }
 
+//query per crezione delle card in caso venisse selezionato solo il tipo di viaggio
 $sql_single="SELECT nome FROM paese where paese.tipo=$1 or paese.tipo=$2 or paese.tipo=$3";
 $prep_single = pg_prepare($db, "paesi_single", $sql_single);
 $ret_single = pg_execute($db, "paesi_single", array($mare,$montagna,$citta));
@@ -75,6 +76,7 @@ if (!$ret_single) {
     return false;
 }
 
+//query per crezione delle card in caso venisse selezionato sia il tipo di viaggio che la categoria
 $sql = "SELECT nome FROM paese WHERE (paese.tipo=$1 or paese.tipo=$2 or paese.tipo=$3) and (paese.categoria=$4 or paese.categoria=$5 or paese.categoria=$6 or paese.categoria=$7 or paese.categoria=$8 or paese.categoria=$9 or paese.categoria=$10 or paese.categoria=$11)";
 $prep = pg_prepare($db, "paesi", $sql);
 $ret = pg_execute($db, "paesi", array($mare, $montagna, $citta, $cultura, $famiglia, $cibo, $avventura, $romanticismo, $neve, $divertimento, $relax));
@@ -83,6 +85,7 @@ if (!$ret) {
     return false;
 }
 
+//query per crezione delle card in caso non ci fosse alcuna selezione
 $sql_empty = "SELECT nome FROM paese";
 $prep_empty = pg_prepare($db, 'paesi_empty', $sql_empty);
 $ret_empty = pg_execute($db, 'paesi_empty', array());
@@ -91,6 +94,7 @@ if (!$ret_empty) {
     return false;
 }
 
+//query per crezione delle card in caso venisse selezionata la voce 'tendenza'
 $sql_tendenza = "SELECT citta_arrivo,count(*) as tendenza from volo where (data_volo+ora_partenza)>=(CURRENT_DATE+LOCALTIME(0)) group by citta_arrivo order by tendenza desc";
 $prep_tendenza = pg_prepare($db, 'tendenza', $sql_tendenza);
 $ret_tendenza = pg_execute($db, 'tendenza', array());
@@ -99,6 +103,7 @@ if (!$ret_tendenza) {
     return false;
 }
 
+//query per crezione delle card in caso venisse selezionata la voce 'economico'
 $sql_economico = "SELECT distinct(citta_arrivo),(select min(prezzo) from volo v where volo.citta_arrivo = v.citta_arrivo) as prezzo from volo where (data_volo+ora_partenza)>=(CURRENT_DATE+LOCALTIME(0)) order by prezzo";
 $prep_economico = pg_prepare($db, 'economico', $sql_economico);
 $ret_economico = pg_execute($db, 'economico', array());
@@ -107,6 +112,7 @@ if (!$ret_economico) {
     return false;
 }
 
+//query per crezione delle card dei consigliati di oggi
 $sql_consigliati = "SELECT distinct data_volo,citta_arrivo,(select min(prezzo) from volo v where volo.citta_arrivo = v.citta_arrivo) as prezzo from volo where posti_disponibili > 0 and (data_volo+ora_partenza)>=(CURRENT_DATE+LOCALTIME(0)) and (data_volo+ora_partenza) < ((CURRENT_DATE +'1 DAY'::interval)+LOCALTIME(0)) order by  prezzo";
 $prep_consigliati = pg_prepare($db, "consigliati", $sql_consigliati);
 $ret_consigliati = pg_execute($db, "consigliati", array());
@@ -233,6 +239,7 @@ if (!$ret_consigliati) {
                 <h1>Consigliati di oggi</h1>
 
                 <?php
+                //display card consigliati di oggi (massimo 3)
                 $i = 0;
                 while (($row = pg_fetch_array($ret_consigliati)) && ($i<3)) {
                     $paese_consigliati = $row['citta_arrivo'];
@@ -251,23 +258,26 @@ if (!$ret_consigliati) {
         </div>
         <div>
             <?php
-
-                if(pg_num_rows(($ret))==0 && (pg_num_rows($ret_single)==0) && $_GET){
-                    echo '<h5>OPS! A quanto pare non ci sono mete per i tuoi gusti!</h5>';
-                }else if(pg_num_rows(($ret))==0 && (pg_num_rows($ret_single)!=0) && count($_GET)>1){
-                    echo '<h5>OPS! A quanto pare non ci sono mete per i tuoi gusti!</h5>';
-                }else if(($tendenza == 'tendenza')){
+                //controllo se 'tendenza' è selezionata e display della relativa scritta
+                if(($tendenza == 'tendenza')){
                     echo '<h5>Per te abbiamo selezionato le top 9 mete di tendenza!</h5>';
+                //controllo se 'economico' è selezionato e display della relativa scritta
                 }else if($economico=='economico'){
                     echo '<h5>Per te abbiamo selezionato le top 9 mete più economiche!</h5>';
-                }else {
-                    echo '<h5>Guarda cosa abbiamo trovato per te!</h5>';
+                 //controllo se le query dovessero dare risultati vuoti con display della relativa scritta  
+                }elseif(pg_num_rows(($ret))==0 && (pg_num_rows($ret_single)==0) && $_GET){
+                        echo '<h5>OPS! A quanto pare non ci sono mete per i tuoi gusti!</h5>';
+                         //controllo se le query dovessero dare risultati vuoti con display della relativa scritta  
+                    }else if(pg_num_rows(($ret))==0 && (pg_num_rows($ret_single)!=0) && count($_GET)>1){
+                        echo '<h5>OPS! A quanto pare non ci sono mete per i tuoi gusti!</h5>';
+                    }else{
+                         echo '<h5>Guarda cosa abbiamo trovato per te!</h5>';
                 }
             ?>
         <div class="footer_midpage">
             <?php
+            //display card se viene selezionato solo un tipo
             if((count($_GET)==1) &&($mare='mare' || $montagna='montagna' || $citta='citta') ){
-                
                 while ($row = pg_fetch_array($ret_single)) {
                     $paese_single = $row['nome'];
             ?>
@@ -280,6 +290,7 @@ if (!$ret_consigliati) {
             <?php }
             } ?>
             <?php
+            //display card se non viene selzionato alcun filtro
             if (!$_GET || (!empty($_GET['error']))) {
                 while ($row = pg_fetch_array($ret_empty)) {
                     $paese_empty = $row['nome'];
@@ -294,6 +305,7 @@ if (!$ret_consigliati) {
             } ?>
 
             <?php
+            //display card se viene selzionato il filtro 'tendenza' (massimo 9) 
             if ($tendenza == 'tendenza') {
                 for ($i = 0; $i < 9; $i++) {
                     $row = pg_fetch_array($ret_tendenza);
@@ -309,6 +321,7 @@ if (!$ret_consigliati) {
             } ?>
 
             <?php
+            //display card se viene selzionato il filtro 'eeconomico' (massimo 9)
             if ($economico == 'economico') {
                 for ($i = 0; $i < 9; $i++) {
                     $row = pg_fetch_array($ret_economico);
@@ -324,6 +337,7 @@ if (!$ret_consigliati) {
             } ?>
 
             <?php
+            //display card se vengono selezionati sia categoria che tipo
             while ($row = pg_fetch_array($ret)) {
                 $paese = $row['nome'];
             ?>

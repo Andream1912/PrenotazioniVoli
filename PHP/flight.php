@@ -51,7 +51,7 @@ if ((isset($_GET['startDate']))) {
     }
 } //SELEZIONATO SOLO ANDATA
 if (($data == 'qualsiasi') && ($from == 'ovunque')) {
-    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_arrivo = $1" . $order;
+    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_arrivo = $1 and posti_disponibili > 0" . $order;
     $prep = pg_prepare($db, "searchFlightEveryWhere", $sql);
     if (!$prep) {
         exit;
@@ -64,7 +64,7 @@ if (($data == 'qualsiasi') && ($from == 'ovunque')) {
         }
     }
 } else if ($from == 'ovunque') {
-    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_arrivo = $1 and data_volo = $2" . $order;
+    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_arrivo = $1 and data_volo = $2 and posti_disponibili > 0" . $order;
     $prep = pg_prepare($db, "searchFlight", $sql);
     if (!$prep) {
         exit;
@@ -77,7 +77,7 @@ if (($data == 'qualsiasi') && ($from == 'ovunque')) {
         }
     }
 } else if ($data == 'qualsiasi') { //GESTIONE PER VOLI CONSIGLIATI 
-    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_partenza = $1 and citta_arrivo = $2 order by data_volo";
+    $sql = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and posti_disponibili > 0 order by data_volo";
     $prep = pg_prepare($db, "searchFlight", $sql);
     if (!$prep) {
         exit();
@@ -106,7 +106,7 @@ if (($data == 'qualsiasi') && ($from == 'ovunque')) {
 if ($roundtrip == 'ritorno') {
     $endDate = $_GET['endDate'];
     if (($endDate == "qualsiasi") || (empty($endDate))) {
-        $sql_r = "SELECT * FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo > '$data'";
+        $sql_r = "SELECT * FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND posti_disponibili > 0 and data_volo > '$data'";
         $prep_r = pg_prepare($db, "searchFlightBack", $sql_r);
         if (!$prep_r) {
             exit();
@@ -119,7 +119,7 @@ if ($roundtrip == 'ritorno') {
             }
         }
     } else {
-        $sql_r = "SELECT * FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo = $3";
+        $sql_r = "SELECT * FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo = $3 posti_disponibili > 0";
         $prep_r = pg_prepare($db, "searchFlightBackOneDate", $sql_r);
         if (!$prep_r) {
             exit();
@@ -194,14 +194,14 @@ if ($roundtrip == 'ritorno') {
                                 <input type="radio" name="filter" id="filterOne" value="standard" style="display:none" onChange="this.form.submit()">
                                 <?php
                                 if ($from == 'ovunque') {
-                                    $sql_standard = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_arrivo = $1 and data_volo = $2";
+                                    $sql_standard = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_arrivo = $1 and data_volo = $2 and posti_disponibili > 0";
                                     $prep_standard = pg_prepare($db, "searchFlightStandard", $sql_standard);
                                     $ret_standard = pg_execute($db, "searchFlightStandard", array($to, $data));
                                     if (!$ret_standard) {
                                         exit;
                                     }
                                 } else {
-                                    $sql_standard = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo = $3";
+                                    $sql_standard = "SELECT *,-(ora_partenza-ora_arrivo) as tempo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo = $3 and posti_disponibili > 0";
                                     $prep_standard = pg_prepare($db, "searchFlightStandard", $sql_standard);
                                     $ret_standard = pg_execute($db, "searchFlightStandard", array($from, $to, $data));
                                     if (!$ret_standard) {
@@ -213,7 +213,7 @@ if ($roundtrip == 'ritorno') {
                                 $price = $standard['prezzo'];
                                 if (($roundtrip == 'ritorno')) {
                                     if ($endDate == "") {
-                                        $sql_standard_back = "SELECT * FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo > $3";
+                                        $sql_standard_back = "SELECT * FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo > $3 and posti_disponibili > 0";
                                         $prep_standard_back = pg_prepare($db, "searchFlightStandardBack", $sql_standard_back);
                                         $ret_standard_back = pg_execute($db, "searchFlightStandardBack", array($to, $from, $data));
                                         if (!$ret_standard_back) {
@@ -243,7 +243,7 @@ if ($roundtrip == 'ritorno') {
                                 <input type="radio" name="filter" id="filterTwo" value="speed" style="display:none" onChange="this.form.submit()">
                                 <?php
                                 if ($from == 'ovunque') {
-                                    $sql_speed = "SELECT prezzo,id_volo,(ora_arrivo-ora_partenza) AS best FROM volo WHERE citta_arrivo=$1 and data_volo=$2 and (ora_arrivo-ora_partenza) = (SELECT min(ora_arrivo-ora_partenza) from volo where citta_arrivo=$1 and data_volo=$2) order by prezzo";
+                                    $sql_speed = "SELECT prezzo,id_volo,(ora_arrivo-ora_partenza) AS best FROM volo WHERE posti_disponibili > 0 and citta_arrivo=$1 and data_volo=$2 and (ora_arrivo-ora_partenza) = (SELECT min(ora_arrivo-ora_partenza) from volo where citta_arrivo=$1 and data_volo=$2) order by prezzo";
                                     $prep_speed = pg_prepare($db, "searchFlightSpeed", $sql_speed);
                                     $ret_speed = pg_execute($db, "searchFlightSpeed", array($to, $data));
                                     if (!$ret_speed) {
@@ -254,7 +254,7 @@ if ($roundtrip == 'ritorno') {
                                         $price = $second_filter['prezzo'];
                                     }
                                 } else {
-                                    $sql_speed = "SELECT prezzo,id_volo,(ora_arrivo-ora_partenza) AS best FROM volo WHERE citta_partenza = $1 and citta_arrivo=$2 and data_volo=$3 and (ora_arrivo-ora_partenza) = (SELECT min(ora_arrivo-ora_partenza) from volo where citta_partenza=$1 and citta_arrivo=$2 and data_volo=$3) order by prezzo";
+                                    $sql_speed = "SELECT prezzo,id_volo,(ora_arrivo-ora_partenza) AS best FROM volo WHERE posti_disponibili > 0 and citta_partenza = $1 and citta_arrivo=$2 and data_volo=$3 and (ora_arrivo-ora_partenza) = (SELECT min(ora_arrivo-ora_partenza) from volo where citta_partenza=$1 and citta_arrivo=$2 and data_volo=$3) order by prezzo";
                                     $prep_speed = pg_prepare($db, "searchFlightSpeed", $sql_speed);
                                     $ret_speed = pg_execute($db, "searchFlightSpeed", array($from, $to, $data));
                                     if (!$ret_speed) {
@@ -268,7 +268,7 @@ if ($roundtrip == 'ritorno') {
                                 $priceback = 0;
                                 if (($roundtrip == 'ritorno')) {
                                     if ($endDate == "") {
-                                        $sql_r_speed = "SELECT *,(ora_arrivo - ora_partenza) as interval FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo > '$data' order by prezzo,interval";
+                                        $sql_r_speed = "SELECT *,(ora_arrivo - ora_partenza) as interval FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND posti_disponibili > 0 and data_volo > '$data' order by prezzo,interval";
                                         $prep_speed_b = pg_prepare($db, "searchRoundTripSpeed", $sql_r_speed);
                                         $ret_speed_b = pg_execute($db, "searchRoundTripSpeed", array($to, $from));
                                         if (!$ret_speed_b) {
@@ -301,7 +301,7 @@ if ($roundtrip == 'ritorno') {
                                 <input type="radio" name="filter" value="economy" id="filterThree" style="display:none" onChange="this.form.submit()">
                                 <?php
                                 if ($from == 'ovunque') {
-                                    $sql_economy = "SELECT min(prezzo) as price,(ora_arrivo-ora_partenza) AS interval from volo where citta_arrivo = $1 and data_volo=$2 group by interval order by price";
+                                    $sql_economy = "SELECT min(prezzo) as price,(ora_arrivo-ora_partenza) AS interval from volo where posti_disponibili > 0 and citta_arrivo = $1 and data_volo=$2 group by interval order by price";
                                     $prep_economy = pg_prepare($db, "searchFlightEconomy", $sql_economy);
                                     $ret_economy = pg_execute($db, "searchFlightEconomy", array($to, $data));
                                     if (!$ret_economy) {
@@ -313,7 +313,7 @@ if ($roundtrip == 'ritorno') {
                                         $price = $third_filter['price'];
                                     }
                                 } else {
-                                    $sql_economy = "SELECT min(prezzo) as prezzo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo = $3";
+                                    $sql_economy = "SELECT min(prezzo) as prezzo FROM volo where posti_disponibili > 0 and citta_partenza = $1 and citta_arrivo = $2 and data_volo = $3";
                                     $prep_economy = pg_prepare($db, "searchFlightEconomy", $sql_economy);
                                     $ret_economy = pg_execute($db, "searchFlightEconomy", array($from, $to, $data));
                                     if (!$ret_economy) {
@@ -327,7 +327,7 @@ if ($roundtrip == 'ritorno') {
                                 $priceback = 0;
                                 if (($roundtrip == 'ritorno')) {
                                     if ($endDate == "") {
-                                        $sql_economy_back = "SELECT min(prezzo) as prezzo FROM volo where citta_partenza = $1 and citta_arrivo = $2 and data_volo > $3";
+                                        $sql_economy_back = "SELECT min(prezzo) as prezzo FROM volo where posti_disponibili > 0 and citta_partenza = $1 and citta_arrivo = $2 and data_volo > $3";
                                         $prep_economy_back = pg_prepare($db, "roundTripEconomy", $sql_standard_back);
                                         if (!$prep_economy_back) {
                                             exit();

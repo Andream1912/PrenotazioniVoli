@@ -38,7 +38,7 @@
             <input type="hidden" name="code" value="<?php echo $var; ?>">
             <div class="create-response-text">
                 <h1>Inserisci la risposta</h1>
-                <textarea class="responseText" name="responseText" placeholder="Scrivi la risposta..." maxlength="600" responseText></textarea> 
+                <textarea class="responseText" name="responseText" placeholder="Scrivi la risposta..." minlength="15" maxlength="600" responseText></textarea> 
             </div>
             <div class="respSubmitButtonContainer">
                 <button type="submit" class="respSubmitButton" respSubmitButton>Inoltra risposta</button>
@@ -55,7 +55,7 @@
             <input type="hidden" name="code" value="<?php echo $var; ?>">
             <div class="modify-discussion-description">
                 <h1>Modifica la descrizione</h1>
-                <textarea class="descriptionText" name="descriptionText" placeholder="Cambia la descrizione..." maxlength="600" modifyText><?php echo $row['descrizione']; ?></textarea>
+                <textarea class="descriptionText" name="descriptionText" placeholder="Cambia la descrizione..." minlength="15" maxlength="600" modifyText><?php echo $row['descrizione']; ?></textarea>
             </div>
             <div class="modifySubmitButtonContainer">
                 <button class="modifySubmitButton" type="submit" modifySubmitButton>Cambia descrizione</button>

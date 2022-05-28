@@ -305,3 +305,7 @@ body {
     background: #ababb1;
     border: 2px solid red;
 }
+#notFound{
+    font-weight: bold;
+    color:red;
+}

@@ -1,8 +1,11 @@
 <?php
 require_once "parametri.php";
 include 'header.php';
-//controllo se l'utente è loggato e il suo ruolo
-
+//funzione per convertire la virgola con il punto
+function virgolaToPunto($number) {
+    return (float)strtr($number, ',', '.');
+}
+//controlllo che l'username sia loggato ed anche il suo ruolo
 if(isset($_SESSION['username'])||!empty($_SESSION['username'])){
     $user = $_SESSION['username'];
 }
@@ -15,19 +18,22 @@ if(isset($_SESSION['ruolo'])||!empty($_SESSION['ruolo'])){
 else{
     $ruolo="";
 }
+//se l'utente non è loggato oppure il ruolo non è admin torno alla homepage
 if (empty($user) || ($ruolo != "admin")) {
     header("Location:../PHP/homepage.php");
 }
+//controllo in che card mi trovo per far vedere ciò che mi interessa
 if(isset($_GET['card'])||!empty($_GET['card'])){
     $card=$_GET['card'];
 }
 else{
     $card="";
 }
+//inizializzo un count che mi servirà nel caso non ci fossero utenti corrispondenti alla ricerca
 $count = 0;
-//controllo in che card mi trovo per far vedere ciò che mi interessa
 
-//se l'utente non è loggato oppure il ruolo non è admin torno alla homepage
+
+
 //blocco di codice che serve per eliminare l'user selezionato col tasto cancella nella sezione elimina account
 if(isset($_POST['elimina_account'])||!empty($_POST['elimina_account'])){
     $user_da_eliminare = $_POST['elimina_account'];
@@ -159,7 +165,7 @@ if (!empty($user_da_eliminare)) {
                             echo '<script type="text/javascript">nascondi_tabella();</script>';
                             echo "<b>Non esiste nessun utente</b>";
                         }
-                        //se sono qui allora vuol dire che l'input è pieno quindi cerco solo gli utenti che mi interessano
+                        //se sono qui allora vuol dire che la ricerca è piena quindi cerco solo gli utenti che mi interessano
                     } else {
                         
                         while ($row = pg_fetch_assoc($ret)) {
@@ -215,7 +221,7 @@ if (!empty($user_da_eliminare)) {
                         $ret_paese = pg_execute($db, 'controllaPaesePart', array($citta_partenza));
                         if (!($row = pg_fetch_array($ret_paese))) {
                             $citta_partenza = "";
-                            $insertFlight = "Volo non inserito, CITTA PARTENZA ERRATA!";
+                            $insertFlight = "Città partenza errata!  ";
                         }
                     } else {
                         $citta_partenza = "";
@@ -234,20 +240,27 @@ if (!empty($user_da_eliminare)) {
                         $ret_paese = pg_execute($db, 'controllaPaeseArrivo', array($citta_arrivo));
                         if (!($row = pg_fetch_array($ret_paese))) {
                             $citta_arrivo = "";
-                            $insertFlight = $insertFlight . "CITTA ARRIVO ERRATA";
+                            $insertFlight = $insertFlight."Città arrivo errata!";
                         }
                     } else {
                         $citta_arrivo = "";
                     }
                     //controllo che l'orario di arrivo sia inizializzata
                     if ((isset($_POST['ora_arrivo'])) && (!empty($_POST['ora_arrivo']))) {
-                        $ora_arrivo = $_POST['ora_arrivo'] . ":00";
+                        if($_POST['ora_arrivo']<$ora_partenza){
+                            $ora_arrivo = "";
+                        }
+                        else{
+                            $ora_arrivo = $_POST['ora_arrivo'] . ":00";
+
+                        }
                     } else {
                         $ora_arrivo = "";
                     }
                     //controllo che il prezzo non sia inferiore a 0
                     if ((isset($_POST['prezzo'])) && (!empty($_POST['prezzo']) && ($_POST['prezzo'] > 0))) {
-                        $prezzo = $_POST['prezzo'];
+                        $prezzo=virgolaToPunto($_POST['prezzo']);
+                        //$prezzo = $_POST['prezzo'];
                     } else {
                         $prezzo = "";
                     }
@@ -270,7 +283,14 @@ if (!empty($user_da_eliminare)) {
                     } else {
                     } ?>
                 </div>
-                <p><?php echo $insertFlight; ?></p>
+                <?php
+                if($insertFlight=="Volo Inserito"){
+                    echo "<p id=insertFlight>Volo Inserito</p>";
+                }
+                else{
+                    echo "<p id=insertFlightErr>$insertFlight</p>";
+                }
+                ?>
                 <h2>Aggiungi un Volo</h2>
                 <!-- form che mi permette di inserire tutti i dati necessari per l'inserimento del volo -->
                 <form action="admin.php?card=aggiungivoli" method="post" id="aggiungi_voli_form" onsubmit="return validateAggiungiVoli()">

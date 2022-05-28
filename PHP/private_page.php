@@ -8,7 +8,7 @@ if (isset($_SESSION['username']) || !empty($_SESSION['username'])) {
 } else {
     $user = "";
 }
-if (empty($user)) { //if login in session is not set
+if (empty($user)) { 
     header("Location:../PHP/homepage.php");
 }
 if (isset($_SESSION['ruolo']) || !empty($_SESSION['ruolo'])) {
@@ -19,12 +19,13 @@ if (isset($_SESSION['ruolo']) || !empty($_SESSION['ruolo'])) {
 if ($ruolo != "visitatore") {
     header("Location:../PHP/admin.php");
 }
+//controllo la card
 if (isset($_GET['card']) || !empty($_GET['card'])) {
     $card = $_GET['card'];
 } else {
     $card = "";
 }
-//controllo la card
+
 
 //controllo se voglio essere in prenotazioni o voli passati
 if (isset($_GET['prenotazioni']) || !empty($_GET['prenotazioni'])) {
@@ -53,9 +54,6 @@ if (!empty($elimina_account)) {
 ?>
 <!DOCTYPE html>
 <html lang="it">
-
-
-
 <head>
     <title>User</title>
     <link rel="stylesheet" href="../CSS/private_page.css">
@@ -356,7 +354,7 @@ if (!empty($elimina_account)) {
                             }
                             //se non entra nell'if($noData) arriverà qui e stamperà voli non trovati
                         } else {
-                            echo "voli non trovati";
+                            echo "<p id=notFound>Voli non trovati</p>";
                         }
                     }
 
@@ -366,7 +364,6 @@ if (!empty($elimina_account)) {
                 <!-- funziona allo stesso identico modo del div prenotazioni ma stamap tutti i voli passati-->
                 <div id=voli_passati name="voli_passati">
                     <?php
-                    //$date = date("Y/m/d");
                     $sql_passati = "SELECT p.username,p.id_volo,p.numero_bagagli,p.prezzo,v.data_volo,v.citta_partenza,v.ora_partenza,v.citta_arrivo,v.ora_arrivo,pd.nome,pd.cognome FROM prenotazioni p  JOIN volo v ON (p.id_volo = v.id_volo) JOIN personaldata pd ON (p.username = pd.username) WHERE p.username=$1 AND data_volo<='$data' ORDER BY data_volo";
                     $prep = pg_prepare($db, "voli_passati", $sql_passati);
                     $ret = pg_execute($db, "voli_passati", array($user));
@@ -422,7 +419,7 @@ if (!empty($elimina_account)) {
 
                             }
                         } else {
-                            echo "Non hai voli passati";
+                            echo "<p id=notFound>Non hai voli passati</p>";
                         }
                     }
 

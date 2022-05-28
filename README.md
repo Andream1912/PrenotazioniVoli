@@ -39,11 +39,15 @@ I paesi inseriti sono i seguenti:
 23. Nairobi
 24. Dodoma
 
-All'inizializzazione del sito, ai fini di provare tutte le funzionalità del sito sono stati inseriti 4 utenti amministratori che avranno accesso 
-ad una pagina per la gestione degli utenti, e per l'aggiunta dei voli.
+All'inizializzazione del sito, ai fini di provare tutte le funzionalità del sito sono stati inseriti 5 utenti amministratori che avranno accesso ad una pagina per la gestione degli utenti, e per l'aggiunta dei voli. Gli utenti sono i seguenti:
+1. e-mail: a.marino120@studenti.unisa.it password: CiaoCiao1
+2. e-mail: m.monastero@studenti.unisa.it password: CiaoCiao1
+3. e-mail: m.ripesi1@studenti.unisa.it password: CiaoCiao1
+4. e-mail: s.prugnosiniscalc@studenti.unisa.it password: CiaoCiao1
+5. e-mail: admin@gmail.com password: CiaoCiao1
 
 Consigliamo per il test del sito di effetuare delle ricerche con luogo di partenza 'Napoli'
 
-
+All'inizializzazione del sito il forum sarà vuoto. Per poter testare a pieno le sue funzionalità si consiglia di creare più discussioni con utenti diversi, e di effettuare modifiche e risposte.
 
 

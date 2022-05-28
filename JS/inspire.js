@@ -1,6 +1,7 @@
 window.onload = onReload();
 
 function selectionFilter(x) {
+    //all on click del filtro permetto di cambiare immagine
     if (document.getElementById(x).src == '../immagini/' + x + '.jpg') {
         document.getElementById(x).src = '../immagini/pre_' + x + '.jpg';
     } else {
@@ -12,19 +13,23 @@ function selectionFilter(x) {
 function onReload() {
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
+    //al ricaricarsi del sito se dovesse avere filtri selezionati la pagina visualizzera di nuovo la finestra dei filtri
     if (window.location.href.includes("?")) {
         window.scrollTo(0, 500);
     }
 
     if (urlParams.has('mare')) {
+        //diabilito tutto cio che non voglio venga cliccato dopo l' immissione del filtro
         disableCheck('montagna');
         disableCheck('citta');
         disableCheck('economico');
         disableCheck('tendenza');
         var mare = urlParams.get('mare');
+        //permetto di salvare la selezione del filtro anche dopo il caricamento pagina
         document.getElementById('mare').src = '../immagini/' + mare + '.jpg';
         document.getElementsByName('mare')[0].checked = true;
     } else {
+        //il filtro rimarrà deselezionato
         document.getElementById('mare').src = '../immagini/pre_mare.jpg';
     }
 
@@ -176,6 +181,6 @@ function onReload() {
 
 function disableCheck(x){
     document.getElementById('checkbox_'+x).disabled=true;
-    document.getElementById(x).style.opacity= 0.5;
+    document.getElementById(x).style.opacity= 0.3;
     document.getElementById(x).style.pointerEvents = "none";
 }

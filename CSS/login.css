@@ -42,7 +42,7 @@
 .form-control i {
     visibility: hidden;
     position: absolute;
-    top: 360px;
+    top: 318px;
     right: 20px;
 }
 
@@ -73,7 +73,7 @@
     visibility: hidden;
     position: absolute;
     right: 20px;
-    top: 420px;
+    top: 380px;
     color: #e74c3c;
 }
 
