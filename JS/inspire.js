@@ -1,6 +1,75 @@
 window.onload = onReload();
 
 function selectionFilter(x) {
+    //controllo per disabilitare ciò che non si desidera cliccabile
+    if(x=='mare'){
+        disableCheck('montagna');
+        disableCheck('citta');
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }
+    if(x=='montagna'){
+        disableCheck('mare');
+        disableCheck('citta');
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }
+    if(x=='citta'){
+        disableCheck('montagna');
+        disableCheck('mare');
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='economico'){
+        disableCheck('mare');
+        disableCheck('montagna');
+        disableCheck('citta');
+        disableCheck('cultura');
+        disableCheck('famiglia');
+        disableCheck('cibo');
+        disableCheck('avventura');
+        disableCheck('romanticismo');
+        disableCheck('neve');
+        disableCheck('divertimento');
+        disableCheck('relax');
+        disableCheck('tendenza');
+    }if(x=='tendenza'){
+        disableCheck('mare');
+        disableCheck('montagna');
+        disableCheck('citta');
+        disableCheck('cultura');
+        disableCheck('famiglia');
+        disableCheck('cibo');
+        disableCheck('avventura');
+        disableCheck('romanticismo');
+        disableCheck('neve');
+        disableCheck('divertimento');
+        disableCheck('relax');
+        disableCheck('economico');
+    }if(x=='cultura'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='famiglia'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='cibo'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='avventura'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='romanticismo'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='neve'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='divertimento'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }if(x=='relax'){
+        disableCheck('economico');
+        disableCheck('tendenza');
+    }
     //all on click del filtro permetto di cambiare immagine
     if (document.getElementById(x).src == '../immagini/' + x + '.jpg') {
         document.getElementById(x).src = '../immagini/pre_' + x + '.jpg';
@@ -179,6 +248,7 @@ function onReload() {
     }
 }
 
+//funzione per disabilitare il filtro che si desidera
 function disableCheck(x){
     document.getElementById('checkbox_'+x).disabled=true;
     document.getElementById(x).style.opacity= 0.3;

@@ -119,7 +119,7 @@ if ($roundtrip == 'ritorno') {
             }
         }
     } else {
-        $sql_r = "SELECT * FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo = $3 posti_disponibili > 0";
+        $sql_r = "SELECT * FROM volo WHERE citta_partenza = $1 AND citta_arrivo = $2 AND data_volo = $3 and posti_disponibili > 0";
         $prep_r = pg_prepare($db, "searchFlightBackOneDate", $sql_r);
         if (!$prep_r) {
             exit();
